@@ -62,6 +62,11 @@ class PathPolicyTests(unittest.TestCase):
             portable_collision_key("STRASSE.TXT"),
         )
 
+    def test_non_utf8_surrogate_is_rejected(self):
+        with self.assertRaises(PathPolicyError) as cm:
+            validate_logical_path("Data/\udcff.bin")
+        self.assertEqual(cm.exception.code, "PATH_NOT_UTF8")
+
     def test_path_byte_limit(self):
         path = "a" * (MAX_PATH_UTF8_BYTES + 1)
         with self.assertRaises(PathPolicyError) as cm:

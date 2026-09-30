@@ -52,6 +52,8 @@ Le numéro représente la version du **format**, pas une version de fichier à g
 | politiques versionnées | `policies/` |
 | exemples de contrats | `examples/` |
 | tests de conformité | `tests/` |
+| implémentations de référence | `reference/python/` |
+| outils GP1 | `tools/gp1/` |
 | architecture / état | `docs/` |
 | preuves compactes | `evidence/` |
 | outils GP0 | `tools/gp0/` |

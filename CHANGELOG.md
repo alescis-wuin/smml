@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### GameTargetInspector v1 — 2026-09-30
+
+- ajout de `specs/game-target-inspector.md` et du plan `smml.game-target-inspection-plan/1` ;
+- vérification de l'AppID, Steam build, branche et `installdir` depuis le appmanifest local ;
+- mapping explicite Steam build -> gameVersion/engineBuild, sans reconnaissance heuristique des builds inconnues ;
+- inventaire read-only fail-closed avec rejet symlink/reparse/objets spéciaux/collisions portables ;
+- acquisition stable `lstat/fstat` avant/après hashing et seconde passe metadata ;
+- production des fingerprints exact, canonique, roots et targets via `Hashing v1` ;
+- déplacement des primitives PathPolicy/Hashing vers `reference/python/smml_reference/` pour supprimer la dépendance des outils à `tests/` ;
+- ajout du rejet explicite des noms POSIX non encodables UTF-8 (`PATH_NOT_UTF8`) ;
+- ajout du CLI GP1 et de tests de conformité de l'Inspector.
+
 ### Hashing v1 — 2026-09-30
 
 - ajout de `specs/hashing.md` et de vecteurs normatifs exécutables ;

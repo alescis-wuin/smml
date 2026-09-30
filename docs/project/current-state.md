@@ -60,12 +60,17 @@ Les validateurs sémantiques existants (`GameTargetIdentity`, `TransactionJourna
 
 Les digests de Profile/manifest/package utilisent désormais la même primitive de référence au lieu d'implémentations ad hoc.
 
+## GameTargetInspector v1
+
+`GameTargetInspector v1` est au stade **candidate freeze**. Il vérifie le Steam appmanifest, refuse les builds inconnus, inventorie l'installation avec acquisition stable et seconde passe metadata, puis produit un `GameTargetIdentity` à partir des primitives PathPolicy/Hashing communes.
+
+Le plan courant connaît explicitement la cible Steam build `25442087` / branche `public` et ne tente aucune reconnaissance heuristique d'une build inconnue.
+
 ## Prochaine priorité
 
 Le prochain chantier P0 du cœur de sûreté est :
 
 ```text
-GameTargetInspector
 TransactionJournal integration
 TransactionEngine
 ```

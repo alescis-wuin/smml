@@ -21,7 +21,7 @@ Identifiant : `smml.path-policy/1`.
 
 ## Implémentation de référence actuelle
 
-`tests/path_policy_validation.py` est une implémentation exécutable de la sémantique v1 pour les tests. Elle n'est pas encore le backend filesystem de production.
+`reference/python/smml_reference/path_policy.py` est l'implémentation exécutable de référence. `tests/path_policy_validation.py` n'est plus qu'un shim de compatibilité pour les tests historiques. Elle ne constitue pas encore le backend filesystem de production.
 
 Les validateurs sémantiques suivants l'utilisent :
 
@@ -39,4 +39,4 @@ Au moment du gel candidat :
 142 / 142 tests unitaires PASS
 ```
 
-La prochaine étape est le hashing déterministe puis `GameTargetInspector`.
+Le hashing déterministe et `GameTargetInspector v1` ont depuis été réalisés ; la prochaine étape est l'intégration transactionnelle.

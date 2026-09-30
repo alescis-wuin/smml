@@ -68,6 +68,12 @@ def main() -> int:
     validate_policy_semantics(policy)
     print("PASS smml.canonical-game-policy/1")
 
+    inspection_plan_schema = load_json(ROOT / "schemas" / "smml.game-target-inspection-plan-1.schema.json")
+    inspection_plan = load_json(ROOT / "policies" / "smml.game-target-inspection-plan-1.json")
+    Draft202012Validator.check_schema(inspection_plan_schema)
+    Draft202012Validator(inspection_plan_schema).validate(inspection_plan)
+    print("PASS smml.game-target-inspection-plan/1")
+
     path_policy_schema = load_json(ROOT / "schemas" / "smml.path-policy-1.schema.json")
     path_policy = load_json(ROOT / "policies" / "smml.path-policy-1.json")
     Draft202012Validator.check_schema(path_policy_schema)

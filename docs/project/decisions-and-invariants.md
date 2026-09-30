@@ -35,6 +35,8 @@
 - `sha256` signifie toujours SHA-256 des octets exacts, sans normalisation texte/JSON implicite.
 - `smml.content-tree-sha256/1` hash des records `path + NUL + size + NUL + sha256 + LF`, triés avec `PortableCollisionKey`; doublons et collisions portables sont refusés.
 - Les fingerprints exact, canonique, sous-arbre et `ManagedOutputSet` partagent l'algorithme d'arbre mais leur rôle/contexte reste distinct ; v1 n'ajoute pas de domain separation afin de préserver GP0.
+- `GameTargetInspector v1` obtient AppID/build/branche depuis le Steam appmanifest local et traduit `gameVersion`/`engineBuild` uniquement via un plan versionné ; une build inconnue est fail-closed.
+- L'inspection exige un inventaire stable en deux passes et ne constitue jamais une autorisation de mutation ; le TransactionEngine revalide les préconditions.
 - `smml explain <path>` doit exposer provenance/ownership/conflits.
 
 ## Décisions réseau/persistance gelées après GP0.5

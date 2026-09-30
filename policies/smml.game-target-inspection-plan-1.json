@@ -1,0 +1,29 @@
+{
+  "schema": "smml.game-target-inspection-plan/1",
+  "steamAppId": 387990,
+  "canonicalPolicy": "smml.canonical-game-policy/1",
+  "builds": [
+    {
+      "steamBuildId": "25442087",
+      "steamBranch": "public",
+      "gameVersion": "1.0.6",
+      "engineBuild": 889,
+      "gameOs": "windows",
+      "gameArch": "x86_64",
+      "rootFingerprints": [
+        "Cache",
+        "ChallengeData",
+        "Data",
+        "Release",
+        "Survival"
+      ],
+      "targetFingerprints": [
+        "Cache/Bundle/core_data.cbo",
+        "Survival/Scripts/game/SurvivalGame.lua",
+        "Survival/Scripts/game/SurvivalPlayer.lua",
+        "Survival/Scripts/game/interactables/ResourceContainer.lua",
+        "Survival/Scripts/game/tools/CarryTool.lua"
+      ]
+    }
+  ]
+}

@@ -300,6 +300,7 @@ Une implémentation PEUT enrichir le diagnostic, mais les catégories suivantes 
 
 ```text
 PATH_EMPTY
+PATH_NOT_UTF8
 PATH_NOT_NFC
 PATH_TOO_LONG
 TOO_MANY_SEGMENTS
@@ -349,7 +350,7 @@ Les chemins exacts et les préfixes exclus utilisent les mêmes règles lexicale
 
 Une implémentation conforme DOIT au minimum démontrer :
 
-1. rejet des chemins vides, absolus, drive-relative/absolute et namespaced ;
+1. rejet des chemins vides, non encodables UTF-8, absolus, drive-relative/absolute et namespaced ;
 2. rejet de `\\`, `//`, `.` et `..` ;
 3. NFC obligatoire ;
 4. rejet des contrôles ASCII et caractères Windows réservés ;

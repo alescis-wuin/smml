@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 IGNORED_DIRS = {".git", ".venv", "venv", "artifacts", "dist", "build", "out", "tmp"}
-ACTIVE_DIRS = {"specs", "schemas", "policies", "examples", "tests", "tools"}
+ACTIVE_DIRS = {"specs", "schemas", "policies", "examples", "tests", "tools", "reference"}
 VERSIONED_PATH_RE = re.compile(r"(?:^|[-_])v\d+(?:[._-]\d+)+", re.IGNORECASE)
 
 

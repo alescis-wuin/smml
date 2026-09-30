@@ -4,7 +4,7 @@
 
 1. ✅ `PathPolicy v1` — candidate freeze
 2. ✅ hashing déterministe — candidate freeze
-3. `GameTargetInspector`
+3. ✅ `GameTargetInspector v1` — candidate freeze
 4. intégration de `TransactionJournal v1`
 5. `TransactionEngine`
 6. verrou inter-processus
