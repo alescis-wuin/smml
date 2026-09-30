@@ -25,7 +25,7 @@ from .path_policy import (
 
 INSPECTION_PLAN_SCHEMA = "smml.game-target-inspection-plan/1"
 GAME_TARGET_SCHEMA = "smml.game-target/1"
-CANONICAL_POLICY_ID = "smml.canonical-game-policy/1"
+CANONICAL_POLICY_IDS = frozenset({"smml.canonical-game-policy/1", "smml.canonical-game-policy/2"})
 
 
 @dataclass(frozen=True)
@@ -258,7 +258,7 @@ def validate_inspection_plan(plan: dict[str, Any]) -> None:
     app_id = plan.get("steamAppId")
     if isinstance(app_id, bool) or not isinstance(app_id, int) or app_id <= 0:
         _raise("GTI_PLAN_INVALID", "steamAppId must be a positive integer")
-    if plan.get("canonicalPolicy") != CANONICAL_POLICY_ID:
+    if plan.get("canonicalPolicy") not in CANONICAL_POLICY_IDS:
         _raise("GTI_PLAN_INVALID", "unsupported canonicalPolicy")
     builds = plan.get("builds")
     if not isinstance(builds, list) or not builds:
@@ -283,6 +283,15 @@ def validate_inspection_plan(plan: dict[str, Any]) -> None:
             validate_unique_paths(targets)
         except PathPolicyError as exc:
             _raise("GTI_PLAN_INVALID", str(exc))
+        if "knownCanonicalGameFingerprints" in build:
+            known = build["knownCanonicalGameFingerprints"]
+            if not isinstance(known, list) or not known:
+                _raise("GTI_PLAN_INVALID", f"build {key!r} knownCanonicalGameFingerprints must be a non-empty array")
+            if len(set(known)) != len(known):
+                _raise("GTI_PLAN_INVALID", f"build {key!r} has duplicate known canonical fingerprints")
+            for value in known:
+                if not isinstance(value, str) or len(value) != 64 or any(ch not in "0123456789abcdef" for ch in value):
+                    _raise("GTI_PLAN_INVALID", f"build {key!r} has invalid canonical fingerprint {value!r}")
 
 
 def _tokenize_vdf(text: str) -> list[str]:
@@ -465,10 +474,14 @@ def inspect_game_target(
     compatibility_version: str | None = None,
     host_os: str | None = None,
     host_arch: str | None = None,
+    inventory_records: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     validate_inspection_plan(plan)
-    if canonical_policy.get("schema") != CANONICAL_POLICY_ID:
-        _raise("GTI_PLAN_INVALID", f"unexpected canonical policy {canonical_policy.get('schema')!r}")
+    if canonical_policy.get("schema") != plan.get("canonicalPolicy"):
+        _raise(
+            "GTI_PLAN_INVALID",
+            f"canonical policy {canonical_policy.get('schema')!r} does not match plan {plan.get('canonicalPolicy')!r}",
+        )
     root = Path(game_root).expanduser().absolute()
     _validate_root(root)
 
@@ -504,6 +517,8 @@ def inspect_game_target(
     _ensure_snapshot_stable(first, second)
 
     records = list(first.records)
+    if inventory_records is not None:
+        inventory_records.extend(dict(record) for record in records)
     exact_summary = content_tree_summary(records)
     canonical_summary = canonical_tree_summary(records, canonical_policy)
     portable_index = _index_portable(first.entries.keys())
@@ -576,6 +591,17 @@ def inspect_game_target(
             "targetFingerprints": target_fingerprints,
         },
     }
+
+
+def known_canonical_fingerprints(plan: dict[str, Any], identity: dict[str, Any]) -> tuple[str, ...]:
+    for build in plan.get("builds", []):
+        if (
+            build.get("steamBuildId") == identity.get("steamBuildId")
+            and build.get("steamBranch") == identity.get("steamBranch")
+        ):
+            values = build.get("knownCanonicalGameFingerprints", [])
+            return tuple(str(value) for value in values)
+    return ()
 
 
 def load_json(path: Path | str) -> dict[str, Any]:

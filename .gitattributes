@@ -29,3 +29,5 @@
 *.dco binary
 *.mco binary
 *.tco binary
+
+*.gz binary

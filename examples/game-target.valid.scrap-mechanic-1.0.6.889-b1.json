@@ -16,16 +16,16 @@
   },
   "fingerprints": {
     "algorithm": "smml.content-tree-sha256/1",
-    "canonicalPolicy": "smml.canonical-game-policy/1",
+    "canonicalPolicy": "smml.canonical-game-policy/2",
     "installationExactFingerprint": {
       "sha256": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
       "fileCount": 61371,
       "totalFileBytes": 20596893988
     },
     "canonicalGameFingerprint": {
-      "sha256": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
-      "fileCount": 61370,
-      "totalFileBytes": 20596856244
+      "sha256": "f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c",
+      "fileCount": 41251,
+      "totalFileBytes": 15342231607
     },
     "rootFingerprints": [
       {
@@ -39,8 +39,18 @@
         "algorithm": "smml.content-tree-sha256/1"
       },
       {
+        "path": "Challenges",
+        "sha256": "6070ae45d790918c9e818b2ebb93b8c4a30de3db5e04f03771eb2c6477c4838a",
+        "algorithm": "smml.content-tree-sha256/1"
+      },
+      {
         "path": "Data",
         "sha256": "f4710feee3052900e3daff832238795e861f5f7f8d067f1270cc3a64c695fa25",
+        "algorithm": "smml.content-tree-sha256/1"
+      },
+      {
+        "path": "ParticleEditorData",
+        "sha256": "aef6e0f5dd1faba5d0ae204e5d597d6637470d7dc227dbd029da59cd1b1b46e9",
         "algorithm": "smml.content-tree-sha256/1"
       },
       {
@@ -56,6 +66,21 @@
     ],
     "targetFingerprints": [
       {
+        "path": "Cache/Bundle/core_data.cbo",
+        "sha256": "682efa4378e69f1a711e1d2147c302fbdd0dc8035f841c948d50c50964181351",
+        "algorithm": "sha256"
+      },
+      {
+        "path": "installscript.vdf",
+        "sha256": "ece338203e54ab8b5928a8bc600328ca6d32d99d299b7db3f9a654b3e984deab",
+        "algorithm": "sha256"
+      },
+      {
+        "path": "Survival/Scripts/game/interactables/ResourceContainer.lua",
+        "sha256": "ccd77da5aaa6b6a8e640dc115e123a7236f0df40e31b56277d01314371cdc042",
+        "algorithm": "sha256"
+      },
+      {
         "path": "Survival/Scripts/game/SurvivalGame.lua",
         "sha256": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
         "algorithm": "sha256"
@@ -68,16 +93,6 @@
       {
         "path": "Survival/Scripts/game/tools/CarryTool.lua",
         "sha256": "ddbb727a8fb687f290f35ff359d626bdcf4983930c51ad24daadd26ee8702dbf",
-        "algorithm": "sha256"
-      },
-      {
-        "path": "Survival/Scripts/game/interactables/ResourceContainer.lua",
-        "sha256": "ccd77da5aaa6b6a8e640dc115e123a7236f0df40e31b56277d01314371cdc042",
-        "algorithm": "sha256"
-      },
-      {
-        "path": "Cache/Bundle/core_data.cbo",
-        "sha256": "682efa4378e69f1a711e1d2147c302fbdd0dc8035f841c948d50c50964181351",
         "algorithm": "sha256"
       }
     ]

@@ -48,6 +48,7 @@ class GameTargetInspectorTests(unittest.TestCase):
         cls.game_schema = json.loads((ROOT / "schemas" / "smml.game-target-1.schema.json").read_text(encoding="utf-8"))
         cls.plan = json.loads((ROOT / "policies" / "smml.game-target-inspection-plan-1.json").read_text(encoding="utf-8"))
         cls.canonical_policy = json.loads((ROOT / "policies" / "smml.canonical-game-policy-1.json").read_text(encoding="utf-8"))
+        cls.canonical_policy2 = json.loads((ROOT / "policies" / "smml.canonical-game-policy-2.json").read_text(encoding="utf-8"))
 
     def _fixture(self):
         td = tempfile.TemporaryDirectory()
@@ -90,6 +91,29 @@ class GameTargetInspectorTests(unittest.TestCase):
         self.assertEqual(build["gameVersion"], "1.0.6")
         self.assertEqual(build["engineBuild"], 889)
         self.assertIn("Survival/Scripts/game/SurvivalGame.lua", build["targetFingerprints"])
+        self.assertIn("Cache/Bundle/core_data.cbo", build["targetFingerprints"])
+        self.assertEqual(self.plan["canonicalPolicy"], "smml.canonical-game-policy/2")
+        self.assertEqual(
+            build["knownCanonicalGameFingerprints"],
+            ["f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c"],
+        )
+
+
+    def test_plan_and_canonical_policy_must_match(self):
+        td, root, manifest, plan = self._fixture()
+        try:
+            with self.assertRaises(InspectorError) as cm:
+                inspect_game_target(
+                    root,
+                    plan=plan,
+                    canonical_policy=self.canonical_policy2,
+                    appmanifest_path=manifest,
+                    compatibility_layer="proton",
+                    host_os="linux",
+                )
+            self.assertEqual(cm.exception.code, "GTI_PLAN_INVALID")
+        finally:
+            td.cleanup()
 
     def test_vdf_parser_supports_comments_and_public_branch(self):
         doc = parse_vdf('// header\n"AppState" { "appid" "387990" "buildid" "25442087" "installdir" "Scrap Mechanic" }')

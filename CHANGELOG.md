@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### GameTargetInspector v1.1 / canonical cache classification — 2026-09-30
+
+- ajout de `smml.file-inventory/1` et `smml.file-inventory-diff/1` ;
+- sortie optionnelle d'inventaire complet JSON/JSON.gz déterministe ;
+- baseline GP0 B0 sanitizée de 61 370 records conservée comme preuve compacte ;
+- diff automatique `Cache/` avec classification `rebuildable-cache` et marquage des targets strictes ;
+- ajout de `smml.canonical-game-policy/2`, excluant explicitement `Cache/` et `Logs/` ;
+- fingerprint canonique B0/B1 v2 : `f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c` ;
+- extension du plan d'inspection avec fingerprint canonique connu et roots/targets diagnostiques supplémentaires ;
+- conservation de `Cache/Bundle/core_data.cbo` comme target SHA-256 stricte ;
+- contrôle d'hygiène basé sur les fichiers suivis par Git afin que les `__pycache__` ignorés localement ne fassent plus échouer `make check`.
+
 ### PathPolicy / GameTargetInspector compatibility fix — 2026-09-30
 
 - correction de l'incompatibilité de la référence Python avec CPython 3.12 / UCD 15.0.0 ;

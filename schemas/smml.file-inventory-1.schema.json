@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:file-inventory:1",
+  "title": "SMML File Inventory v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "target", "scope", "contentTreeAlgorithm", "summary", "files"],
+  "properties": {
+    "schema": {"const": "smml.file-inventory/1"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["steamAppId", "steamBuildId", "steamBranch"],
+      "properties": {
+        "steamAppId": {"type": "integer", "minimum": 1},
+        "steamBuildId": {"type": "string", "pattern": "^[0-9]+$"},
+        "steamBranch": {"type": "string", "minLength": 1, "maxLength": 128}
+      }
+    },
+    "scope": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": {"kind": {"const": "game-root"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path"],
+          "properties": {
+            "kind": {"const": "prefix"},
+            "path": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 4096,
+              "pattern": "^(?!/)(?![A-Za-z]:/)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\u0000]+/$"
+            }
+          }
+        }
+      ]
+    },
+    "contentTreeAlgorithm": {"const": "smml.content-tree-sha256/1"},
+    "summary": {"$ref": "#/$defs/treeSummary"},
+    "files": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/fileRecord"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?![A-Za-z]:/)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\u0000]+$"
+    },
+    "treeSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "sha256", "fileCount", "totalFileBytes"],
+      "properties": {
+        "algorithm": {"const": "smml.content-tree-sha256/1"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "fileCount": {"type": "integer", "minimum": 0},
+        "totalFileBytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "fileRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "size", "sha256"],
+      "properties": {
+        "path": {"$ref": "#/$defs/relativePath"},
+        "size": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

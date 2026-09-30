@@ -83,11 +83,12 @@ builds[]
   gameArch?
   rootFingerprints[]
   targetFingerprints[]
+  knownCanonicalGameFingerprints[]?
 ```
 
 Les chemins utilisent `PathPolicy v1` et doivent être uniques selon `PortableCollisionKey`.
 
-Le plan n'embarque aucun hash attendu de baseline. Son rôle est de décrire **quoi observer** et comment nommer une build Steam déjà connue ; l'identité observée reste calculée à partir des octets locaux.
+`knownCanonicalGameFingerprints` est optionnel. Il sert à comparer le résultat observé à une baseline canonique connue et peut rendre le CLI fail-closed avec `--require-known-canonical`. Il ne remplace jamais le calcul local ni les target fingerprints.
 
 ## 4. Inspection filesystem
 
@@ -164,7 +165,7 @@ porte sur tous les fichiers réguliers observés sous le game root.
 canonicalGameFingerprint
 ```
 
-porte sur le même inventaire après application exclusive de `smml.canonical-game-policy/1`.
+porte sur le même inventaire après application de la politique explicitement référencée par le plan. Le plan actif utilise `smml.canonical-game-policy/2`; la v1 reste lisible pour les preuves historiques.
 
 Aucune exclusion implicite n'est autorisée.
 
@@ -180,7 +181,18 @@ Chaque `targetFingerprints[]` du plan DOIT désigner un fichier régulier exista
 
 Le hash est le `sha256` exact du fichier déjà acquis dans l'inventaire. Le fichier n'est pas relu avec une primitive différente.
 
-## 6. Déterminisme
+
+## 6. Sortie d'inventaire optionnelle
+
+Le CLI PEUT produire un `smml.file-inventory/1` complet avec `--inventory-output`. Cette sortie réutilise exactement les records déjà acquis pendant l'inspection ; aucun second mécanisme de hashing n'est autorisé.
+
+Pour les investigations de cache, `--cache-diff-output` compare le sous-inventaire `Cache/` à la baseline GP0 B0 sanitizée conservée dans `evidence/gp0/baselines/b0-file-inventory.json.gz`. Le rapport distingue `added`, `removed` et `modified`, classe ces entrées `rebuildable-cache`, et marque explicitement une entrée qui reste `strictTargetFingerprint`.
+
+Les sorties peuvent être sérialisées en JSON ou en JSON gzip déterministe (`mtime=0`). Elles ne contiennent ni game root local ni timestamp.
+
+Le plan PEUT déclarer `knownCanonicalGameFingerprints`. Le CLI signale si le fingerprint calculé appartient à cet ensemble et PEUT être rendu fail-closed par `--require-known-canonical`.
+
+## 7. Déterminisme
 
 Pour une installation byte-identical, un même appmanifest, un même plan, une même politique canonique et les mêmes paramètres plateforme, la sortie JSON logique DOIT être identique.
 
@@ -195,7 +207,7 @@ nom d'utilisateur
 
 Les listes de roots/targets sont émises dans l'ordre `PortableCollisionKey` puis UTF-8 exact.
 
-## 7. Frontière de sécurité
+## 8. Frontière de sécurité
 
 Un `GameTargetIdentity` produit par l'Inspector n'est **jamais** une autorisation de mutation.
 
@@ -214,13 +226,13 @@ Le `TransactionEngine` doit réinspecter les préconditions immédiatement avant
 
 L'inspection v1 ne prétend donc pas résoudre à elle seule une attaque TOCTOU située après la fin de l'inspection.
 
-## 8. Portabilité du backend de référence
+## 9. Portabilité du backend de référence
 
 L'implémentation Python utilise `O_NOFOLLOW` lorsque le host l'expose et effectue des contrôles `lstat/fstat` avant/après lecture.
 
 Sur Windows, la classification des reparse points utilise `st_file_attributes` lorsqu'elle est fournie par Python. Une future implémentation de production devra utiliser les primitives handle-relative/no-follow spécifiques à chaque OS ; cette exigence reste portée par `PathPolicy v1`.
 
-## 9. Codes d'erreur spécifiques v1
+## 10. Codes d'erreur spécifiques v1
 
 En plus des codes `PathPolicy` :
 
@@ -242,7 +254,7 @@ GTI_REQUIRED_TARGET_MISSING
 GTI_OUTPUT_INSIDE_GAME_ROOT
 ```
 
-## 10. Hors périmètre v1
+## 11. Hors périmètre v1
 
 - découverte d'installations Steam dans toutes les bibliothèques ;
 - interrogation réseau de Steam ;

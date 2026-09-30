@@ -30,8 +30,10 @@ class GameTargetIdentityTests(unittest.TestCase):
             (ROOT / "schemas" / "smml.game-target-1.schema.json").read_text(encoding="utf-8")
         )
         cls.validator = Draft202012Validator(cls.schema)
-        cls.policy_schema = json.loads((ROOT / 'schemas' / 'smml.canonical-game-policy-1.schema.json').read_text(encoding='utf-8'))
-        cls.policy_validator = Draft202012Validator(cls.policy_schema)
+        cls.policy1_schema = json.loads((ROOT / 'schemas' / 'smml.canonical-game-policy-1.schema.json').read_text(encoding='utf-8'))
+        cls.policy2_schema = json.loads((ROOT / 'schemas' / 'smml.canonical-game-policy-2.schema.json').read_text(encoding='utf-8'))
+        cls.policy1_validator = Draft202012Validator(cls.policy1_schema)
+        cls.policy2_validator = Draft202012Validator(cls.policy2_schema)
         cls.valid = json.loads(
             (
                 ROOT
@@ -39,15 +41,14 @@ class GameTargetIdentityTests(unittest.TestCase):
                 / "game-target.valid.scrap-mechanic-1.0.6.889-b1.json"
             ).read_text(encoding="utf-8")
         )
-        cls.policy = json.loads(
-            (ROOT / "policies" / "smml.canonical-game-policy-1.json").read_text(
-                encoding="utf-8"
-            )
-        )
+        cls.policy1 = json.loads((ROOT / 'policies' / 'smml.canonical-game-policy-1.json').read_text(encoding='utf-8'))
+        cls.policy2 = json.loads((ROOT / 'policies' / 'smml.canonical-game-policy-2.json').read_text(encoding='utf-8'))
+        cls.policy = cls.policy2
 
     def test_schemas_are_well_formed(self):
         Draft202012Validator.check_schema(self.schema)
-        Draft202012Validator.check_schema(self.policy_schema)
+        Draft202012Validator.check_schema(self.policy1_schema)
+        Draft202012Validator.check_schema(self.policy2_schema)
 
     def test_reference_example_is_valid(self):
         self.validator.validate(self.valid)
@@ -64,23 +65,28 @@ class GameTargetIdentityTests(unittest.TestCase):
         )
         self.assertEqual(
             self.valid["fingerprints"]["canonicalGameFingerprint"]["sha256"],
-            "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
+            "f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c",
         )
 
     def test_policy_schema_and_semantics_are_valid(self):
-        self.policy_validator.validate(self.policy)
-        validate_policy_semantics(self.policy)
+        self.policy1_validator.validate(self.policy1)
+        self.policy2_validator.validate(self.policy2)
+        validate_policy_semantics(self.policy1)
+        validate_policy_semantics(self.policy2)
 
     def test_policy_rejects_traversal_prefix(self):
         bad = json.loads(json.dumps(self.policy))
         bad["excludedFilePrefixes"] = ["../Logs/"]
         with self.assertRaises(ValidationError):
-            self.policy_validator.validate(bad)
+            self.policy2_validator.validate(bad)
 
-    def test_policy_excludes_logs_only(self):
-        self.assertEqual(self.policy["excludedFilePrefixes"], ["Logs/"])
-        self.assertEqual(self.policy["excludedExactFiles"], [])
-        self.assertTrue(self.policy["includeEverythingElse"])
+    def test_policy_v1_is_preserved_as_historical_logs_only(self):
+        self.assertEqual(self.policy1["excludedFilePrefixes"], ["Logs/"])
+
+    def test_policy_v2_excludes_classified_cache_and_logs(self):
+        self.assertEqual(self.policy2["excludedFilePrefixes"], ["Cache/", "Logs/"])
+        self.assertEqual(self.policy2["excludedExactFiles"], [])
+        self.assertTrue(self.policy2["includeEverythingElse"])
 
     def test_root_and_target_algorithms_are_explicit(self):
         for item in self.valid['fingerprints']['rootFingerprints']:

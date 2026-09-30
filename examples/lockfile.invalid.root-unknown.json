@@ -2,7 +2,7 @@
   "schema": "smml.lockfile/1",
   "profile": {
     "id": "survival-industrial",
-    "sha256": "c8fcfcd1fc38dbb91aefbd1b5a6cf37bb3b2c579d0836caf0f5b25005e63b7e8"
+    "sha256": "d3045a5d9c8d81f44333444d74c03f0f050fdbde3f416cba8ca49a02dd400722"
   },
   "platformVersion": "0.6.0",
   "target": {
@@ -16,7 +16,7 @@
       "gameOs": "windows",
       "compatibilityLayer": "proton"
     },
-    "canonicalGameFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+    "canonicalGameFingerprint": "f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c"
   },
   "packages": [
     {

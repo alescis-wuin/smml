@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:file-inventory-diff:1",
+  "title": "SMML File Inventory Diff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "target", "scope", "baselineSummary", "currentSummary", "summary", "changes"],
+  "properties": {
+    "schema": {"const": "smml.file-inventory-diff/1"},
+    "target": {"$ref": "#/$defs/target"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "baselineSummary": {"$ref": "#/$defs/treeSummary"},
+    "currentSummary": {"$ref": "#/$defs/treeSummary"},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed", "modified", "unchanged", "addedBytes", "removedBytes", "modifiedSizeDelta", "netSizeDelta"],
+      "properties": {
+        "added": {"type": "integer", "minimum": 0},
+        "removed": {"type": "integer", "minimum": 0},
+        "modified": {"type": "integer", "minimum": 0},
+        "unchanged": {"type": "integer", "minimum": 0},
+        "addedBytes": {"type": "integer", "minimum": 0},
+        "removedBytes": {"type": "integer", "minimum": 0},
+        "modifiedSizeDelta": {"type": "integer"},
+        "netSizeDelta": {"type": "integer"}
+      }
+    },
+    "changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed", "modified"],
+      "properties": {
+        "added": {"type": "array", "items": {"$ref": "#/$defs/decoratedFile"}},
+        "removed": {"type": "array", "items": {"$ref": "#/$defs/decoratedFile"}},
+        "modified": {"type": "array", "items": {"$ref": "#/$defs/modifiedFile"}}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["steamAppId", "steamBuildId", "steamBranch"],
+      "properties": {
+        "steamAppId": {"type": "integer", "minimum": 1},
+        "steamBuildId": {"type": "string", "pattern": "^[0-9]+$"},
+        "steamBranch": {"type": "string", "minLength": 1, "maxLength": 128}
+      }
+    },
+    "scope": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": {"kind": {"const": "game-root"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path"],
+          "properties": {
+            "kind": {"const": "prefix"},
+            "path": {"type": "string", "minLength": 2}
+          }
+        }
+      ]
+    },
+    "treeSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "sha256", "fileCount", "totalFileBytes"],
+      "properties": {
+        "algorithm": {"const": "smml.content-tree-sha256/1"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "fileCount": {"type": "integer", "minimum": 0},
+        "totalFileBytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "decoratedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "size", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "size": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "classification": {"type": "string", "enum": ["rebuildable-cache", "runtime-ephemeral", "immutable-game-content", "unknown"]},
+        "strictTargetFingerprint": {"const": true}
+      }
+    },
+    "side": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["size", "sha256"],
+      "properties": {
+        "size": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "modifiedFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "baseline", "current"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "baseline": {"$ref": "#/$defs/side"},
+        "current": {"$ref": "#/$defs/side"},
+        "classification": {"type": "string", "enum": ["rebuildable-cache", "runtime-ephemeral", "immutable-game-content", "unknown"]},
+        "strictTargetFingerprint": {"const": true}
+      }
+    }
+  }
+}

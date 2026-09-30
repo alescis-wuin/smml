@@ -60,11 +60,22 @@ Les validateurs sémantiques existants (`GameTargetIdentity`, `TransactionJourna
 
 Les digests de Profile/manifest/package utilisent désormais la même primitive de référence au lieu d'implémentations ad hoc.
 
-## GameTargetInspector v1
+## GameTargetInspector v1.1 / canonical policy v2
 
-`GameTargetInspector v1` est au stade **candidate freeze**. Il vérifie le Steam appmanifest, refuse les builds inconnus, inventorie l'installation avec acquisition stable et seconde passe metadata, puis produit un `GameTargetIdentity` à partir des primitives PathPolicy/Hashing communes.
+`GameTargetInspector` vérifie le Steam appmanifest, refuse les builds inconnus, inventorie l'installation avec acquisition stable et seconde passe metadata, puis produit un `GameTargetIdentity` à partir des primitives PathPolicy/Hashing communes.
 
-Le plan courant connaît explicitement la cible Steam build `25442087` / branche `public` et ne tente aucune reconnaissance heuristique d'une build inconnue.
+La sortie optionnelle `smml.file-inventory/1` permet désormais une comparaison fichier par fichier avec la baseline GP0. Le dépôt conserve une baseline B0 sanitizée/compressée de 61 370 records.
+
+`smml.canonical-game-policy/2` est la politique active :
+
+```text
+Cache/ -> rebuildable-cache
+Logs/  -> runtime-ephemeral
+```
+
+Le fingerprint canonique B0/B1 v2 est `f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c` (41 251 fichiers). `Cache/Bundle/core_data.cbo` reste une target stricte malgré l'exclusion de `Cache/` du canonique.
+
+Le plan courant connaît explicitement la cible Steam build `25442087` / branche `public`, le fingerprint canonique v2 connu et ne tente aucune reconnaissance heuristique d'une build inconnue.
 
 ## Prochaine priorité
 

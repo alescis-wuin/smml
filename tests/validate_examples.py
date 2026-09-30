@@ -62,11 +62,13 @@ def main() -> int:
     lockfile_schema = load_json(ROOT / "schemas" / "smml.lockfile-1.schema.json")
     lockfile_validator = Draft202012Validator(lockfile_schema)
 
-    policy_schema = load_json(ROOT / "schemas" / "smml.canonical-game-policy-1.schema.json")
-    policy = load_json(ROOT / "policies" / "smml.canonical-game-policy-1.json")
-    Draft202012Validator(policy_schema).validate(policy)
-    validate_policy_semantics(policy)
-    print("PASS smml.canonical-game-policy/1")
+    for version in (1, 2):
+        policy_schema = load_json(ROOT / "schemas" / f"smml.canonical-game-policy-{version}.schema.json")
+        policy = load_json(ROOT / "policies" / f"smml.canonical-game-policy-{version}.json")
+        Draft202012Validator.check_schema(policy_schema)
+        Draft202012Validator(policy_schema).validate(policy)
+        validate_policy_semantics(policy)
+        print(f"PASS smml.canonical-game-policy/{version}")
 
     inspection_plan_schema = load_json(ROOT / "schemas" / "smml.game-target-inspection-plan-1.schema.json")
     inspection_plan = load_json(ROOT / "policies" / "smml.game-target-inspection-plan-1.json")

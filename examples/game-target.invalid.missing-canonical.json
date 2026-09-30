@@ -16,7 +16,7 @@
   },
   "fingerprints": {
     "algorithm": "smml.content-tree-sha256/1",
-    "canonicalPolicy": "smml.canonical-game-policy/1",
+    "canonicalPolicy": "smml.canonical-game-policy/2",
     "installationExactFingerprint": {
       "sha256": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
       "fileCount": 61371,

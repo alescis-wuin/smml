@@ -400,7 +400,7 @@ gameVersion       1.0.6
 engineBuild       889
 Steam build       25442087
 branch            public
-canonical fp      6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964
+canonical fp v2   f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c
 SurvivalGame.lua  934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4
 cache             Cache/Bundle/core_data.cbo
 ```

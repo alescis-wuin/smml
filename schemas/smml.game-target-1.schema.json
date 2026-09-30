@@ -159,7 +159,11 @@
           "const": "smml.content-tree-sha256/1"
         },
         "canonicalPolicy": {
-          "const": "smml.canonical-game-policy/1"
+          "type": "string",
+          "enum": [
+            "smml.canonical-game-policy/1",
+            "smml.canonical-game-policy/2"
+          ]
         },
         "installationExactFingerprint": {
           "$ref": "#/$defs/treeFingerprint"

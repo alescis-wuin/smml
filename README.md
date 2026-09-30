@@ -10,7 +10,8 @@ SMML est un projet de plateforme de modding pour **Scrap Mechanic Survival** ori
   `GameTargetIdentity`, `TransactionJournal`, `PackageManifest`, `ContractDescriptor`, `HookPackManifest`, `Profile`, `Lockfile`.
 - `PathPolicy v1` est au stade **candidate freeze** avec politique versionnée et tests exécutables.
 - `Hashing v1` est au stade **candidate freeze** : SHA-256 d'octets exacts, `smml.content-tree-sha256/1`, fingerprints exact/canonique/sous-arbre/ManagedOutputSet et vecteurs normatifs.
-- `GameTargetInspector v1` est au stade **candidate freeze** : appmanifest Steam, plan de build versionné, inventaire stable fail-closed et production de `GameTargetIdentity`.
+- `GameTargetInspector v1.1` ajoute une sortie d’inventaire déterministe, un diff `Cache/` contre la baseline GP0 et la vérification d’un fingerprint canonique connu.
+- `smml.canonical-game-policy/2` est la politique active : `Cache/` est classé rebuildable-cache et `Logs/` runtime-ephemeral, tandis que les target fingerprints restent stricts.
 - Prochaine priorité : intégration `TransactionJournal`, puis `TransactionEngine` avec fault injection avant toute GUI.
 
 La source de vérité active est le dépôt Git. Les anciennes archives versionnées manuellement ne doivent plus être utilisées comme source canonique.
@@ -54,6 +55,18 @@ python3 -m venv .venv
 . .venv/bin/activate
 make setup
 make check
+```
+
+Inspection réelle recommandée :
+
+```bash
+python tools/gp1/game-target-inspector/smml_game_target_inspector.py \
+  "$HOME/.local/share/Steam/steamapps/common/Scrap Mechanic" \
+  --compatibility-layer proton \
+  --output artifacts/game-target.json \
+  --inventory-output artifacts/game-target-inventory.json.gz \
+  --cache-diff-output artifacts/cache-diff.json \
+  --require-known-canonical
 ```
 
 Équivalent sans `make` :

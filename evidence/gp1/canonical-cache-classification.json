@@ -1,0 +1,74 @@
+{
+  "schema": "smml.canonical-cache-classification-evidence/1",
+  "sources": {
+    "handoffSha256": "96f30189711d148f825a552162923fecb25c8044846695625bd4d535faa419f3",
+    "gp0CorpusSha256": "2df387539a66a8e73a1043eec67e39c1562460f1a2a213e166d89b4f339f95c4",
+    "currentGameTargetSha256": "23db1eaf6d030ce9cce00b737f6904a9b77757153a8ccce65efbaedf74b54f4b"
+  },
+  "facts": {
+    "b0": {
+      "exactFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
+      "fileCount": 61370,
+      "totalFileBytes": 20596856244,
+      "cacheFingerprint": "affd1530a458ac21782eabca281426fadf38b5de9a43f76ad1620462ca1d8cf1",
+      "cacheFileCount": 20119,
+      "cacheFileBytes": 5254624637,
+      "cachePackageHintCounts": {
+        "reference_only:generated_cache": 20119
+      }
+    },
+    "b1": {
+      "exactFingerprint": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
+      "fileCount": 61371,
+      "totalFileBytes": 20596893988,
+      "cacheFingerprint": "affd1530a458ac21782eabca281426fadf38b5de9a43f76ad1620462ca1d8cf1",
+      "deltaFromB0": "one Logs/game-...log file added; no B0 file modified or removed"
+    },
+    "currentPolicyV1Observation": {
+      "exactFingerprint": {
+        "fileCount": 61397,
+        "sha256": "908123cc7e586adf21f1a5636242ebf2545183a9f3319fcf781748677559be71",
+        "totalFileBytes": 20617246687
+      },
+      "canonicalFingerprint": {
+        "fileCount": 61385,
+        "sha256": "481304077a026cb62c1f0a8a725519afe839d39ef11d3d6223d56821f08fb8d3",
+        "totalFileBytes": 20600159517
+      },
+      "cacheFingerprint": "32c35f46162adb2d6da969d33eb71fda542136033b6bac58a9eaa022cce6d6aa",
+      "targetFingerprints": {
+        "Cache/Bundle/core_data.cbo": "682efa4378e69f1a711e1d2147c302fbdd0dc8035f841c948d50c50964181351",
+        "Survival/Scripts/game/interactables/ResourceContainer.lua": "ccd77da5aaa6b6a8e640dc115e123a7236f0df40e31b56277d01314371cdc042",
+        "Survival/Scripts/game/SurvivalGame.lua": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
+        "Survival/Scripts/game/SurvivalPlayer.lua": "960d15b4a5f66e1fd9ea4af6bd81a6088893b9f71bd8c1ad9c6bafaa592ecf76",
+        "Survival/Scripts/game/tools/CarryTool.lua": "ddbb727a8fb687f290f35ff359d626bdcf4983930c51ad24daadd26ee8702dbf"
+      }
+    }
+  },
+  "derived": {
+    "policyV2": {
+      "excludedFilePrefixes": [
+        "Cache/",
+        "Logs/"
+      ],
+      "b0CanonicalFingerprint": "f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c",
+      "b0CanonicalFileCount": 41251,
+      "b0CanonicalFileBytes": 15342231607,
+      "b1CanonicalFingerprint": "f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c"
+    },
+    "currentPolicyV2Status": "pending-current-inventory-capture"
+  },
+  "classification": [
+    {
+      "prefix": "Cache/",
+      "class": "rebuildable-cache",
+      "basis": "GP0 B0 corpus classifies all 20119 Cache files as reference_only:generated_cache; current observation proves Cache root drift while critical target hashes remain stable."
+    },
+    {
+      "prefix": "Logs/",
+      "class": "runtime-ephemeral",
+      "basis": "GP0 B1 added only a Logs/game-...log file and modified no B0 file."
+    }
+  ],
+  "designDecision": "smml.canonical-game-policy/2 excludes Cache/ and Logs/ from canonical identity while target fingerprints remain strict, including Cache/Bundle/core_data.cbo."
+}

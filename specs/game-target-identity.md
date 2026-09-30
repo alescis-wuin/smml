@@ -144,17 +144,45 @@ metadata
 + structural validation
 ```
 
-## 3. Politique canonique v1
+## 3. Politiques canoniques
 
-`smml.canonical-game-policy/1` possède son propre JSON Schema et exclut uniquement les fichiers dont le chemin commence par :
+### `smml.canonical-game-policy/1` — historique
+
+La v1 exclut uniquement :
 
 ```text
 Logs/
 ```
 
-Cette exclusion est fondée sur GP0.1 : B1 a ajouté un seul fichier de log, sans modifier les fichiers de B0.
+Elle reste reconnue pour relire les preuves GP0/GP1 antérieures.
 
-`Cache/` reste inclus par défaut. Des exclusions de cache ne devront être ajoutées que lorsqu'elles seront explicitement démontrées et versionnées.
+### `smml.canonical-game-policy/2` — active
+
+La v2 exclut explicitement :
+
+```text
+Cache/
+Logs/
+```
+
+Cette révision est fondée sur une nouvelle preuve locale :
+
+- le corpus B0 contient 20 119 fichiers sous `Cache/`, tous classés `reference_only:generated_cache` par la capture GP0 ;
+- le fingerprint de `Cache/` est identique entre B0 et B1 ;
+- une inspection ultérieure de la même Steam build observe un drift de `Cache/` alors que les fichiers cibles critiques conservent leurs SHA-256 GP0 ;
+- B1 n'ajoute qu'un fichier sous `Logs/` et ne modifie aucun fichier B0.
+
+`Cache/` est donc classé **rebuildable-cache** pour l'identité canonique et `Logs/` **runtime-ephemeral**. Cette classification n'affaiblit pas les preuves de fichier : un fichier de cache peut rester présent dans `targetFingerprints`.
+
+En particulier :
+
+```text
+Cache/Bundle/core_data.cbo
+```
+
+reste une target critique avec SHA-256 exact malgré l'exclusion de `Cache/` du fingerprint canonique.
+
+La politique NE DOIT PAS transformer cette exclusion en permission de purge globale. L'invariant « invalidation ciblée et prouvée » reste inchangé.
 
 ## 4. Fixture de référence 1.0.6.889
 
@@ -171,7 +199,7 @@ B0 exact = 6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964
 B1 exact = 9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4
 ```
 
-Avec `smml.canonical-game-policy/1`, le fingerprint canonique dérivé de B1 est celui de B0, car l'unique fichier ajouté entre B0 et B1 est sous `Logs/` et aucun fichier B0 n'a été modifié ou supprimé.
+Avec `smml.canonical-game-policy/2`, B0 et B1 produisent le même fingerprint canonique : `f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c` (41 251 fichiers, 15 342 231 607 octets). La v1 historique produit toujours le fingerprint B0 exact après exclusion du seul log B1.
 
 La version Proton exacte n'est pas établie dans le handoff et n'est donc pas inventée dans l'exemple.
 
@@ -179,7 +207,7 @@ La version Proton exacte n'est pas établie dans le handoff et n'est donc pas in
 
 Le scanner GP0 historique utilisait `str.casefold()` pour l'ordre. Les fingerprints B0/B1 de référence sont conservés comme fixtures héritées. La spécification v1 fixe désormais Unicode 15.1.0 afin d'éviter qu'une future implémentation change d'ordre au gré d'une mise à jour de runtime.
 
-La compatibilité bit-à-bit avec les fingerprints GP0 est directement établie pour les fixtures connues du handoff, mais le handoff ne contient pas l'inventaire complet nécessaire pour démontrer ici l'absence de tout nom de fichier affecté par une différence de table Unicode. Cette vérification devra être effectuée quand le manifeste complet B0 sera disponible au `GameTargetInspector`.
+Le manifeste complet B0 est désormais conservé sous forme sanitizée dans `evidence/gp0/baselines/b0-file-inventory.json.gz`. Les tests recalculent bit-à-bit le fingerprint B0 historique et le fingerprint canonique v2 depuis ces 61 370 records.
 
 ## 6. Hors périmètre v1
 

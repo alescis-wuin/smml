@@ -4,15 +4,33 @@
   "title": "SMML GameTargetInspectionPlan v1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "steamAppId", "canonicalPolicy", "builds"],
+  "required": [
+    "schema",
+    "steamAppId",
+    "canonicalPolicy",
+    "builds"
+  ],
   "properties": {
-    "schema": {"const": "smml.game-target-inspection-plan/1"},
-    "steamAppId": {"type": "integer", "minimum": 1},
-    "canonicalPolicy": {"const": "smml.canonical-game-policy/1"},
+    "schema": {
+      "const": "smml.game-target-inspection-plan/1"
+    },
+    "steamAppId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "canonicalPolicy": {
+      "type": "string",
+      "enum": [
+        "smml.canonical-game-policy/1",
+        "smml.canonical-game-policy/2"
+      ]
+    },
     "builds": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "#/$defs/build"}
+      "items": {
+        "$ref": "#/$defs/build"
+      }
     }
   },
   "$defs": {
@@ -24,7 +42,11 @@
     },
     "os": {
       "type": "string",
-      "enum": ["linux", "windows", "macos"]
+      "enum": [
+        "linux",
+        "windows",
+        "macos"
+      ]
     },
     "build": {
       "type": "object",
@@ -45,15 +67,24 @@
           "minLength": 1,
           "maxLength": 32
         },
-        "steamBranch": {"type": "string", "minLength": 1, "maxLength": 128},
+        "steamBranch": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
         "gameVersion": {
           "type": "string",
           "minLength": 1,
           "maxLength": 64,
           "pattern": "^[0-9A-Za-z][0-9A-Za-z._+\\-]*$"
         },
-        "engineBuild": {"type": "integer", "minimum": 0},
-        "gameOs": {"$ref": "#/$defs/os"},
+        "engineBuild": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gameOs": {
+          "$ref": "#/$defs/os"
+        },
         "gameArch": {
           "type": "string",
           "minLength": 1,
@@ -64,13 +95,26 @@
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"$ref": "#/$defs/relativePath"}
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
         },
         "targetFingerprints": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"$ref": "#/$defs/relativePath"}
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
+        },
+        "knownCanonicalGameFingerprints": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
         }
       }
     }

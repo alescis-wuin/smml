@@ -4,12 +4,13 @@
 
 1. ✅ `PathPolicy v1` — candidate freeze
 2. ✅ hashing déterministe — candidate freeze
-3. ✅ `GameTargetInspector v1` — candidate freeze
-4. intégration de `TransactionJournal v1`
-5. `TransactionEngine`
-6. verrou inter-processus
-7. durabilité adaptée à l'OS (`fsync`, atomic replace, etc.)
-8. fault injection et recovery
+3. ✅ `GameTargetInspector v1.1` + FileInventory — candidate freeze
+4. ✅ classification canonique `Cache/` + `smml.canonical-game-policy/2`
+5. intégration de `TransactionJournal v1`
+6. `TransactionEngine`
+7. verrou inter-processus
+8. durabilité adaptée à l'OS (`fsync`, atomic replace, etc.)
+9. fault injection et recovery
 
 Scénarios minimaux : crash avant commit, après opération 1, après opération N, avant vérification, après mutation avant acquittement du journal, modification étrangère entre deux phases.
 

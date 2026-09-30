@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import re
 import sys
+import subprocess
 from collections import defaultdict
 from pathlib import Path
 
@@ -14,6 +15,24 @@ VERSIONED_PATH_RE = re.compile(r"(?:^|[-_])v\d+(?:[._-]\d+)+", re.IGNORECASE)
 
 
 def iter_files():
+    try:
+        completed = subprocess.run(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            cwd=ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+        )
+        tracked = [item for item in completed.stdout.split(b"\0") if item]
+        for raw in tracked:
+            rel = Path(raw.decode("utf-8"))
+            path = ROOT / rel
+            if path.is_file():
+                yield path, rel
+        return
+    except (OSError, subprocess.CalledProcessError, UnicodeDecodeError):
+        pass
+
     for path in ROOT.rglob("*"):
         if not path.is_file():
             continue
