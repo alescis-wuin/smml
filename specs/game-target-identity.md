@@ -77,6 +77,8 @@ L'orthographe originale du chemin est conservée.
 
 Tous les SHA-256 DOIVENT être encodés en hexadécimal minuscule sur 64 caractères.
 
+Les primitives et rôles de digest sont définis normativement par [`hashing.md`](hashing.md). Un hash de fichier (`sha256`) et un fingerprint d'arbre (`smml.content-tree-sha256/1`) ne sont pas interchangeables.
+
 ### GTI-007 — Fingerprint exact
 
 `fingerprints.installationExactFingerprint` DOIT représenter tous les fichiers suivis de l'installation observée.
@@ -98,6 +100,8 @@ Cette politique :
 
 `rootFingerprints` contient des fingerprints exacts de racines utiles au diagnostic. Chaque entrée DOIT déclarer `algorithm = smml.content-tree-sha256/1`. Leur présence n'autorise pas à elle seule une mutation.
 
+Pour préserver la sémantique GP0, les records d'un sous-arbre conservent leurs chemins **relatifs au game root** ; ils ne sont pas réécrits relativement à la racine sélectionnée. La sélection d'une racine `R` retient `path == R` ou `path` commençant par `R + "/"`.
+
 ### GTI-010 — Cibles critiques
 
 `targetFingerprints` contient les SHA-256 bruts des fichiers utilisés comme preuves fortes de compatibilité, par exemple les cibles de Hook Pack. Chaque entrée DOIT déclarer `algorithm = sha256`.
@@ -112,22 +116,13 @@ La v1 utilise :
 smml.content-tree-sha256/1
 ```
 
-Pour chaque fichier retenu, construire exactement les octets :
+Sa définition normative complète est dans [`hashing.md`](hashing.md). En résumé, chaque record contient `path + size + sha256`, les chemins doivent être valides et uniques selon `PathPolicy v1`, l'ordre est déterministe via `PortableCollisionKey`, et l'encodage est :
 
 ```text
 <path UTF-8> NUL <size décimale ASCII> NUL <sha256 minuscule ASCII> LF
 ```
 
-Les lignes sont triées par :
-
-1. la clé de **full Unicode case folding** du chemin ;
-2. en cas d'égalité, `path` exact croissant par octets UTF-8.
-
-La table de case folding normative de v1 est celle d'**Unicode 15.1.0**. Une implémentation ne doit donc pas dépendre silencieusement de la version Unicode fournie par son runtime.
-
-Le SHA-256 de la concaténation est le fingerprint d'arbre.
-
-Le second critère rend le tri total et déterministe. Il ne modifie pas les fingerprints GP0 connus car le scan B0 de référence rapporte zéro collision insensible à la casse.
+Un chemin dupliqué ou une collision portable est une erreur ; le hash ne doit pas les départager arbitrairement.
 
 ### GTI-012 — Relation exact/canonique
 

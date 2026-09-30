@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import hashlib
 from typing import Any
 
+from hashing_validation import sha256_bytes
 from package_manifest_validation import (
     PackageManifestSemanticError,
     capability_key,
@@ -47,4 +47,4 @@ def profile_matches_game_target(document: dict[str, Any], game_target: dict[str,
 
 
 def profile_digest(raw_profile_bytes: bytes) -> str:
-    return hashlib.sha256(raw_profile_bytes).hexdigest()
+    return sha256_bytes(raw_profile_bytes)

@@ -144,7 +144,7 @@ Le digest de provenance est dérivé, jamais auto-déclaré :
 profileDigest = SHA-256 des octets exacts du fichier profile.json
 ```
 
-Le digest exact peut changer lors d'un simple reformatage sans changer la sémantique de résolution. Le Lockfile conserve ce digest comme provenance de l'entrée exacte ayant servi à la résolution.
+Le digest exact peut changer lors d'un simple reformatage sans changer la sémantique de résolution. Le Lockfile conserve ce digest comme provenance de l'entrée exacte ayant servi à la résolution. La primitive normative est `sha256` sur octets exacts telle que définie dans [`hashing.md`](hashing.md), sans re-sérialisation JSON.
 
 ### PR-008 — Ce qui reste hors Profile v1
 

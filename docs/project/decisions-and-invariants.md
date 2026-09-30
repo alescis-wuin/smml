@@ -32,6 +32,9 @@
 - `PathPolicy v1` : chemins logiques UTF-8/NFC, séparateur `/`, pas de normalisation silencieuse, collisions détectées avec Unicode Default Case Folding 15.1.0.
 - Les noms/caractères incompatibles avec la politique portable Windows sont rejetés même sur un host POSIX.
 - Les cibles gérées ne suivent jamais symlink/reparse point ; une mutation d'un fichier hardlinké est refusée en v1.
+- `sha256` signifie toujours SHA-256 des octets exacts, sans normalisation texte/JSON implicite.
+- `smml.content-tree-sha256/1` hash des records `path + NUL + size + NUL + sha256 + LF`, triés avec `PortableCollisionKey`; doublons et collisions portables sont refusés.
+- Les fingerprints exact, canonique, sous-arbre et `ManagedOutputSet` partagent l'algorithme d'arbre mais leur rôle/contexte reste distinct ; v1 n'ajoute pas de domain separation afin de préserver GP0.
 - `smml explain <path>` doit exposer provenance/ownership/conflits.
 
 ## Décisions réseau/persistance gelées après GP0.5

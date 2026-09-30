@@ -286,7 +286,7 @@ packageDigest  = SHA-256 des octets exacts de l'artefact package distribué
 fileDigests    = valeurs sha256 déclarées dans files, vérifiées sur les octets extraits
 ```
 
-Cela évite toute auto-référence de hash.
+Cela évite toute auto-référence de hash. Ces trois digests utilisent la primitive `sha256` d'octets exacts définie dans [`hashing.md`](hashing.md) ; aucun parsing/reformatage JSON n'est autorisé avant calcul.
 
 L'identité exacte d'un package résolu est au minimum :
 

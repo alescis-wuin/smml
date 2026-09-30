@@ -1,0 +1,99 @@
+{
+  "rawBytes": [
+    {
+      "name": "empty",
+      "hex": "",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "abc",
+      "hex": "616263",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+      "name": "utf8-e-acute",
+      "hex": "c3a9",
+      "sha256": "4a99557e4033c3539de2eb65472017cad5f9557f7a0625a09f1c3f6e2ba69c4c"
+    },
+    {
+      "name": "hello-lf",
+      "hex": "68656c6c6f0a",
+      "sha256": "5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03"
+    }
+  ],
+  "trees": [
+    {
+      "name": "empty",
+      "records": [],
+      "expected": {
+        "algorithm": "smml.content-tree-sha256/1",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fileCount": 0,
+        "totalFileBytes": 0
+      }
+    },
+    {
+      "name": "two-files",
+      "records": [
+        {
+          "path": "Data/a.bin",
+          "size": 3,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "path": "Survival/b.lua",
+          "size": 9,
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "expected": {
+        "algorithm": "smml.content-tree-sha256/1",
+        "sha256": "e4f4b92be733431df6632d27be6329ef30b865653044710293220fc2d43ba583",
+        "fileCount": 2,
+        "totalFileBytes": 12
+      }
+    },
+    {
+      "name": "managed-output",
+      "records": [
+        {
+          "path": "Data/generated/a.json",
+          "size": 4,
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        {
+          "path": "Survival/Scripts/hooked.lua",
+          "size": 5,
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      ],
+      "expected": {
+        "algorithm": "smml.content-tree-sha256/1",
+        "sha256": "0de2db8820118a1c665d420fabdc475a865e5a87872b053be44030570cdf5094",
+        "fileCount": 2,
+        "totalFileBytes": 9
+      }
+    }
+  ],
+  "subtree": {
+    "root": "Survival",
+    "records": [
+      {
+        "path": "Data/unrelated.bin",
+        "size": 7,
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "path": "Survival/a.lua",
+        "size": 1,
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "path": "Survival/sub/b.lua",
+        "size": 2,
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    ],
+    "sha256": "36fe6a893705a7fd1fda75573f4bbde1fb5e75c7ad6f5c4ae6377bb89e7cc898"
+  }
+}

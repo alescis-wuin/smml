@@ -93,48 +93,6 @@ def validate_semantics(document: dict[str, Any]) -> None:
     _validate_casefold_unique(fps["rootFingerprints"], "rootFingerprints")
     _validate_casefold_unique(fps["targetFingerprints"], "targetFingerprints")
 
-
-def content_tree_fingerprint(records: list[dict[str, Any]]) -> str:
-    """Reference implementation for smml.content-tree-sha256/1 tests only."""
-    import hashlib
-
-    normalized = []
-    for record in records:
-        path = str(record["path"])
-        _validate_relative_path(path)
-        size = int(record["size"])
-        sha256 = str(record["sha256"])
-        if size < 0:
-            raise SemanticValidationError("file size must be >= 0")
-        if len(sha256) != 64 or any(c not in "0123456789abcdef" for c in sha256):
-            raise SemanticValidationError("sha256 must be 64 lowercase hex characters")
-        normalized.append((path, size, sha256))
-
-    normalized.sort(key=lambda row: (portable_collision_key(row[0]), row[0].encode("utf-8")))
-
-    h = hashlib.sha256()
-    for path, size, sha256 in normalized:
-        h.update(path.encode("utf-8"))
-        h.update(b"\0")
-        h.update(str(size).encode("ascii"))
-        h.update(b"\0")
-        h.update(sha256.encode("ascii"))
-        h.update(b"\n")
-    return h.hexdigest()
-
-
-def apply_canonical_policy(
-    records: list[dict[str, Any]], policy: dict[str, Any]
-) -> list[dict[str, Any]]:
-    prefixes = tuple(policy.get("excludedFilePrefixes", []))
-    exact = set(policy.get("excludedExactFiles", []))
-
-    result = []
-    for record in records:
-        path = str(record["path"])
-        if path in exact:
-            continue
-        if any(path.startswith(prefix) for prefix in prefixes):
-            continue
-        result.append(record)
-    return result
+# Backward-compatible re-exports. The normative hashing implementation lives in
+# hashing_validation so every contract uses the same deterministic primitives.
+from hashing_validation import apply_canonical_policy, content_tree_fingerprint  # noqa: E402,F401

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Hashing v1 — 2026-09-30
+
+- ajout de `specs/hashing.md` et de vecteurs normatifs exécutables ;
+- formalisation de `sha256` sur octets exacts et de `smml.content-tree-sha256/1` ;
+- distinction explicite des rôles exact/canonique/sous-arbre/ManagedOutputSet ;
+- rejet des chemins dupliqués et des collisions `PortableCollisionKey` dans un arbre ;
+- clarification des sous-arbres : chemins conservés relatifs au game root, compatible avec GP0 ;
+- centralisation des digests Profile/manifest/package sur la primitive de référence ;
+- filtrage canonique exact et sensible à la casse après validation PathPolicy ;
+- ajout de tests de conformité et suppression du helper historique ambigu.
+
 ### PathPolicy v1 — 2026-09-30
 
 - ajout de `specs/path-policy.md` et de la politique sérialisée `smml.path-policy/1` ;

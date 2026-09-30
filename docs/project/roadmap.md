@@ -3,7 +3,7 @@
 ## P0 — Transaction foundation
 
 1. ✅ `PathPolicy v1` — candidate freeze
-2. hashing déterministe
+2. ✅ hashing déterministe — candidate freeze
 3. `GameTargetInspector`
 4. intégration de `TransactionJournal v1`
 5. `TransactionEngine`

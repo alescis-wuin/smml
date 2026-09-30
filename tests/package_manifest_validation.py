@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import hashlib
 import re
 from typing import Any
 
+from hashing_validation import sha256_bytes
 from path_policy_validation import PathPolicyError, portable_collision_key, validate_logical_path
 
 
@@ -252,8 +252,8 @@ def manifest_matches_game_target(document: dict[str, Any], game_target: dict[str
 
 
 def manifest_digest(raw_manifest_bytes: bytes) -> str:
-    return hashlib.sha256(raw_manifest_bytes).hexdigest()
+    return sha256_bytes(raw_manifest_bytes)
 
 
 def package_digest(raw_package_bytes: bytes) -> str:
-    return hashlib.sha256(raw_package_bytes).hexdigest()
+    return sha256_bytes(raw_package_bytes)

@@ -11,10 +11,13 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
-from validation import (  # noqa: E402
-    SemanticValidationError,
+from hashing_validation import (  # noqa: E402
+    HashingError,
     apply_canonical_policy,
     content_tree_fingerprint,
+)
+from validation import (  # noqa: E402
+    SemanticValidationError,
     validate_policy_semantics,
     validate_semantics,
 )
@@ -115,16 +118,24 @@ class GameTargetIdentityTests(unittest.TestCase):
             content_tree_fingerprint(apply_canonical_policy(after_launch, self.policy)),
         )
 
-    def test_sort_has_deterministic_tie_breaker(self):
+    def test_content_tree_order_is_deterministic(self):
         records_a = [
-            {"path": "A.txt", "size": 1, "sha256": "1" * 64},
-            {"path": "a.txt", "size": 1, "sha256": "2" * 64},
+            {"path": "Data/A.txt", "size": 1, "sha256": "1" * 64},
+            {"path": "Survival/a.txt", "size": 1, "sha256": "2" * 64},
         ]
         records_b = list(reversed(records_a))
         self.assertEqual(
             content_tree_fingerprint(records_a),
             content_tree_fingerprint(records_b),
         )
+
+    def test_content_tree_rejects_portable_collision(self):
+        records = [
+            {"path": "Data/A.txt", "size": 1, "sha256": "1" * 64},
+            {"path": "data/a.txt", "size": 1, "sha256": "2" * 64},
+        ]
+        with self.assertRaises(HashingError):
+            content_tree_fingerprint(records)
 
     def test_semantics_reject_case_collision(self):
         doc = json.loads(json.dumps(self.valid))

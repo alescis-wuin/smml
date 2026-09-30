@@ -54,12 +54,17 @@ Le DLL/VFS natif reste différé. Le MVP reste Lua/data hybride.
 
 Les validateurs sémantiques existants (`GameTargetIdentity`, `TransactionJournal`, `PackageManifest`, `HookPackManifest`) utilisent désormais le même validateur de chemin de référence.
 
+## Hashing v1
+
+`Hashing v1` est au stade **candidate freeze**. Il centralise `sha256` sur octets exacts et `smml.content-tree-sha256/1`, rejette les chemins dupliqués/collisions portables, formalise les fingerprints exact, canonique, sous-arbre et `ManagedOutputSet`, et fournit des vecteurs de conformité exécutables.
+
+Les digests de Profile/manifest/package utilisent désormais la même primitive de référence au lieu d'implémentations ad hoc.
+
 ## Prochaine priorité
 
 Le prochain chantier P0 du cœur de sûreté est :
 
 ```text
-Hashing
 GameTargetInspector
 TransactionJournal integration
 TransactionEngine

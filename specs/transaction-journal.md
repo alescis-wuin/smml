@@ -71,6 +71,8 @@ or:
 { "exists": true, "sha256": "<64 lowercase hex>" }
 ```
 
+Les champs `sha256` décrivent le SHA-256 des octets exacts du fichier selon [`hashing.md`](hashing.md). Ils ne sont jamais calculés à partir d'une représentation texte normalisée.
+
 A present file without a SHA-256 is invalid. An absent file with a SHA-256 is invalid.
 
 ### 3.4 Operation order

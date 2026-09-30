@@ -273,7 +273,9 @@ algorithm = smml.content-tree-sha256/1
 sha256
 ```
 
-Il représente le fingerprint du **ManagedOutputSet** final staged, et non le fingerprint exact de l'installation runtime. Le `ManagedOutputSet` est l'ensemble des fichiers réguliers dont les octets finaux sont produits ou sélectionnés par SMML pour ce profil, chemins relatifs à la racine du jeu : fichiers vanilla hookés reconstruits, sorties du Composer et fichiers de package copiés dans l'état géré. Les fichiers baseline inchangés et les artefacts runtime ne sont pas inclus ; un chemin supprimé n'a pas d'entrée. Le hash utilise exactement les records `path + NUL + size + NUL + sha256 + LF` de `smml.content-tree-sha256/1`.
+Il représente le fingerprint du **ManagedOutputSet** final staged, et non le fingerprint exact de l'installation runtime. Le `ManagedOutputSet` est l'ensemble des fichiers réguliers dont les octets finaux sont produits ou sélectionnés par SMML pour ce profil, chemins relatifs à la racine du jeu : fichiers vanilla hookés reconstruits, sorties du Composer et fichiers de package copiés dans l'état géré. Les fichiers baseline inchangés et les artefacts runtime ne sont pas inclus ; un chemin supprimé n'a pas d'entrée.
+
+La définition normative de l'ensemble, de l'ordre et de l'encodage `smml.content-tree-sha256/1` est centralisée dans [`hashing.md`](hashing.md).
 
 **Gate futur :** un Lockfile utilisé comme artefact final d'un profil appliqué devra contenir ce fingerprint. Le futur `StateManifest` pourra décrire l'inventaire détaillé qui prouve ce `ManagedOutputSet`; GP1 n'en duplique pas encore le contenu dans le Lockfile.
 
