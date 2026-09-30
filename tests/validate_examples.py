@@ -68,6 +68,12 @@ def main() -> int:
     validate_policy_semantics(policy)
     print("PASS smml.canonical-game-policy/1")
 
+    path_policy_schema = load_json(ROOT / "schemas" / "smml.path-policy-1.schema.json")
+    path_policy = load_json(ROOT / "policies" / "smml.path-policy-1.json")
+    Draft202012Validator.check_schema(path_policy_schema)
+    Draft202012Validator(path_policy_schema).validate(path_policy)
+    print("PASS smml.path-policy/1")
+
     cases = load_json(CASES_PATH)
     failures = 0
 

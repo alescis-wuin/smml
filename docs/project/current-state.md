@@ -48,15 +48,20 @@ SDK optionnel
 
 Le DLL/VFS natif reste différé. Le MVP reste Lua/data hybride.
 
+## PathPolicy v1
+
+`PathPolicy v1` est au stade **candidate freeze**. Il fixe une représentation portable des chemins logiques, Unicode NFC, une clé de collision Unicode 15.1.0, les restrictions Windows portables, les limites UTF-8 et les invariants no-follow pour symlink/reparse/hardlink.
+
+Les validateurs sémantiques existants (`GameTargetIdentity`, `TransactionJournal`, `PackageManifest`, `HookPackManifest`) utilisent désormais le même validateur de chemin de référence.
+
 ## Prochaine priorité
 
-Le prochain chantier P0 est le cœur de sûreté :
+Le prochain chantier P0 du cœur de sûreté est :
 
 ```text
-PathPolicy
 Hashing
 GameTargetInspector
-TransactionJournal
+TransactionJournal integration
 TransactionEngine
 ```
 

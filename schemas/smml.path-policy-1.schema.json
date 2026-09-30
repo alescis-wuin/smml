@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:path-policy:1",
+  "title": "SMML PathPolicy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "logicalPath", "collision", "filesystem"],
+  "properties": {
+    "schema": { "const": "smml.path-policy/1" },
+    "logicalPath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "encoding",
+        "separator",
+        "unicodeNormalization",
+        "maxPathUtf8Bytes",
+        "maxSegmentUtf8Bytes",
+        "maxSegments",
+        "rejectAsciiControls",
+        "rejectWindowsReservedCharacters",
+        "rejectTrailingDotOrSpace",
+        "rejectWindowsDeviceNames"
+      ],
+      "properties": {
+        "encoding": { "const": "utf-8" },
+        "separator": { "const": "/" },
+        "unicodeNormalization": { "const": "NFC" },
+        "maxPathUtf8Bytes": { "const": 4096 },
+        "maxSegmentUtf8Bytes": { "const": 255 },
+        "maxSegments": { "const": 256 },
+        "rejectAsciiControls": { "const": true },
+        "rejectWindowsReservedCharacters": { "const": true },
+        "rejectTrailingDotOrSpace": { "const": true },
+        "rejectWindowsDeviceNames": { "const": true }
+      }
+    },
+    "collision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["normalization", "caseFolding", "unicodeVersion"],
+      "properties": {
+        "normalization": { "const": "NFC" },
+        "caseFolding": { "const": "unicode-default" },
+        "unicodeVersion": { "const": "15.1.0" }
+      }
+    },
+    "filesystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requireTrustedRoot",
+        "followSymlinks",
+        "allowReparsePoints",
+        "allowHardlinkedWritableFiles",
+        "requireExactCaseForExistingComponents"
+      ],
+      "properties": {
+        "requireTrustedRoot": { "const": true },
+        "followSymlinks": { "const": false },
+        "allowReparsePoints": { "const": false },
+        "allowHardlinkedWritableFiles": { "const": false },
+        "requireExactCaseForExistingComponents": { "const": true }
+      }
+    }
+  }
+}

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### PathPolicy v1 — 2026-09-30
+
+- ajout de `specs/path-policy.md` et de la politique sérialisée `smml.path-policy/1` ;
+- chemins logiques UTF-8/NFC avec séparateur `/` et absence de normalisation silencieuse ;
+- détection de collisions via Unicode Default Case Folding 15.1.0 ;
+- règles portables Windows : caractères/noms réservés, trailing dot/space, drive/namespace forms ;
+- bornes v1 : 4096 octets UTF-8 par chemin, 255 par segment, 256 segments ;
+- invariants filesystem no-follow : racine de confiance, symlink/reparse refusés, hardlinks mutables refusés ;
+- centralisation des validations de chemin utilisées par les contrats GP1 existants ;
+- ajout de vecteurs et tests de conformité PathPolicy.
+
 ### Repository bootstrap — 2026-09-30
 
 - migration vers une arborescence Git canonique ;

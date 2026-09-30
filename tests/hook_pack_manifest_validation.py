@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import json
-from pathlib import PurePosixPath
 from typing import Any
+
+from path_policy_validation import PathPolicyError, portable_collision_key, validate_logical_path
 
 
 class HookPackManifestSemanticError(ValueError):
@@ -10,21 +11,10 @@ class HookPackManifestSemanticError(ValueError):
 
 
 def _validate_relative_path(value: str) -> None:
-    if not value:
-        raise HookPackManifestSemanticError("path must not be empty")
-    if "\\" in value:
-        raise HookPackManifestSemanticError(f"backslash is forbidden in path: {value!r}")
-    if "\x00" in value:
-        raise HookPackManifestSemanticError("NUL is forbidden in paths")
-    if value.startswith("/"):
-        raise HookPackManifestSemanticError(f"absolute path is forbidden: {value!r}")
-    if len(value) >= 3 and value[0].isalpha() and value[1] == ":" and value[2] == "/":
-        raise HookPackManifestSemanticError(f"drive-absolute path is forbidden: {value!r}")
-    if "//" in value:
-        raise HookPackManifestSemanticError(f"empty path segment is forbidden: {value!r}")
-    parts = PurePosixPath(value).parts
-    if any(part in {".", ".."} for part in parts):
-        raise HookPackManifestSemanticError(f"dot segment is forbidden: {value!r}")
+    try:
+        validate_logical_path(value)
+    except PathPolicyError as exc:
+        raise HookPackManifestSemanticError(str(exc)) from exc
 
 
 def _unique(items, key_fn, label: str) -> None:
@@ -62,7 +52,7 @@ def validate_hook_pack_manifest_semantics(
     target_path_casefold: dict[str, str] = {}
     for item in target_files:
         _validate_relative_path(item["path"])
-        folded = item["path"].casefold()
+        folded = portable_collision_key(item["path"])
         previous = target_path_casefold.get(folded)
         if previous is not None:
             raise HookPackManifestSemanticError(
@@ -161,7 +151,7 @@ def validate_hook_pack_manifest_semantics(
     for item in cache:
         path = item["path"]
         _validate_relative_path(path)
-        folded = path.casefold()
+        folded = portable_collision_key(path)
         previous = cache_path_casefold.get(folded)
         if previous is not None:
             raise HookPackManifestSemanticError(

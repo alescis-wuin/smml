@@ -8,7 +8,8 @@ SMML est un projet de plateforme de modding pour **Scrap Mechanic Survival** ori
 - **GP1 — Foundation : en cours**.
 - Les sept contrats fondamentaux sont au stade **candidate freeze** :
   `GameTargetIdentity`, `TransactionJournal`, `PackageManifest`, `ContractDescriptor`, `HookPackManifest`, `Profile`, `Lockfile`.
-- Prochaine priorité : `PathPolicy`, hashing, `GameTargetInspector`, puis `TransactionEngine` avec fault injection avant toute GUI.
+- `PathPolicy v1` est au stade **candidate freeze** avec politique versionnée et tests exécutables.
+- Prochaine priorité : hashing déterministe, puis `GameTargetInspector` et `TransactionEngine` avec fault injection avant toute GUI.
 
 La source de vérité active est le dépôt Git. Les anciennes archives versionnées manuellement ne doivent plus être utilisées comme source canonique.
 

@@ -1,7 +1,13 @@
 from __future__ import annotations
 
-from pathlib import PurePosixPath
 from typing import Any
+
+from path_policy_validation import (
+    PathPolicyError,
+    portable_collision_key,
+    validate_logical_path,
+    validate_logical_prefix,
+)
 
 
 class SemanticValidationError(ValueError):
@@ -9,22 +15,10 @@ class SemanticValidationError(ValueError):
 
 
 def _validate_relative_path(value: str) -> None:
-    if not value:
-        raise SemanticValidationError("path must not be empty")
-    if "\\" in value:
-        raise SemanticValidationError(f"backslash is forbidden in path: {value!r}")
-    if "\x00" in value:
-        raise SemanticValidationError("NUL is forbidden in paths")
-    if value.startswith("/"):
-        raise SemanticValidationError(f"absolute path is forbidden: {value!r}")
-    if len(value) >= 3 and value[0].isalpha() and value[1] == ":" and value[2] == "/":
-        raise SemanticValidationError(f"drive-absolute path is forbidden: {value!r}")
-    if "//" in value:
-        raise SemanticValidationError(f"empty path segment is forbidden: {value!r}")
-
-    parts = PurePosixPath(value).parts
-    if any(part in {".", ".."} for part in parts):
-        raise SemanticValidationError(f"dot segment is forbidden: {value!r}")
+    try:
+        validate_logical_path(value)
+    except PathPolicyError as exc:
+        raise SemanticValidationError(str(exc)) from exc
 
 
 def _validate_casefold_unique(items: list[dict[str, Any]], label: str) -> None:
@@ -32,7 +26,7 @@ def _validate_casefold_unique(items: list[dict[str, Any]], label: str) -> None:
     for item in items:
         path = item["path"]
         _validate_relative_path(path)
-        key = path.casefold()
+        key = portable_collision_key(path)
         previous = seen.get(key)
         if previous is not None:
             raise SemanticValidationError(
@@ -46,8 +40,11 @@ def validate_policy_semantics(policy: dict[str, Any]) -> None:
     for prefix in policy["excludedFilePrefixes"]:
         if not prefix.endswith("/"):
             raise SemanticValidationError(f"excluded prefix must end with '/': {prefix!r}")
-        _validate_relative_path(prefix[:-1])
-        key = prefix.casefold()
+        try:
+            validate_logical_prefix(prefix)
+        except PathPolicyError as exc:
+            raise SemanticValidationError(str(exc)) from exc
+        key = portable_collision_key(prefix[:-1]) + "/"
         previous = seen_prefixes.get(key)
         if previous is not None:
             raise SemanticValidationError(
@@ -58,7 +55,7 @@ def validate_policy_semantics(policy: dict[str, Any]) -> None:
     seen_files: dict[str, str] = {}
     for path in policy["excludedExactFiles"]:
         _validate_relative_path(path)
-        key = path.casefold()
+        key = portable_collision_key(path)
         previous = seen_files.get(key)
         if previous is not None:
             raise SemanticValidationError(
@@ -113,7 +110,7 @@ def content_tree_fingerprint(records: list[dict[str, Any]]) -> str:
             raise SemanticValidationError("sha256 must be 64 lowercase hex characters")
         normalized.append((path, size, sha256))
 
-    normalized.sort(key=lambda row: (row[0].casefold(), row[0].encode("utf-8")))
+    normalized.sort(key=lambda row: (portable_collision_key(row[0]), row[0].encode("utf-8")))
 
     h = hashlib.sha256()
     for path, size, sha256 in normalized:

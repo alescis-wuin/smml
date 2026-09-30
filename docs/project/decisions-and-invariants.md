@@ -29,6 +29,9 @@
 - State model : installation officielle attendue → baseline locale → état géré SMML → état runtime.
 - Désinstallation reconstructive : recalculer l'état désiré avec les mods restants, jamais appliquer des « inverse patches » fragiles.
 - Baseline Vault immuable ; optimisation CAS/dédup possible plus tard.
+- `PathPolicy v1` : chemins logiques UTF-8/NFC, séparateur `/`, pas de normalisation silencieuse, collisions détectées avec Unicode Default Case Folding 15.1.0.
+- Les noms/caractères incompatibles avec la politique portable Windows sont rejetés même sur un host POSIX.
+- Les cibles gérées ne suivent jamais symlink/reparse point ; une mutation d'un fichier hardlinké est refusée en v1.
 - `smml explain <path>` doit exposer provenance/ownership/conflits.
 
 ## Décisions réseau/persistance gelées après GP0.5

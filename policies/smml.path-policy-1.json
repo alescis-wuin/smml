@@ -1,0 +1,27 @@
+{
+  "schema": "smml.path-policy/1",
+  "logicalPath": {
+    "encoding": "utf-8",
+    "separator": "/",
+    "unicodeNormalization": "NFC",
+    "maxPathUtf8Bytes": 4096,
+    "maxSegmentUtf8Bytes": 255,
+    "maxSegments": 256,
+    "rejectAsciiControls": true,
+    "rejectWindowsReservedCharacters": true,
+    "rejectTrailingDotOrSpace": true,
+    "rejectWindowsDeviceNames": true
+  },
+  "collision": {
+    "normalization": "NFC",
+    "caseFolding": "unicode-default",
+    "unicodeVersion": "15.1.0"
+  },
+  "filesystem": {
+    "requireTrustedRoot": true,
+    "followSymlinks": false,
+    "allowReparsePoints": false,
+    "allowHardlinkedWritableFiles": false,
+    "requireExactCaseForExistingComponents": true
+  }
+}

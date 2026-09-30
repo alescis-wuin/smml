@@ -1,0 +1,40 @@
+{
+  "validPaths": [
+    "Survival/Scripts/game/SurvivalGame.lua",
+    ".smml/state.json",
+    "Localization/Français/é.json",
+    "COM10/file.txt",
+    "LPT10.txt",
+    "configuration/NUL-value.json"
+  ],
+  "invalidPaths": [
+    {"path": "", "code": "PATH_EMPTY"},
+    {"path": "/absolute/file.txt", "code": "ABSOLUTE_OR_NAMESPACED_PATH"},
+    {"path": "C:/absolute/file.txt", "code": "ABSOLUTE_OR_NAMESPACED_PATH"},
+    {"path": "C:relative.txt", "code": "ABSOLUTE_OR_NAMESPACED_PATH"},
+    {"path": "dir\\file.txt", "code": "BACKSLASH_FORBIDDEN"},
+    {"path": "dir//file.txt", "code": "EMPTY_SEGMENT"},
+    {"path": "dir/./file.txt", "code": "DOT_SEGMENT"},
+    {"path": "dir/../file.txt", "code": "DOT_SEGMENT"},
+    {"path": "bad:name.txt", "code": "RESERVED_CHARACTER"},
+    {"path": "bad?.txt", "code": "RESERVED_CHARACTER"},
+    {"path": "bad\u0001name.txt", "code": "CONTROL_CHARACTER"},
+    {"path": "bad\u007fname.txt", "code": "CONTROL_CHARACTER"},
+    {"path": "file. ", "code": "TRAILING_DOT_OR_SPACE"},
+    {"path": "file.", "code": "TRAILING_DOT_OR_SPACE"},
+    {"path": "NUL", "code": "RESERVED_DEVICE_NAME"},
+    {"path": "nul.txt", "code": "RESERVED_DEVICE_NAME"},
+    {"path": "COM1.json", "code": "RESERVED_DEVICE_NAME"},
+    {"path": "lpt³.log", "code": "RESERVED_DEVICE_NAME"},
+    {"path": "Cafe\u0301.txt", "code": "PATH_NOT_NFC"}
+  ],
+  "collisionSets": [
+    ["Foo/Bar.lua", "foo/bar.lua"],
+    ["Straße.txt", "STRASSE.TXT"],
+    ["É.txt", "é.TXT"]
+  ],
+  "nonCollisionSets": [
+    ["COM10.txt", "COM11.txt"],
+    ["a/b.txt", "a/c.txt"]
+  ]
+}

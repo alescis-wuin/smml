@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from pathlib import PurePosixPath
 from typing import Any
+
+from path_policy_validation import PathPolicyError, portable_collision_key, validate_logical_path
 
 from validation import SemanticValidationError, validate_semantics as validate_game_target_semantics
 
@@ -38,21 +39,10 @@ def _parse_utc(value: str) -> datetime:
 
 
 def _validate_relative_path(value: str) -> None:
-    if not value:
-        raise TransactionJournalSemanticError("path must not be empty")
-    if "\\" in value:
-        raise TransactionJournalSemanticError(f"backslash is forbidden in path: {value!r}")
-    if "\x00" in value:
-        raise TransactionJournalSemanticError("NUL is forbidden in paths")
-    if value.startswith("/"):
-        raise TransactionJournalSemanticError(f"absolute path is forbidden: {value!r}")
-    if len(value) >= 3 and value[0].isalpha() and value[1] == ":" and value[2] == "/":
-        raise TransactionJournalSemanticError(f"drive-absolute path is forbidden: {value!r}")
-    if "//" in value:
-        raise TransactionJournalSemanticError(f"empty path segment is forbidden: {value!r}")
-    parts = PurePosixPath(value).parts
-    if any(part in {".", ".."} for part in parts):
-        raise TransactionJournalSemanticError(f"dot segment is forbidden: {value!r}")
+    try:
+        validate_logical_path(value)
+    except PathPolicyError as exc:
+        raise TransactionJournalSemanticError(str(exc)) from exc
 
 
 def _validate_operation_shape(op: dict[str, Any]) -> None:
@@ -126,7 +116,7 @@ def validate_transaction_journal_semantics(document: dict[str, Any]) -> None:
 
         path = op["path"]
         _validate_relative_path(path)
-        key = path.casefold()
+        key = portable_collision_key(path)
         previous = path_keys.get(key)
         if previous is not None:
             raise TransactionJournalSemanticError(
