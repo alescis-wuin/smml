@@ -13,6 +13,6 @@ Commencer par lire :
 
 État : GP0 fermé pour Scrap Mechanic 1.0.6 / engine 889 / Steam build 25442087. Les sept contrats GP1 fondamentaux sont au stade candidate freeze dans le snapshot issu de `smml-gp1-foundation-v0.6.0`.
 
-Priorité suivante : intégration `TransactionJournal` puis `TransactionEngine` avec fault injection et recovery fail-closed. `PathPolicy`, hashing et `GameTargetInspector v1.1` sont candidate freeze. Ne pas commencer par la GUI.
+État P0 : `TransactionJournal runtime integration v1` et `TransactionEngine v1 — non-destructive core` sont candidate freeze. Le staging CAS transaction-local et le JournalStore durable permettent `PLANNED -> PREPARED` sans mutation du jeu. Priorité suivante : verrou inter-processus, puis commit/verify/rollback avec fault injection destructive sur roots synthétiques avant toute écriture réelle. Ne pas commencer par la GUI.
 
 Toujours distinguer FACT, INFERENCE, DESIGN DECISION et OPEN QUESTION. Les preuves moteur ont priorité sur la documentation externe.

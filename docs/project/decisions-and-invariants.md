@@ -42,8 +42,13 @@
 - L'inspection exige un inventaire stable en deux passes et ne constitue jamais une autorisation de mutation ; le TransactionEngine revalide les préconditions.
 - `TransactionJournal runtime integration v1` observe le filesystem sans mutation et considère les octets observés comme autorité pour `BEFORE | AFTER | FOREIGN`; le `status` du journal reste une connaissance durable potentiellement en retard.
 - Le recovery runtime lie la cible sur build + fingerprint canonique + target fingerprints stricts ; l'exact fingerprint et les root fingerprints ne bloquent pas à eux seuls le recovery à cause du drift `Cache/` prouvé.
-- Un diagnostic `RESUME_COMMIT` ou `ROLLBACK_REQUIRED` n'autorise aucune écriture ; seul le futur TransactionEngine pourra matérialiser l'action après revalidation et write-ahead durable.
+- Un diagnostic `RESUME_COMMIT` ou `ROLLBACK_REQUIRED` n'autorise aucune écriture ; seule une tranche destructive explicitement activée du TransactionEngine pourra matérialiser l'action après revalidation, verrouillage et write-ahead durable.
 - Le recovery inspector refuse toute sortie sous le game root et bloque fail-closed sur symlink, reparse point, hardlink mutable, case mismatch ou ancêtre invalide.
+- `TransactionEngine v1` utilise le `TransactionJournal PLANNED` comme plan unique afin de ne pas dupliquer les mutations dans un second format.
+- `PREPARED` n'est durable qu'après stockage vérifié de tous les bytes `before` nécessaires au rollback et `after` nécessaires au commit, plus publication durable de `smml.transaction-staging-manifest/1`.
+- Le staging est transaction-local et adressé par SHA-256 ; un digest sans bytes recoverables n'autorise jamais `PREPARED`.
+- `JournalStore` publie un journal complet par fichier temporaire + `fsync` + remplacement atomique ; une révision ne peut modifier l'identité de transaction, la cible ou les champs immuables des opérations.
+- La tranche non destructive du TransactionEngine n'écrit jamais dans le game root ; l'inter-process lock reste obligatoire avant d'activer commit/rollback.
 - `smml explain <path>` doit exposer provenance/ownership/conflits.
 
 ## Décisions réseau/persistance gelées après GP0.5

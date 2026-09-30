@@ -13,7 +13,8 @@ SMML est un projet de plateforme de modding pour **Scrap Mechanic Survival** ori
 - `GameTargetInspector v1.1` ajoute une sortie d’inventaire déterministe, un diff `Cache/` contre la baseline GP0 et la vérification d’un fingerprint canonique connu.
 - `smml.canonical-game-policy/2` est la politique active : `Cache/` est classé rebuildable-cache et `Logs/` runtime-ephemeral, tandis que les target fingerprints restent stricts.
 - `TransactionJournal runtime integration v1` ajoute observation filesystem et recovery **read-only**, sans mutation du jeu ni du journal.
-- Prochaine priorité : `TransactionEngine` avec staging, journal durable et fault injection avant toute GUI.
+- `TransactionEngine v1 — non-destructive core` ajoute staging CAS transaction-local, journal durable atomique et préparation `PLANNED -> PREPARED` sans mutation du jeu.
+- Prochaine priorité : verrou inter-processus puis commit/verify/rollback avec fault injection destructive en environnement de test avant toute écriture réelle sur une installation utilisateur.
 
 La source de vérité active est le dépôt Git. Les anciennes archives versionnées manuellement ne doivent plus être utilisées comme source canonique.
 
@@ -81,6 +82,21 @@ python tools/gp1/transaction-recovery-inspector/smml_transaction_recovery_inspec
 ```
 
 Cette commande n'écrit jamais dans le game root et refuse un `--output` situé sous celui-ci.
+
+Préparation durable non destructive d'une transaction :
+
+```bash
+mkdir -p "$HOME/.local/state/smml"
+
+python tools/gp1/transaction-preparer/smml_transaction_prepare.py \
+  --journal-plan artifacts/transaction-journal.planned.json \
+  --game-root "$HOME/.local/share/Steam/steamapps/common/Scrap Mechanic" \
+  --game-target artifacts/game-target.json \
+  --after-root artifacts/desired-game-tree \
+  --state-root "$HOME/.local/state/smml"
+```
+
+Cette commande capture/stage les octets nécessaires hors du jeu et ne fait avancer le journal à `PREPARED` qu'après publication durable du staging. Elle n'exécute aucun commit ou rollback.
 
 Équivalent sans `make` :
 

@@ -1,0 +1,49 @@
+{
+  "schema": "smml.transaction-staging-manifest/1",
+  "transactionId": "tx-staging-example",
+  "journalRevision": 1,
+  "contentAlgorithm": "sha256",
+  "layout": "sha256-prefix-v1",
+  "operations": [
+    {
+      "operationId": "op-create",
+      "sequence": 0,
+      "path": "Data/new.txt",
+      "before": {
+        "exists": false
+      },
+      "after": {
+        "exists": true,
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "size": 4
+      }
+    },
+    {
+      "operationId": "op-delete",
+      "sequence": 1,
+      "path": "Data/old.txt",
+      "before": {
+        "exists": true,
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "size": 8
+      },
+      "after": {
+        "exists": false
+      }
+    }
+  ],
+  "blobs": [
+    {
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "size": 4
+    },
+    {
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "size": 8
+    },
+    {
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "size": 1
+    }
+  ]
+}

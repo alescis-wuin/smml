@@ -85,14 +85,31 @@ Le rapport lie le journal à un `GameTargetIdentity` frais par build + fingerpri
 
 Le CLI de recovery n'écrit ni dans le game root ni dans le journal ; `RESUME_COMMIT` / `ROLLBACK_REQUIRED` sont uniquement des diagnostics. Symlink, reparse point, hardlink mutable, case mismatch et topologie de chemin invalide bloquent fail-closed.
 
+## TransactionEngine v1 — non-destructive core
+
+La première tranche du `TransactionEngine` est au stade **candidate freeze** sans mutation du game root. Elle introduit :
+
+- `StagingStore` transaction-local adressé par SHA-256 ;
+- `smml.transaction-staging-manifest/1` ;
+- capture des bytes `before` nécessaires au rollback ;
+- import des bytes `after` nécessaires au futur commit ;
+- `JournalStore` whole-file avec `fsync` + remplacement atomique sur la référence POSIX ;
+- ordre durable `PLANNED -> staging blobs -> staging manifest -> PREPARED` ;
+- reprise idempotente après interruption ;
+- fault injection autour des publications persistantes non destructives.
+
+Le CLI `transaction-preparer` écrit uniquement dans un `stateRoot` distinct du jeu. `PREPARED` signifie désormais que les bytes nécessaires au commit et au rollback sont effectivement recoverables depuis le staging vérifié.
+
 ## Prochaine priorité
 
-Le prochain chantier P0 du cœur de sûreté est :
+Avant d'activer toute mutation réelle du jeu :
 
 ```text
-TransactionEngine
+inter-process transaction lock
+        ↓
+TransactionEngine commit / verify / rollback
+        ↓
+fault injection destructive sur game roots synthétiques
 ```
 
-Il doit introduire staging/CAS ou équivalent, journal durable write-ahead, commit/verify/rollback et fault injection avant toute GUI.
-
-Ensuite : `PackageValidator`, `Resolver`, puis Content Composer MVP et vertical slice Pallet64.
+La preuve de durabilité Windows reste ouverte ; l'environnement GP1 actuellement validé est Linux/Proton. Ensuite : `PackageValidator`, `Resolver`, Content Composer MVP et vertical slice Pallet64.

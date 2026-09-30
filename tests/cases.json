@@ -553,5 +553,16 @@
     "file": "transaction-recovery-report.invalid.bad-summary.json",
     "valid": false,
     "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-staging-manifest",
+    "file": "transaction-staging-manifest.valid.prepared.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-staging-manifest",
+    "file": "transaction-staging-manifest.invalid.unreferenced-blob.json",
+    "valid": false,
+    "failureLayer": "semantic"
   }
 ]

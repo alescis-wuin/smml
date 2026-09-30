@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### TransactionEngine v1 — non-destructive core — 2026-09-30
+
+- ajout de `specs/transaction-engine.md` et `smml.transaction-staging-manifest/1` ;
+- `StagingStore` transaction-local adressé par SHA-256 avec publication atomique, relecture et vérification des blobs ;
+- capture durable des bytes `before` nécessaires au rollback et import des bytes `after` nécessaires au futur commit ;
+- `JournalStore` avec réécriture whole-file, `fsync`, remplacement atomique et invariants de révision/immutabilité ;
+- préparation `PLANNED -> PREPARED` uniquement après staging + manifest durables ;
+- reprise idempotente d'une préparation interrompue et revalidation d'un état déjà `PREPARED` ;
+- fault injection non destructive autour des blobs, manifests et publications du journal ;
+- CLI `transaction-preparer` qui écrit uniquement sous un `stateRoot` hors du game root ;
+- aucun commit/verify/rollback du jeu activé dans cette tranche.
+
 ### TransactionJournal runtime integration v1 — 2026-09-30
 
 - ajout de `smml.transaction-recovery-report/1` et de `specs/transaction-journal-runtime.md` ;

@@ -7,10 +7,10 @@
 3. ✅ `GameTargetInspector v1.1` + FileInventory — candidate freeze
 4. ✅ classification canonique `Cache/` + `smml.canonical-game-policy/2`
 5. ✅ intégration runtime read-only de `TransactionJournal v1` — candidate freeze
-6. `TransactionEngine`
+6. ✅ `TransactionEngine v1` non-destructif : staging CAS + JournalStore + préparation `PLANNED -> PREPARED` — candidate freeze
 7. verrou inter-processus
-8. durabilité adaptée à l'OS (`fsync`, atomic replace, etc.)
-9. fault injection et recovery
+8. durabilité OS : référence POSIX implémentée ; preuve/backend Windows encore ouvert
+9. fault injection : publication staging/journal couverte ; commit/rollback destructifs encore à couvrir
 
 Scénarios minimaux : crash avant commit, après opération 1, après opération N, avant vérification, après mutation avant acquittement du journal, modification étrangère entre deux phases.
 

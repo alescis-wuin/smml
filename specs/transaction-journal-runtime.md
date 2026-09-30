@@ -190,19 +190,20 @@ Exit status:
 - `2`: report produced, but decision is `TARGET_MISMATCH`, `PATH_POLICY_BLOCKED`, `FOREIGN_MODIFICATION` or `RECOVERY_REQUIRED`;
 - `1`: invalid input/schema or observation failure.
 
-## 9. Deferred to TransactionEngine
+## 9. TransactionEngine handoff
 
-This stage does not implement:
+`TransactionEngine v1 — non-destructive core` now implements the first three deferred foundations in [`transaction-engine.md`](transaction-engine.md): transaction-local staging/CAS, durable atomic journal persistence on the validated POSIX reference environment, and the write-ahead transition `PLANNED -> PREPARED`.
 
-- atomic journal persistence;
-- staging/CAS;
-- write-ahead phase transitions;
-- commit operations;
-- verification writes;
+Still deferred after that slice:
+
+- inter-process transaction locks;
+- transition to `COMMITTING`;
+- commit operations against the game root;
+- `APPLIED` acknowledgements;
+- verification writes and `VERIFIED` acknowledgements;
 - rollback execution;
-- inter-process locks;
-- ownership/state manifest;
-- OS durability primitives (`fsync`, `FlushFileBuffers`, directory durability);
+- ownership/state manifest integration;
+- Windows-specific durability proof (`FlushFileBuffers`, directory semantics);
 - fault injection around destructive actions.
 
-Those belong to the next TransactionEngine slice.
+The read-only recovery report remains diagnostic only and does not become an authorization merely because durable staging exists.

@@ -41,6 +41,10 @@ from smml_reference.transaction_runtime import (  # noqa: E402
     TransactionRecoveryReportSemanticError,
     validate_transaction_recovery_report_semantics,
 )
+from smml_reference.transaction_store import (  # noqa: E402
+    StagingManifestSemanticError,
+    validate_staging_manifest_semantics,
+)
 
 
 def load_json(path: Path):
@@ -72,6 +76,9 @@ def main() -> int:
 
     recovery_report_schema = load_json(ROOT / "schemas" / "smml.transaction-recovery-report-1.schema.json")
     recovery_report_validator = Draft202012Validator(recovery_report_schema)
+
+    staging_manifest_schema = load_json(ROOT / "schemas" / "smml.transaction-staging-manifest-1.schema.json")
+    staging_manifest_validator = Draft202012Validator(staging_manifest_schema)
 
     for version in (1, 2):
         policy_schema = load_json(ROOT / "schemas" / f"smml.canonical-game-policy-{version}.schema.json")
@@ -133,6 +140,10 @@ def main() -> int:
             validator = recovery_report_validator
             semantic_fn = validate_transaction_recovery_report_semantics
             semantic_error_type = TransactionRecoveryReportSemanticError
+        elif schema_kind == "transaction-staging-manifest":
+            validator = staging_manifest_validator
+            semantic_fn = validate_staging_manifest_semantics
+            semantic_error_type = StagingManifestSemanticError
         else:
             print(f"FAIL {case['file']}: unknown schema kind {schema_kind!r}")
             failures += 1

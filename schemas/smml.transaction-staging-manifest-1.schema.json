@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:transaction-staging-manifest:1",
+  "title": "SMML Transaction Staging Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "transactionId",
+    "journalRevision",
+    "contentAlgorithm",
+    "layout",
+    "operations",
+    "blobs"
+  ],
+  "properties": {
+    "schema": {"const": "smml.transaction-staging-manifest/1"},
+    "transactionId": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 128,
+      "pattern": "^tx-[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "journalRevision": {"type": "integer", "minimum": 1},
+    "contentAlgorithm": {"const": "sha256"},
+    "layout": {"const": "sha256-prefix-v1"},
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100000,
+      "items": {"$ref": "#/$defs/operationBinding"}
+    },
+    "blobs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200000,
+      "items": {"$ref": "#/$defs/blob"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?![A-Za-z]:/)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\u0000]+$"
+    },
+    "stagedState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exists"],
+      "properties": {
+        "exists": {"type": "boolean"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size": {"type": "integer", "minimum": 0}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"exists": {"const": true}},
+            "required": ["exists"]
+          },
+          "then": {"required": ["sha256", "size"]},
+          "else": {
+            "not": {
+              "anyOf": [
+                {"required": ["sha256"]},
+                {"required": ["size"]}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "operationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operationId", "sequence", "path", "before", "after"],
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "sequence": {"type": "integer", "minimum": 0},
+        "path": {"$ref": "#/$defs/relativePath"},
+        "before": {"$ref": "#/$defs/stagedState"},
+        "after": {"$ref": "#/$defs/stagedState"}
+      }
+    },
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "size"],
+      "properties": {
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "size": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}
