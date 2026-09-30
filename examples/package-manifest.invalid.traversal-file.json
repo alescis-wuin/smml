@@ -1,0 +1,126 @@
+{
+  "schema": "smml.package-manifest/1",
+  "id": "com.example.pallet64",
+  "name": "Pallet64 example",
+  "version": "0.2.6",
+  "authors": [
+    "Example Author"
+  ],
+  "description": "Illustrative GP1 package manifest; not the historical Pallet64 migration manifest.",
+  "compatibility": {
+    "targets": [
+      {
+        "steamAppId": 387990,
+        "gameVersions": [
+          "1.0.6"
+        ],
+        "engineBuilds": [
+          889
+        ],
+        "steamBuildIds": [
+          "25442087"
+        ],
+        "steamBranches": [
+          "public"
+        ],
+        "canonicalGameFingerprints": [
+          "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+        ],
+        "hostOs": [
+          "linux"
+        ],
+        "gameOs": [
+          "windows"
+        ],
+        "compatibilityLayers": [
+          "proton"
+        ]
+      }
+    ]
+  },
+  "dependencies": [
+    {
+      "id": "com.example.foundation",
+      "range": ">=1.0.0 <2.0.0",
+      "kind": "hard"
+    },
+    {
+      "id": "com.example.optional-helper",
+      "range": "*",
+      "kind": "soft"
+    }
+  ],
+  "capabilities": {
+    "provides": [
+      {
+        "id": "content.shape.registration",
+        "version": 1
+      }
+    ],
+    "requires": [
+      {
+        "id": "smml.storage",
+        "version": 1,
+        "cardinality": "exactlyOne"
+      },
+      {
+        "id": "smml.telemetry",
+        "version": 1,
+        "cardinality": "zeroOrOne"
+      }
+    ]
+  },
+  "conflicts": {
+    "packages": [
+      {
+        "id": "com.example.legacy-pallet64",
+        "range": "*"
+      }
+    ],
+    "capabilities": [
+      {
+        "id": "legacy.shape.patch",
+        "version": 1
+      }
+    ]
+  },
+  "loadBefore": [
+    "com.example.postprocessor"
+  ],
+  "loadAfter": [
+    "com.example.foundation"
+  ],
+  "persistenceImpact": "worldContent",
+  "entrypoints": {
+    "shared": "runtime/shared.lua"
+  },
+  "artifacts": [
+    {
+      "id": "shape-contribution",
+      "type": "smml.content-contribution/1",
+      "path": "contributions/shapes.json"
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/pallet64.obj",
+      "size": 1234,
+      "sha256": "ea771d262a04640ba10828ff85196160b7e490a025c3ad0fa19528604180ceb5"
+    },
+    {
+      "path": "contributions/shapes.json",
+      "size": 456,
+      "sha256": "638aeba5b3fc20c95c1db925fc4994dcc7bbeb58f38deccc9ebcf196d4a0e0ec"
+    },
+    {
+      "path": "runtime/shared.lua",
+      "size": 789,
+      "sha256": "c4667e2dfef3849dec5d9d9189e400e17365af4194ed28fd8d4096f4a98ce6b3"
+    },
+    {
+      "path": "../escape.lua",
+      "size": 1,
+      "sha256": "b3140286ac71ad2acf69681f4f2a907b0b83d8edfbffdd4e0a38c05a23180495"
+    }
+  ]
+}

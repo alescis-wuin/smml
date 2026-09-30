@@ -1,0 +1,172 @@
+{
+  "accessed": "2026-09-29",
+  "sources": [
+    {
+      "tier": "official",
+      "title": "Scrap Mechanic Lua API — Introduction",
+      "url": "https://scrapmechanic.com/api/index.html",
+      "claims": [
+        "Lua 5.1",
+        "-dev recommended for debug console/hot reload"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "GLOBAL — Lua API",
+      "url": "https://scrapmechanic.com/api/namespace_Game_GLOBAL.html",
+      "claims": [
+        "documented global/static API surface"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "GameClass — Lua API",
+      "url": "https://scrapmechanic.com/api/class_Game_GameClass.html",
+      "claims": [
+        "one GameClass instance",
+        "network/storage fields"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "Network — Lua API",
+      "url": "https://scrapmechanic.com/api/userdata_Game_Network.html",
+      "claims": [
+        "client/server RPC",
+        "setClientData persistent latest data",
+        "bandwidth warning"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "sm.storage — Lua API",
+      "url": "https://scrapmechanic.com/api/namespace_Game_sm_storage.html",
+      "claims": [
+        "server only",
+        "save is slow/use sparsely",
+        "current-mod namespace"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "Container — Lua API",
+      "url": "https://scrapmechanic.com/api/userdata_Game_Container.html",
+      "claims": [
+        "canCollect",
+        "transaction-compatible operations",
+        "revision/filters"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "sm.shape — Lua API",
+      "url": "https://scrapmechanic.com/api/namespace_Game_sm_shape.html",
+      "claims": [
+        "createPart is server only"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "Player — Lua API",
+      "url": "https://scrapmechanic.com/api/userdata_Game_Player.html",
+      "claims": [
+        "getCarry/getInventory"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "Scrap Mechanic Patch 1.0.6 — Steam announcements",
+      "url": "https://store.steampowered.com/oldnews/?appgroupname=Scrap+Mechanic&appids=387990&feed=steam_community_announcements&headlines=0",
+      "claims": [
+        "1.0.6 live Sep 18/21 2026",
+        "save-related patch incidents and official backup guidance"
+      ]
+    },
+    {
+      "tier": "official",
+      "title": "Steam Support — Verify integrity",
+      "url": "https://help.steampowered.com/fr/faqs/view/0C48-FCBD-DA71-93EB",
+      "claims": [
+        "Steam verifies installed game files"
+      ]
+    },
+    {
+      "tier": "secondary",
+      "title": "SteamDB — Scrap Mechanic Cloud Saves",
+      "url": "https://steamdb.info/app/387990/ufs/",
+      "claims": [
+        "WinAppDataRoaming Save paths",
+        "Survival/Backup paths",
+        "Steam Cloud UFS patterns"
+      ]
+    },
+    {
+      "tier": "secondary",
+      "title": "PCGamingWiki — Scrap Mechanic",
+      "url": "https://www.pcgamingwiki.com/wiki/Scrap_Mechanic",
+      "claims": [
+        "Proton compatdata 387990 path model"
+      ]
+    },
+    {
+      "tier": "community-code",
+      "title": "community-owned-workshop/scrap-mechanic-bootstrapper",
+      "url": "https://github.com/community-owned-workshop/scrap-mechanic-bootstrapper",
+      "claims": [
+        "reconstructive composition of shared Survival files",
+        "version-specific baseline",
+        "conflict detection",
+        "targeted core_data.cbo invalidation"
+      ]
+    },
+    {
+      "tier": "community",
+      "title": "Scrap Mechanic Mod Manager — Nexus",
+      "url": "https://www.nexusmods.com/scrapmechanic/mods/37",
+      "claims": [
+        "direct Survival mod framework",
+        "backup/install workflow",
+        "1.4.6 critical conditional terrain-patch failure"
+      ]
+    },
+    {
+      "tier": "community-code",
+      "title": "Cooperkit/ScrapLab",
+      "url": "https://github.com/Cooperkit/ScrapLab",
+      "claims": [
+        "backup-first tooling",
+        "exact-code guarded patches",
+        "Steam-update detection"
+      ]
+    },
+    {
+      "tier": "community-code",
+      "title": "ReDoIngMods/Rivet",
+      "url": "https://github.com/ReDoIngMods/Rivet",
+      "claims": [
+        "native DLL loader/hook API alternative",
+        "heavy development"
+      ]
+    },
+    {
+      "tier": "analogy",
+      "title": "BepInEx Plugin metadata/dependencies",
+      "url": "https://docs.bepinex.dev/master/articles/dev_guide/plugin_tutorial/2_plugin_start.html",
+      "claims": [
+        "permanent GUID",
+        "SemVer",
+        "hard/soft dependencies and ranges"
+      ]
+    },
+    {
+      "tier": "analogy",
+      "title": "OSTree deployments",
+      "url": "https://github.com/ostreedev/ostree/blob/main/docs/deployment.md",
+      "claims": [
+        "content-addressed trees",
+        "parallel deployments",
+        "3-way merge model"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+fixtureId,fixtureTitle,fixtureUuid,expectedSlots,actualSlots,itemId,itemTitle,itemUuid,canCollect,dryRunCollected,unchangedAfterAbort,error,source_log,line
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12192
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12193
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12194
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12195
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12196
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12197
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12198
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12199
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12200
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12201
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12203
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12204
+scrap_chest,Scrap Chest,7527cf2e-1705-4214-9d07-3dc374957e25,10,10,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12206
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12207
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12208
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12209
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12214
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12215
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12216
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12217
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12218
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12219
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12220
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12222
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12224
+small_chest,Small Chest,4c474cff-3f6a-4306-93d1-c4c74578afd2,10,10,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12225
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12226
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12227
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12228
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12229
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12230
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12231
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12232
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12233
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12234
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12235
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12237
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12238
+chest,Chest,fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5,20,20,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12239
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12240
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12242
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12243
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12244
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12245
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12247
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12248
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12249
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12250
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12251
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12253
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12254
+large_chest,Large Chest,ad35f7e6-af8f-40fa-aef4-77d827ac8a8a,30,30,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12255
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12257
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12258
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12259
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12260
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12261
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12262
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12263
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12264
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12265
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12266
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12268
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12269
+xxl_chest,XXL Chest,9601f2ca-9552-48b0-afc1-b0f200461114,100,100,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12271
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12272
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12273
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12274
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12275
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12276
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12277
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12278
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12279
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12280
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12281
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12283
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12285
+locker,Locker,d0afb527-e786-4a22-a907-6da7e7cba8cb,4,4,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12286
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12287
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12288
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12289
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12290
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12291
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12292
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12293
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12294
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12295
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12296
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12298
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12299
+file_cabinet,File Cabinet,90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8,2,2,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12300
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12301
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12303
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12304
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12305
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12306
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12307
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12308
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,true,1,true,,game-20260929-073952.log,12309
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,true,1,true,,game-20260929-073952.log,12310
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,true,1,true,,game-20260929-073952.log,12311
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,true,1,true,,game-20260929-073952.log,12313
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,true,1,true,,game-20260929-073952.log,12314
+broken_microwave,Broken Microwave,d4e6c84c-a493-44b1-81aa-4f4741ea3ed8,1,1,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,true,1,true,,game-20260929-073952.log,12315
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12317
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12318
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12319
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12320
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12321
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12322
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12323
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12324
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12325
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12326
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12327
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12328
+fridge,Fridge,f08d772f-9851-400f-a014-d847900458a7,20,20,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12329
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12330
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,true,1,true,,game-20260929-073952.log,12331
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12332
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,false,1,true,,game-20260929-073952.log,12333
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12334
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12335
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12336
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12337
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12338
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12339
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12340
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12341
+gas_container,Gas Container,056e5ff1-f030-40df-946a-b830bf494c92,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12342
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12343
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12344
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,true,1,true,,game-20260929-073952.log,12345
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,false,1,true,,game-20260929-073952.log,12346
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12347
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12348
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12349
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12350
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12351
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12352
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12353
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12354
+water_container,Water Container,ea10d1af-b97a-46fb-8895-dfd1becb53bb,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12355
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,true,1,true,,game-20260929-073952.log,12356
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12357
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12358
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,false,1,true,,game-20260929-073952.log,12359
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12360
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12361
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12362
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12363
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12364
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12365
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12366
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12367
+battery_container,Battery Container,da4833fd-f981-4e08-a9f7-48e630a7c146,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12368
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12369
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12370
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12371
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12372
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12373
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12374
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12375
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12376
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12377
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12378
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12379
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12380
+ammo_container,Potato Ammo Container,096d4daf-639e-4947-a1a6-1890eaa94464,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12381
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12382
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12383
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12384
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,false,1,true,,game-20260929-073952.log,12385
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,true,1,true,,game-20260929-073952.log,12386
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12387
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12388
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12389
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12390
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12391
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12392
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12393
+fertilizer_container,Fertilizer Container,76331bbf-abbd-4b8d-bb54-f721a5b6193b,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12394
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12395
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12396
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12397
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,true,1,true,,game-20260929-073952.log,12398
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12399
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,false,1,true,,game-20260929-073952.log,12400
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,true,1,true,,game-20260929-073952.log,12401
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12402
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12403
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12404
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12405
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12406
+seed_container,Seed Container,38ec258d-c644-4f08-8635-3f7434c884dd,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12407
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,battery,Battery,910a7f2c-52b0-46eb-8873-ad13255539af,false,1,true,,game-20260929-073952.log,12408
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,gasoline,Gasoline,d4d68946-aa03-4b8f-b1af-96b81ad4e305,false,1,true,,game-20260929-073952.log,12409
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,water,Water,869d4736-289a-4952-96cd-8a40117a2d28,false,1,true,,game-20260929-073952.log,12410
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,potato,Potato,bfcfac34-db0f-42d6-bd0c-74a7a5c95e82,false,1,true,,game-20260929-073952.log,12411
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,fertilizer,Fertilizer,ac0b5b0a-14e1-4b31-8944-0a351fbfcc67,false,1,true,,game-20260929-073952.log,12412
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,chemical,Chemical,f74c2891-79a9-45e0-982e-4896651c2e25,true,1,true,,game-20260929-073952.log,12413
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,potato_seed,Potato Seed,eb1ef696-5c05-4662-9e47-fe1e0875ff84,false,1,true,,game-20260929-073952.log,12414
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,component_kit,Component Kit,5530e6a0-4748-4926-b134-50ca9ecb9dcf,false,1,true,,game-20260929-073952.log,12415
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,scrap_wood_block,Scrap Wood Block,1fc74a28-addb-451a-878d-c3c605d63811,false,1,true,,game-20260929-073952.log,12416
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,scrap_wheel,Scrap Wheel,59f6951a-a450-42bf-ad03-54567cb70245,false,1,true,,game-20260929-073952.log,12417
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,connect_tool,Connect Tool,8c7efc37-cd7c-4262-976e-39585f8527bf,false,1,true,,game-20260929-073952.log,12418
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,sledgehammer,Sledgehammer,bb641a4f-e391-441c-bc6d-0ae21a069476,false,1,true,,game-20260929-073952.log,12419
+chemical_container,Chemical Container,be29592a-ef58-4b1d-b18c-895023abd27f,5,5,lift,Lift,8f190ce2-3a59-423e-8483-a7aa67bd5bc0,false,1,true,,game-20260929-073952.log,12420

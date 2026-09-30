@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:package-manifest:1",
+  "title": "SMML PackageManifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "version",
+    "authors",
+    "compatibility",
+    "dependencies",
+    "capabilities",
+    "conflicts",
+    "loadBefore",
+    "loadAfter",
+    "persistenceImpact",
+    "artifacts",
+    "files"
+  ],
+  "properties": {
+    "schema": { "const": "smml.package-manifest/1" },
+    "id": { "$ref": "#/$defs/packageId" },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000\\r\\n]+$"
+    },
+    "version": { "$ref": "#/$defs/semver" },
+    "authors": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[^\\u0000\\r\\n]+$"
+      }
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4096,
+      "pattern": "^[^\\u0000]*$"
+    },
+    "compatibility": { "$ref": "#/$defs/compatibility" },
+    "dependencies": {
+      "type": "array",
+      "maxItems": 1024,
+      "items": { "$ref": "#/$defs/dependency" }
+    },
+    "capabilities": { "$ref": "#/$defs/capabilities" },
+    "conflicts": { "$ref": "#/$defs/conflicts" },
+    "loadBefore": {
+      "type": "array",
+      "maxItems": 1024,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/packageId" }
+    },
+    "loadAfter": {
+      "type": "array",
+      "maxItems": 1024,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/packageId" }
+    },
+    "persistenceImpact": {
+      "type": "string",
+      "enum": ["none", "runtimeState", "playerState", "worldContent"]
+    },
+    "entrypoints": { "$ref": "#/$defs/entrypoints" },
+    "artifacts": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "files": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": { "$ref": "#/$defs/fileRecord" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"
+    },
+    "capabilityId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"
+    },
+    "semver": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 128,
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "semverRange": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000\\r\\n]+$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?![A-Za-z]:/)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\u0000]+$"
+    },
+    "opaqueGameVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[0-9A-Za-z][0-9A-Za-z._+\\-]*$"
+    },
+    "targetSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["steamAppId"],
+      "properties": {
+        "steamAppId": { "type": "integer", "minimum": 1 },
+        "gameVersions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/opaqueGameVersion" }
+        },
+        "engineBuilds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0 }
+        },
+        "steamBuildIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "pattern": "^[0-9]+$"
+          }
+        },
+        "steamBranches": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+        },
+        "canonicalGameFingerprints": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/sha256" }
+        },
+        "hostOs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["linux", "windows", "macos"] }
+        },
+        "gameOs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["linux", "windows", "macos"] }
+        },
+        "compatibilityLayers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["none", "proton", "wine", "other"] }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targets"],
+      "properties": {
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/targetSelector" }
+        }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "range", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/packageId" },
+        "range": { "$ref": "#/$defs/semverRange" },
+        "kind": { "type": "string", "enum": ["hard", "soft"] }
+      }
+    },
+    "providedCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/capabilityId" },
+        "version": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "requiredCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "cardinality"],
+      "properties": {
+        "id": { "$ref": "#/$defs/capabilityId" },
+        "version": { "type": "integer", "minimum": 1 },
+        "cardinality": {
+          "type": "string",
+          "enum": ["exactlyOne", "zeroOrOne", "oneOrMore", "many"]
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provides", "requires"],
+      "properties": {
+        "provides": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": { "$ref": "#/$defs/providedCapability" }
+        },
+        "requires": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": { "$ref": "#/$defs/requiredCapability" }
+        }
+      }
+    },
+    "packageConflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "range"],
+      "properties": {
+        "id": { "$ref": "#/$defs/packageId" },
+        "range": { "$ref": "#/$defs/semverRange" }
+      }
+    },
+    "capabilityConflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/capabilityId" },
+        "version": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "conflicts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["packages", "capabilities"],
+      "properties": {
+        "packages": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": { "$ref": "#/$defs/packageConflict" }
+        },
+        "capabilities": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": { "$ref": "#/$defs/capabilityConflict" }
+        }
+      }
+    },
+    "entrypoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "shared": { "$ref": "#/$defs/relativePath" },
+        "server": { "$ref": "#/$defs/relativePath" },
+        "client": { "$ref": "#/$defs/relativePath" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "path"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 200,
+          "pattern": "^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?(?:/[1-9][0-9]*)?$"
+        },
+        "path": { "$ref": "#/$defs/relativePath" }
+      }
+    },
+    "fileRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "size", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relativePath" },
+        "size": { "type": "integer", "minimum": 0 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

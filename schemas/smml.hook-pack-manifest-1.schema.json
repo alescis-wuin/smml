@@ -1,0 +1,512 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:hook-pack-manifest:1",
+  "title": "SMML HookPackManifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "targets",
+    "targetFiles",
+    "adapters",
+    "hooks",
+    "cacheConsequences"
+  ],
+  "properties": {
+    "schema": {
+      "const": "smml.hook-pack-manifest/1"
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/gameTargetSelector"
+      }
+    },
+    "targetFiles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/targetFile"
+      }
+    },
+    "adapters": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/adapter"
+      }
+    },
+    "hooks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/hook"
+      }
+    },
+    "cacheConsequences": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/cacheConsequence"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?![A-Za-z]:/)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\u0000]+$"
+    },
+    "localId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "artifactId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "contractId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z][A-Za-z0-9]*(?:\\.[a-z][A-Za-z0-9]*)+$"
+    },
+    "os": {
+      "type": "string",
+      "enum": [
+        "linux",
+        "windows",
+        "macos"
+      ]
+    },
+    "compatibilityLayerKind": {
+      "type": "string",
+      "enum": [
+        "none",
+        "proton",
+        "wine",
+        "other"
+      ]
+    },
+    "gameTargetSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steamAppId",
+        "gameVersion",
+        "engineBuild",
+        "steamBuildId",
+        "steamBranch",
+        "canonicalGameFingerprint"
+      ],
+      "properties": {
+        "steamAppId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gameVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z][0-9A-Za-z._+\\-]*$"
+        },
+        "engineBuild": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "steamBuildId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[0-9]+$"
+        },
+        "steamBranch": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "canonicalGameFingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hostOs": {
+          "$ref": "#/$defs/os"
+        },
+        "gameOs": {
+          "$ref": "#/$defs/os"
+        },
+        "compatibilityLayer": {
+          "$ref": "#/$defs/compatibilityLayerKind"
+        }
+      }
+    },
+    "textPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "encoding",
+        "bomPolicy",
+        "newlinePolicy"
+      ],
+      "properties": {
+        "encoding": {
+          "const": "utf-8"
+        },
+        "bomPolicy": {
+          "const": "forbid"
+        },
+        "newlinePolicy": {
+          "const": "preserve"
+        }
+      }
+    },
+    "targetFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "acceptedBaselineSha256",
+        "textPolicy"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/localId"
+        },
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "acceptedBaselineSha256": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "textPolicy": {
+          "$ref": "#/$defs/textPolicy"
+        }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "artifactId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/localId"
+        },
+        "artifactId": {
+          "$ref": "#/$defs/artifactId"
+        }
+      }
+    },
+    "contractRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractId",
+        "version",
+        "descriptorArtifactId"
+      ],
+      "properties": {
+        "contractId": {
+          "$ref": "#/$defs/contractId"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "descriptorArtifactId": {
+          "$ref": "#/$defs/artifactId"
+        }
+      }
+    },
+    "exactTextAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "text",
+        "cardinality"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/localId"
+        },
+        "kind": {
+          "const": "exact-text"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384,
+          "pattern": "^[^\\u0000]+$"
+        },
+        "cardinality": {
+          "const": "exactly-one"
+        }
+      }
+    },
+    "luaFunctionAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "symbol",
+        "cardinality"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/localId"
+        },
+        "kind": {
+          "const": "lua-function"
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:[.:][A-Za-z_][A-Za-z0-9_]*)+$"
+        },
+        "cardinality": {
+          "const": "exactly-one"
+        }
+      }
+    },
+    "anchor": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/exactTextAnchor"
+        },
+        {
+          "$ref": "#/$defs/luaFunctionAnchor"
+        }
+      ]
+    },
+    "insertTransformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "kind",
+        "anchorId",
+        "contentArtifactId"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "enum": [
+            "insert-before",
+            "insert-after"
+          ]
+        },
+        "anchorId": {
+          "$ref": "#/$defs/localId"
+        },
+        "contentArtifactId": {
+          "$ref": "#/$defs/artifactId"
+        }
+      }
+    },
+    "replaceRegionTransformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "kind",
+        "startAnchorId",
+        "endAnchorId",
+        "includeStart",
+        "includeEnd",
+        "contentArtifactId"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "const": "replace-region"
+        },
+        "startAnchorId": {
+          "$ref": "#/$defs/localId"
+        },
+        "endAnchorId": {
+          "$ref": "#/$defs/localId"
+        },
+        "includeStart": {
+          "type": "boolean"
+        },
+        "includeEnd": {
+          "type": "boolean"
+        },
+        "contentArtifactId": {
+          "$ref": "#/$defs/artifactId"
+        }
+      }
+    },
+    "functionTransformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "kind",
+        "anchorId",
+        "contentArtifactId"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "enum": [
+            "wrap-prefix",
+            "wrap-postfix",
+            "conditional-short-circuit"
+          ]
+        },
+        "anchorId": {
+          "$ref": "#/$defs/localId"
+        },
+        "contentArtifactId": {
+          "$ref": "#/$defs/artifactId"
+        }
+      }
+    },
+    "transformation": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/insertTransformation"
+        },
+        {
+          "$ref": "#/$defs/replaceRegionTransformation"
+        },
+        {
+          "$ref": "#/$defs/functionTransformation"
+        }
+      ]
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beginMarker",
+        "endMarker"
+      ],
+      "properties": {
+        "beginMarker": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\u0000\\r\\n]+$"
+        },
+        "endMarker": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\u0000\\r\\n]+$"
+        }
+      }
+    },
+    "hook": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "hookId",
+        "targetFileId",
+        "contract",
+        "adapterId",
+        "anchors",
+        "transformations",
+        "verification"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hookId": {
+          "$ref": "#/$defs/localId"
+        },
+        "targetFileId": {
+          "$ref": "#/$defs/localId"
+        },
+        "contract": {
+          "$ref": "#/$defs/contractRef"
+        },
+        "adapterId": {
+          "$ref": "#/$defs/localId"
+        },
+        "anchors": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/anchor"
+          }
+        },
+        "transformations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/transformation"
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        }
+      }
+    },
+    "cacheConsequence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "path",
+        "trigger"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/localId"
+        },
+        "kind": {
+          "const": "invalidate-file"
+        },
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "trigger": {
+          "const": "hook-pack-change"
+        }
+      }
+    }
+  }
+}

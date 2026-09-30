@@ -1,0 +1,20 @@
+{
+  "game_version_observed": "1.0.6.889",
+  "B0": {
+    "fingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
+    "files": 61370,
+    "bytes": 20596856244
+  },
+  "B1": {
+    "fingerprint": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
+    "files": 61371,
+    "bytes": 20596893988
+  },
+  "known_target_hashes": {
+    "Survival/Scripts/game/SurvivalGame.lua": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
+    "Survival/Scripts/game/SurvivalPlayer.lua": "960d15b4a5f66e1fd9ea4af6bd81a6088893b9f71bd8c1ad9c6bafaa592ecf76",
+    "Survival/Scripts/game/tools/CarryTool.lua": "ddbb727a8fb687f290f35ff359d626bdcf4983930c51ad24daadd26ee8702dbf",
+    "Survival/Scripts/game/interactables/ResourceContainer.lua": "ccd77da5aaa6b6a8e640dc115e123a7236f0df40e31b56277d01314371cdc042",
+    "Cache/Bundle/core_data.cbo": "682efa4378e69f1a711e1d2147c302fbdd0dc8035f841c948d50c50964181351"
+  }
+}

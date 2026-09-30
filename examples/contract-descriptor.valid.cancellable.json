@@ -1,0 +1,22 @@
+{
+  "schema": "smml.contract-descriptor/1",
+  "contractId": "carry.beforeServerDrop",
+  "version": 1,
+  "side": "server",
+  "category": "cancellable",
+  "payloadSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.carry-before-server-drop.payload"
+  },
+  "resultSchema": {
+    "kind": "builtin",
+    "id": "smml.decision/1"
+  },
+  "combinationPolicy": "deny-wins",
+  "errorPolicy": {
+    "invalidPayload": "reject-invocation",
+    "handlerException": "deny",
+    "invalidResult": "deny",
+    "noHandlers": "allow"
+  }
+}

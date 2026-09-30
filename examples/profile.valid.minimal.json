@@ -1,0 +1,14 @@
+{
+  "schema": "smml.profile/1",
+  "id": "baseline",
+  "name": "Baseline",
+  "target": {
+    "steamAppId": 387990
+  },
+  "packages": [],
+  "policies": {
+    "softDependencies": "selected-only",
+    "providerAmbiguity": "error",
+    "capabilityProviders": []
+  }
+}

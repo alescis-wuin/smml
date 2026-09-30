@@ -1,0 +1,22 @@
+{
+  "schema": "smml.contract-descriptor/1",
+  "contractId": "storage.save",
+  "version": 1,
+  "side": "server",
+  "category": "service",
+  "payloadSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.storage-save.payload"
+  },
+  "resultSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.storage-save.result"
+  },
+  "combinationPolicy": "single-handler",
+  "errorPolicy": {
+    "invalidPayload": "reject-invocation",
+    "handlerException": "fail-invocation",
+    "invalidResult": "not-applicable",
+    "noHandlers": "fail-invocation"
+  }
+}

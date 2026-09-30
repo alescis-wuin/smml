@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:contract-descriptor:1",
+  "title": "SMML ContractDescriptor v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "contractId",
+    "version",
+    "side",
+    "category",
+    "payloadSchema",
+    "resultSchema",
+    "combinationPolicy",
+    "errorPolicy"
+  ],
+  "properties": {
+    "schema": { "const": "smml.contract-descriptor/1" },
+    "contractId": { "$ref": "#/$defs/contractId" },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "side": {
+      "type": "string",
+      "enum": ["client", "server", "shared"]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["notification", "cancellable", "transform", "query", "service"]
+    },
+    "payloadSchema": { "$ref": "#/$defs/payloadSchemaRef" },
+    "resultSchema": { "$ref": "#/$defs/resultSchemaRef" },
+    "combinationPolicy": {
+      "type": "string",
+      "enum": ["all", "deny-wins", "first-deny", "pipeline", "single-handler"]
+    },
+    "errorPolicy": { "$ref": "#/$defs/errorPolicy" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "category": { "const": "notification" } },
+        "required": ["category"]
+      },
+      "then": {
+        "properties": {
+          "resultSchema": { "$ref": "#/$defs/noneSchemaRef" },
+          "combinationPolicy": { "const": "all" },
+          "errorPolicy": {
+            "allOf": [
+              { "$ref": "#/$defs/errorPolicy" },
+              {
+                "properties": {
+                  "handlerException": { "enum": ["continue", "fail-invocation"] },
+                  "invalidResult": { "const": "not-applicable" },
+                  "noHandlers": { "const": "succeed" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "category": { "const": "cancellable" } },
+        "required": ["category"]
+      },
+      "then": {
+        "properties": {
+          "side": { "const": "server" },
+          "resultSchema": { "$ref": "#/$defs/decisionSchemaRef" },
+          "combinationPolicy": { "enum": ["deny-wins", "first-deny"] },
+          "errorPolicy": {
+            "allOf": [
+              { "$ref": "#/$defs/errorPolicy" },
+              {
+                "properties": {
+                  "handlerException": { "enum": ["continue", "deny", "fail-invocation"] },
+                  "invalidResult": { "enum": ["continue", "deny", "fail-invocation"] },
+                  "noHandlers": { "enum": ["allow", "deny"] }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "category": { "const": "transform" } },
+        "required": ["category"]
+      },
+      "then": {
+        "properties": {
+          "payloadSchema": { "$ref": "#/$defs/artifactSchemaRef" },
+          "resultSchema": { "$ref": "#/$defs/artifactSchemaRef" },
+          "combinationPolicy": { "const": "pipeline" },
+          "errorPolicy": {
+            "allOf": [
+              { "$ref": "#/$defs/errorPolicy" },
+              {
+                "properties": {
+                  "handlerException": { "enum": ["keep-current", "fail-invocation"] },
+                  "invalidResult": { "enum": ["keep-current", "fail-invocation"] },
+                  "noHandlers": { "const": "identity" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "category": { "const": "query" } },
+        "required": ["category"]
+      },
+      "then": {
+        "properties": {
+          "resultSchema": { "$ref": "#/$defs/artifactSchemaRef" },
+          "combinationPolicy": { "const": "single-handler" },
+          "errorPolicy": {
+            "allOf": [
+              { "$ref": "#/$defs/errorPolicy" },
+              {
+                "properties": {
+                  "handlerException": { "const": "fail-invocation" },
+                  "invalidResult": { "const": "fail-invocation" },
+                  "noHandlers": { "const": "fail-invocation" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "category": { "const": "service" } },
+        "required": ["category"]
+      },
+      "then": {
+        "properties": {
+          "resultSchema": {
+            "oneOf": [
+              { "$ref": "#/$defs/noneSchemaRef" },
+              { "$ref": "#/$defs/artifactSchemaRef" }
+            ]
+          },
+          "combinationPolicy": { "const": "single-handler" },
+          "errorPolicy": {
+            "allOf": [
+              { "$ref": "#/$defs/errorPolicy" },
+              {
+                "properties": {
+                  "handlerException": { "const": "fail-invocation" },
+                  "invalidResult": { "enum": ["fail-invocation", "not-applicable"] },
+                  "noHandlers": { "const": "fail-invocation" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "contractId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z][A-Za-z0-9]*(?:\\.[a-z][A-Za-z0-9]*)+$"
+    },
+    "artifactId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "noneSchemaRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "const": "none" }
+      }
+    },
+    "artifactSchemaRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "artifactId"],
+      "properties": {
+        "kind": { "const": "artifact" },
+        "artifactId": { "$ref": "#/$defs/artifactId" }
+      }
+    },
+    "decisionSchemaRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": { "const": "builtin" },
+        "id": { "const": "smml.decision/1" }
+      }
+    },
+    "payloadSchemaRef": {
+      "oneOf": [
+        { "$ref": "#/$defs/noneSchemaRef" },
+        { "$ref": "#/$defs/artifactSchemaRef" }
+      ]
+    },
+    "resultSchemaRef": {
+      "oneOf": [
+        { "$ref": "#/$defs/noneSchemaRef" },
+        { "$ref": "#/$defs/artifactSchemaRef" },
+        { "$ref": "#/$defs/decisionSchemaRef" }
+      ]
+    },
+    "errorPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invalidPayload", "handlerException", "invalidResult", "noHandlers"],
+      "properties": {
+        "invalidPayload": { "const": "reject-invocation" },
+        "handlerException": {
+          "type": "string",
+          "enum": ["continue", "deny", "keep-current", "fail-invocation"]
+        },
+        "invalidResult": {
+          "type": "string",
+          "enum": ["not-applicable", "continue", "deny", "keep-current", "fail-invocation"]
+        },
+        "noHandlers": {
+          "type": "string",
+          "enum": ["succeed", "allow", "deny", "identity", "fail-invocation"]
+        }
+      }
+    }
+  }
+}

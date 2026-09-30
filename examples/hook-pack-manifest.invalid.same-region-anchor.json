@@ -1,0 +1,83 @@
+{
+  "schema": "smml.hook-pack-manifest/1",
+  "targets": [
+    {
+      "steamAppId": 387990,
+      "gameVersion": "1.0.6",
+      "engineBuild": 889,
+      "steamBuildId": "25442087",
+      "steamBranch": "public",
+      "canonicalGameFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+    }
+  ],
+  "targetFiles": [
+    {
+      "id": "survival-game",
+      "path": "Survival/Scripts/game/SurvivalGame.lua",
+      "acceptedBaselineSha256": [
+        "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4"
+      ],
+      "textPolicy": {
+        "encoding": "utf-8",
+        "bomPolicy": "forbid",
+        "newlinePolicy": "preserve"
+      }
+    }
+  ],
+  "adapters": [
+    {
+      "id": "survival-game",
+      "artifactId": "adapter.survival-game"
+    }
+  ],
+  "hooks": [
+    {
+      "hookId": "game.server-created",
+      "targetFileId": "survival-game",
+      "contract": {
+        "contractId": "game.serverCreated",
+        "version": 1,
+        "descriptorArtifactId": "contract.game-server-created"
+      },
+      "adapterId": "survival-game",
+      "anchors": [
+        {
+          "id": "server-on-create-header",
+          "kind": "exact-text",
+          "text": "function SurvivalGame.server_onCreate( self )\n",
+          "cardinality": "exactly-one"
+        },
+        {
+          "id": "end",
+          "kind": "exact-text",
+          "text": "end\n",
+          "cardinality": "exactly-one"
+        }
+      ],
+      "transformations": [
+        {
+          "sequence": 0,
+          "kind": "replace-region",
+          "startAnchorId": "end",
+          "endAnchorId": "end",
+          "includeStart": false,
+          "includeEnd": false,
+          "contentArtifactId": "fragment.game-server-created"
+        }
+      ],
+      "verification": {
+        "beginMarker": "-- SMML_HOOK_BEGIN:game.serverCreated@1",
+        "endMarker": "-- SMML_HOOK_END:game.serverCreated@1"
+      },
+      "sequence": 0
+    }
+  ],
+  "cacheConsequences": [
+    {
+      "id": "core-data",
+      "kind": "invalidate-file",
+      "path": "Cache/Bundle/core_data.cbo",
+      "trigger": "hook-pack-change"
+    }
+  ]
+}

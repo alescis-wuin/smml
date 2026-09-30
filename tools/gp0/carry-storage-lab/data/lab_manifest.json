@@ -1,0 +1,80 @@
+{
+  "schema": "smml-gp0-carry-storage-lab/1",
+  "game": {"version": "1.0.6", "build": 889},
+  "storageFixtures": [
+    {"id":"scrap_chest","title":"Scrap Chest","uuid":"7527cf2e-1705-4214-9d07-3dc374957e25","kind":"engineChest","slots":10},
+    {"id":"small_chest","title":"Small Chest","uuid":"4c474cff-3f6a-4306-93d1-c4c74578afd2","kind":"engineChest","slots":10,"pipe":true},
+    {"id":"chest","title":"Chest","uuid":"fcfae5e2-1df9-47d8-bb9a-30bec9b5b1f5","kind":"engineChest","slots":20},
+    {"id":"large_chest","title":"Large Chest","uuid":"ad35f7e6-af8f-40fa-aef4-77d827ac8a8a","kind":"engineChest","slots":30,"pipe":true},
+    {"id":"xxl_chest","title":"XXL Chest","uuid":"9601f2ca-9552-48b0-afc1-b0f200461114","kind":"engineChest","slots":100,"pipe":true},
+    {"id":"locker","title":"Locker","uuid":"d0afb527-e786-4a22-a907-6da7e7cba8cb","kind":"engineChest","slots":4},
+    {"id":"file_cabinet","title":"File Cabinet","uuid":"90dbaebf-8ea1-4a5a-8f6f-86ddde77c6c8","kind":"engineChest","slots":2},
+    {"id":"broken_microwave","title":"Broken Microwave","uuid":"d4e6c84c-a493-44b1-81aa-4f4741ea3ed8","kind":"engineChest","slots":1},
+    {"id":"fridge","title":"Fridge","uuid":"f08d772f-9851-400f-a014-d847900458a7","kind":"foodContainer","slots":20,"acceptedSelectedItems":["potato"]},
+    {"id":"gas_container","title":"Gas Container","uuid":"056e5ff1-f030-40df-946a-b830bf494c92","kind":"filteredContainer","slots":5,"slotStackSize":20,"acceptedSelectedItems":["gasoline"]},
+    {"id":"water_container","title":"Water Container","uuid":"ea10d1af-b97a-46fb-8895-dfd1becb53bb","kind":"filteredContainer","slots":5,"slotStackSize":20,"acceptedSelectedItems":["water"]},
+    {"id":"battery_container","title":"Battery Container","uuid":"da4833fd-f981-4e08-a9f7-48e630a7c146","kind":"filteredContainer","slots":5,"slotStackSize":20,"acceptedSelectedItems":["battery"]},
+    {"id":"ammo_container","title":"Potato Ammo Container","uuid":"096d4daf-639e-4947-a1a6-1890eaa94464","kind":"filteredContainer","slots":5,"slotStackSize":100,"acceptedSelectedItems":["potato"]},
+    {"id":"fertilizer_container","title":"Fertilizer Container","uuid":"76331bbf-abbd-4b8d-bb54-f721a5b6193b","kind":"filteredContainer","slots":5,"slotStackSize":20,"acceptedSelectedItems":["fertilizer"]},
+    {"id":"seed_container","title":"Seed Container","uuid":"38ec258d-c644-4f08-8635-3f7434c884dd","kind":"plantableFilterContainer","slots":5,"slotStackSize":20,"acceptedSelectedItemsRuntimeValidationRequired":["potato","potato_seed"]},
+    {"id":"chemical_container","title":"Chemical Container","uuid":"be29592a-ef58-4b1d-b18c-895023abd27f","kind":"filteredContainer","slots":5,"slotStackSize":20,"acceptedSelectedItems":["chemical"]}
+  ],
+  "storageTestItems": [
+    {"id":"battery","title":"Battery","uuid":"910a7f2c-52b0-46eb-8873-ad13255539af","stackSize":20},
+    {"id":"gasoline","title":"Gasoline","uuid":"d4d68946-aa03-4b8f-b1af-96b81ad4e305","stackSize":20},
+    {"id":"water","title":"Water","uuid":"869d4736-289a-4952-96cd-8a40117a2d28","stackSize":20},
+    {"id":"potato","title":"Potato","uuid":"bfcfac34-db0f-42d6-bd0c-74a7a5c95e82","stackSize":100,"plantable":true},
+    {"id":"fertilizer","title":"Fertilizer","uuid":"ac0b5b0a-14e1-4b31-8944-0a351fbfcc67","stackSize":20},
+    {"id":"chemical","title":"Chemical","uuid":"f74c2891-79a9-45e0-982e-4896651c2e25","stackSize":20},
+    {"id":"potato_seed","title":"Potato Seed","uuid":"eb1ef696-5c05-4662-9e47-fe1e0875ff84","stackSize":20,"plantable":true},
+    {"id":"component_kit","title":"Component Kit","uuid":"5530e6a0-4748-4926-b134-50ca9ecb9dcf","stackSize":20},
+    {"id":"scrap_wood_block","title":"Scrap Wood Block","uuid":"1fc74a28-addb-451a-878d-c3c605d63811","stackSize":500},
+    {"id":"scrap_wheel","title":"Scrap Wheel","uuid":"59f6951a-a450-42bf-ad03-54567cb70245","stackSize":5},
+    {"id":"connect_tool","title":"Connect Tool","uuid":"8c7efc37-cd7c-4262-976e-39585f8527bf","stackSize":"runtime","vanillaChestPositiveControl":true},
+    {"id":"sledgehammer","title":"Sledgehammer","uuid":"bb641a4f-e391-441c-bc6d-0ae21a069476","stackSize":"runtime","newPlayerSlot":0},
+    {"id":"lift","title":"Lift","uuid":"8f190ce2-3a59-423e-8483-a7aa67bd5bc0","stackSize":"runtime","newPlayerSlot":1}
+  ],
+  "carryTargets": [
+    {"id":"refinebot","title":"Refinebot","uuid":"5cb15c93-4fa9-48da-9974-2e95ca6c9e1c","branch":"container","containerSlot":1,"acceptGroup":"resourceHarvests","rpc":"sv_n_sendItem"},
+    {"id":"resource_collector","title":"Resource Collector","uuid":"a930a42f-63ed-4fb0-933e-56ce8a889cc5","branch":"container","containerSlot":0,"acceptGroup":"resourceHarvests","rpc":"sv_n_sendItem"},
+    {"id":"ore_collector","title":"Ore Collector","uuid":"80680f7d-5f8a-4bf7-962b-ebd07481cd0a","branch":"container","containerSlot":0,"acceptGroup":"oreCasings","rpc":"sv_n_sendItem"},
+    {"id":"crushbot","title":"Crushbot","uuid":"b593a935-802a-4715-b27f-739a091a8977","branch":"container","containerSlot":1,"acceptGroup":"oreCasings","rpc":"sv_n_sendItem"},
+    {"id":"plasma_drill_1","title":"Plasma Drill Level 1","uuid":"9b9c0a82-a9bf-41d4-a599-58182f162058","branch":"generic","acceptGroup":"mixedOreCasings","rpc":"sv_n_sendItem"},
+    {"id":"plasma_drill_2","title":"Plasma Drill Level 2","uuid":"660c50e1-081d-449c-a405-785d4c26328d","branch":"generic","acceptGroup":"mixedOreCasings","rpc":"sv_n_sendItem"},
+    {"id":"plasma_drill_3","title":"Plasma Drill Level 3","uuid":"4a3d40d4-ce86-4a68-b042-8d107ea39d78","branch":"generic","acceptGroup":"mixedOreCasings","rpc":"sv_n_sendItem"},
+    {"id":"gyro_core_slot","title":"Gyro Core Slot","uuid":"a5093336-af02-42c4-8afd-196f22a0917f","branch":"generic","acceptGroup":"gyroCore","rpc":"sv_n_sendItem"},
+    {"id":"power_activator","title":"Power Activator","uuid":"895f5d04-c29a-46fd-bff5-742fc310940b","branch":"harvestable","acceptGroup":"powerStationBattery","rpc":"sv_n_sendItemToHarvestable"}
+  ],
+  "carryGroups": {
+    "resourceHarvests": [
+      {"title":"Scrap Wood","uuid":"968de65c-75f3-471b-954e-6165a4b6d3d6"},
+      {"title":"Wood","uuid":"f99ebc34-4821-4b39-a625-b839c5802ed5"},
+      {"title":"Scrap Metal","uuid":"5cb39ea5-554d-4c40-9d9a-6b2dd59de953"},
+      {"title":"Metal","uuid":"7468db55-b29d-4ce0-82b9-2414f493a376"},
+      {"title":"Scrap Stone","uuid":"02ee2a98-bd8d-4a09-bb69-38edaf66b8e1"}
+    ],
+    "oreCasings": [
+      {"title":"Goopite Ore","uuid":"47e140e8-eec1-4066-ad75-57557ea07e9b"},
+      {"title":"Crimsonite Ore","uuid":"32111055-2a23-413b-a490-da619b85a9bf"},
+      {"title":"Thornite Ore","uuid":"7aab1deb-40a1-4af1-a245-71c6c8439d2f"},
+      {"title":"Rich Ore","uuid":"4f33ee9c-397a-4f47-b91c-32ae96cbe507"},
+      {"title":"Mixed Ore","uuid":"4edfeea0-4dd9-4260-82b0-a812b4179296"},
+      {"title":"Mixed Ore","uuid":"ef4cc633-3cd1-4e13-9502-b498c4a4c7af"},
+      {"title":"Mixed Ore","uuid":"4d3d1a02-83ff-4795-9fa7-85eaee8f36f2"},
+      {"title":"Mixed Ore","uuid":"05a3e48b-0483-4897-b1e3-370271f815ed"}
+    ],
+    "mixedOreCasings": ["4edfeea0-4dd9-4260-82b0-a812b4179296","ef4cc633-3cd1-4e13-9502-b498c4a4c7af","4d3d1a02-83ff-4795-9fa7-85eaee8f36f2","05a3e48b-0483-4897-b1e3-370271f815ed"],
+    "gyroCore": ["5f5b2a0d-b629-4bea-93ca-e1f45ccac62b"],
+    "powerStationBattery": ["b5ce8bc0-e8b3-418f-9267-81b85a8eba0d"]
+  },
+  "minimalCarryCase": {
+    "targetId":"resource_collector",
+    "carryTitle":"Scrap Wood",
+    "carryUuid":"968de65c-75f3-471b-954e-6165a4b6d3d6",
+    "expectedPath":["cl_tryInsert","sv_n_sendItem","ResourceContainer.sv_e_receiveItem"]
+  },
+  "baselineInconsistencies": [
+    "survival_collections.lua references ITEMS.obj_harvest_crystal but current generated survival_items.lua does not define that key",
+    "Chemical Container UUID be29592a-ef58-4b1d-b18c-895023abd27f exists in two baseline shape sets with different physicsMaterial"
+  ]
+}

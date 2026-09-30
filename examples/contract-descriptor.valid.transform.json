@@ -1,0 +1,22 @@
+{
+  "schema": "smml.contract-descriptor/1",
+  "contractId": "carry.resolveInsertTarget",
+  "version": 1,
+  "side": "client",
+  "category": "transform",
+  "payloadSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.carry-insert-context"
+  },
+  "resultSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.carry-insert-context"
+  },
+  "combinationPolicy": "pipeline",
+  "errorPolicy": {
+    "invalidPayload": "reject-invocation",
+    "handlerException": "keep-current",
+    "invalidResult": "keep-current",
+    "noHandlers": "identity"
+  }
+}

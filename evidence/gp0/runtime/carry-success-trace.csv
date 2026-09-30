@@ -1,0 +1,12 @@
+seq,event,side,carryUuid,targetUuid,branch,canCollect,rpc,itemUuid,success,rpcSeen,receiveSeen,carryQuantity,targetQuantity,source_log,line
+269,carry.fixture.created,,,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,,,,,,,,game-20260929-073952.log,12437
+270,carry.fixture.ready,,,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,,,,,,,,game-20260929-073952.log,12438
+271,carry.loaded,,,,,,,968de65c-75f3-471b-954e-6165a4b6d3d6,,,,,,game-20260929-073952.log,12439
+273,carry.tryInsert.begin,client,968de65c-75f3-471b-954e-6165a4b6d3d6,,,,,,,,,,,game-20260929-073952.log,12443
+274,carry.raycast,,,,,,,,true,,,,,game-20260929-073952.log,12444
+275,carry.target,,,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,,,,,,,,game-20260929-073952.log,12445
+276,carry.branch,,968de65c-75f3-471b-954e-6165a4b6d3d6,a930a42f-63ed-4fb0-933e-56ce8a889cc5,container,true,,,,,,,,game-20260929-073952.log,12446
+277,carry.rpc.client,,968de65c-75f3-471b-954e-6165a4b6d3d6,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,sv_n_sendItem,,,,,,,game-20260929-073952.log,12447
+278,carry.rpc.server,,,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,sv_n_sendItem,968de65c-75f3-471b-954e-6165a4b6d3d6,,,,,,game-20260929-073952.log,12448
+279,carry.receive.server,,,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,,968de65c-75f3-471b-954e-6165a4b6d3d6,,,,,,game-20260929-073952.log,12449
+280,carry.case,,,a930a42f-63ed-4fb0-933e-56ce8a889cc5,,,,968de65c-75f3-471b-954e-6165a4b6d3d6,true,true,true,0,1,game-20260929-073952.log,12450

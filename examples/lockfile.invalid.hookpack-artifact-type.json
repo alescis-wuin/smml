@@ -1,0 +1,127 @@
+{
+  "schema": "smml.lockfile/1",
+  "profile": {
+    "id": "survival-industrial",
+    "sha256": "c8fcfcd1fc38dbb91aefbd1b5a6cf37bb3b2c579d0836caf0f5b25005e63b7e8"
+  },
+  "platformVersion": "0.6.0",
+  "target": {
+    "steamAppId": 387990,
+    "gameVersion": "1.0.6",
+    "engineBuild": 889,
+    "steamBuildId": "25442087",
+    "steamBranch": "public",
+    "platform": {
+      "hostOs": "linux",
+      "gameOs": "windows",
+      "compatibilityLayer": "proton"
+    },
+    "canonicalGameFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+  },
+  "packages": [
+    {
+      "id": "com.example.foundation",
+      "version": "1.2.0",
+      "packageDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "manifestDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+      "persistenceImpact": "runtimeState"
+    },
+    {
+      "id": "com.example.pallet64",
+      "version": "1.4.0",
+      "packageDigest": "3333333333333333333333333333333333333333333333333333333333333333",
+      "manifestDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+      "persistenceImpact": "worldContent"
+    },
+    {
+      "id": "org.smml.api",
+      "version": "1.0.0",
+      "packageDigest": "5555555555555555555555555555555555555555555555555555555555555555",
+      "manifestDigest": "6666666666666666666666666666666666666666666666666666666666666666",
+      "persistenceImpact": "runtimeState"
+    },
+    {
+      "id": "org.smml.hooks.scrap-mechanic",
+      "version": "1.0.0",
+      "packageDigest": "7777777777777777777777777777777777777777777777777777777777777777",
+      "manifestDigest": "8888888888888888888888888888888888888888888888888888888888888888",
+      "persistenceImpact": "runtimeState"
+    },
+    {
+      "id": "org.smml.sdk",
+      "version": "1.0.0",
+      "packageDigest": "9999999999999999999999999999999999999999999999999999999999999999",
+      "manifestDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "persistenceImpact": "runtimeState"
+    }
+  ],
+  "artifacts": [
+    {
+      "packageId": "org.smml.hooks.scrap-mechanic",
+      "artifactId": "hookpack.build-889",
+      "type": "smml.contract-descriptor/1",
+      "path": "hookpacks/build-889.json",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "components": {
+    "hookPack": {
+      "packageId": "org.smml.hooks.scrap-mechanic",
+      "artifactId": "hookpack.build-889"
+    },
+    "api": {
+      "packageId": "org.smml.api"
+    },
+    "sdk": {
+      "packageId": "org.smml.sdk"
+    }
+  },
+  "roots": [
+    {
+      "id": "com.example.pallet64",
+      "requestedRange": ">=1.0.0 <2.0.0",
+      "resolvedVersion": "1.4.0"
+    }
+  ],
+  "loadOrder": [
+    "com.example.foundation",
+    "org.smml.api",
+    "org.smml.hooks.scrap-mechanic",
+    "org.smml.sdk",
+    "com.example.pallet64"
+  ],
+  "capabilityProviders": [
+    {
+      "id": "smml.api",
+      "version": 1,
+      "providers": [
+        "org.smml.api"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "com.example.foundation",
+      "to": "com.example.pallet64",
+      "reason": "hardDependency",
+      "declaredBy": "com.example.pallet64",
+      "detail": {
+        "range": ">=1.2.0 <2.0.0"
+      }
+    },
+    {
+      "from": "org.smml.api",
+      "to": "com.example.pallet64",
+      "reason": "capability",
+      "declaredBy": "com.example.pallet64",
+      "detail": {
+        "capabilityId": "smml.api",
+        "capabilityVersion": 1
+      }
+    }
+  ],
+  "finalContentFingerprint": {
+    "algorithm": "smml.content-tree-sha256/1",
+    "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  }
+}

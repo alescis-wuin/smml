@@ -1,0 +1,103 @@
+{
+  "schema": "smml-gp0-capture-policy/1",
+  "name": "Scrap Mechanic GP0 analysis corpus",
+  "description": "Selective capture policy for SMML GP0. The archive is for private static analysis, hook/content mapping and diff work; it is not a redistribution package.",
+  "default_action": "REFERENCE",
+  "path_rules": [
+    {
+      "pattern": "Data/ExampleMods/**",
+      "action": "FULL",
+      "reason": "Official example mods/templates are compact and directly document supported content/mod structures."
+    },
+    {
+      "pattern": "installscript.vdf",
+      "action": "FULL",
+      "reason": "Small installation metadata useful for installation/build analysis."
+    },
+    {
+      "pattern": "Logs/**",
+      "action": "REFERENCE",
+      "reason": "Runtime output. Relevant experiment logs should be captured separately and intentionally."
+    },
+    {
+      "pattern": "Cache/**",
+      "action": "REFERENCE",
+      "reason": "Generated cache. Preserve metadata/hashes/names, not bulk content."
+    },
+    {
+      "pattern": "Release/**",
+      "action": "REFERENCE",
+      "reason": "Native runtime binaries are outside the initial Lua/data modding scope. Preserve metadata and hashes only."
+    }
+  ],
+  "extension_rules": {
+    "FULL": {
+      "extensions": [
+        ".lua", ".json", ".xml", ".rend", ".shapeset", ".effectset",
+        ".layout", ".surface", ".template", ".rendersettings", ".assetset",
+        ".tracknodes", ".trashbotpattern", ".gui", ".txt", ".html",
+        ".harvestableset", ".kinematicset", ".voxelmeshset", ".world",
+        ".sobset", ".tex3d", ".zonesettings", ".voxelmaterialset",
+        ".projectileset", ".sobdb", ".assetdb", ".harvestabledb",
+        ".kinematicdb", ".rotationset", ".shapedb", ".characterdb",
+        ".characterset", ".effectdb", ".logset", ".meleeattackset",
+        ".nodeset", ".paintpalette", ".tooldb", ".toolset",
+        ".achievementset", ".camerasettings", ".carryconfig", ".coklib",
+        ".combatencounters", ".eventtests", ".fogsettings", ".hairprofiles",
+        ".lutlib", ".metalprofiles", ".physicsmaterials", ".skinprofiles",
+        ".statsdb", ".taglist", ".todsettings", ".tradegroup", ".vdf",
+        ".visrend", ".weather", ".obj", ".mtl", ".bat"
+      ],
+      "reason": "Scripts, registries, declarative databases/configuration, small text formats and OBJ collision/geometry sources are directly useful to Hook Patcher and Content Composer analysis."
+    },
+    "SAMPLE": {
+      "extensions": [
+        ".blueprint", ".prefabson", ".tileson", ".dae", ".fbx",
+        ".png", ".tga", ".jpg", ".exr", ".mesh", ".skeleton", ".cur"
+      ],
+      "reason": "Useful format/schema/asset examples, but full families are repetitive or too large for the compact GP0 corpus."
+    },
+    "REFERENCE": {
+      "extensions": [
+        ".mco", ".tco", ".cbo", ".dco", ".lco", ".sbc", ".ico",
+        ".prefab", ".tile", ".export", ".dll", ".exe", ".bank",
+        ".otf", ".ttf", "[no extension]"
+      ],
+      "reason": "Generated caches, compiled/native binaries, large binary runtime assets or compiled counterparts. Metadata and hashes are sufficient for initial GP0 analysis."
+    }
+  },
+  "sample_policy": {
+    "default_per_extension": 5,
+    "per_extension": {
+      ".blueprint": 8,
+      ".prefabson": 8,
+      ".tileson": 8,
+      ".dae": 8,
+      ".fbx": 8,
+      ".png": 4,
+      ".tga": 4,
+      ".jpg": 4,
+      ".exr": 3,
+      ".mesh": 5,
+      ".skeleton": 4,
+      ".cur": 3
+    },
+    "max_single_sample_bytes": 8388608,
+    "selection": [
+      "prefer one file from each top-level root when available",
+      "prefer both likely-text and likely-binary variants when an extension has both",
+      "then choose deterministic small/median/large representatives",
+      "never sample Cache/ or Release/ unless a future policy explicitly overrides them"
+    ]
+  },
+  "archive_layout": {
+    "content_root": "game",
+    "analysis_root": "_analysis",
+    "embed_source_scan_reports": true,
+    "embed_policy": true,
+    "embed_full_manifest": true,
+    "embed_included_manifest": true,
+    "embed_reference_manifest": true,
+    "embed_capture_summary": true
+  }
+}

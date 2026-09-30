@@ -1,0 +1,51 @@
+{
+  "contractKeys": [
+    {
+      "contractId": "game.serverCreated",
+      "version": 1,
+      "expected": "game.serverCreated@1"
+    },
+    {
+      "contractId": "carry.beforeServerDrop",
+      "version": 2,
+      "expected": "carry.beforeServerDrop@2"
+    }
+  ],
+  "cancellable": [
+    {
+      "policy": "deny-wins",
+      "decisions": ["allow", "deny", "allow"],
+      "noHandlers": "allow",
+      "expectedDecision": "deny",
+      "expectedEvaluated": 3
+    },
+    {
+      "policy": "deny-wins",
+      "decisions": ["allow", "allow"],
+      "noHandlers": "deny",
+      "expectedDecision": "allow",
+      "expectedEvaluated": 2
+    },
+    {
+      "policy": "first-deny",
+      "decisions": ["allow", "deny", "allow"],
+      "noHandlers": "allow",
+      "expectedDecision": "deny",
+      "expectedEvaluated": 2
+    },
+    {
+      "policy": "first-deny",
+      "decisions": [],
+      "noHandlers": "allow",
+      "expectedDecision": "allow",
+      "expectedEvaluated": 0
+    },
+    {
+      "policy": "first-deny",
+      "decisions": [],
+      "noHandlers": "deny",
+      "expectedDecision": "deny",
+      "expectedEvaluated": 0
+    }
+  ]
+}

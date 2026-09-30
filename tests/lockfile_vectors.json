@@ -1,0 +1,16 @@
+{
+  "edgeOrientation": [
+    {
+      "reason": "hardDependency",
+      "from": "com.example.foundation",
+      "to": "com.example.pallet64",
+      "declaredBy": "com.example.pallet64"
+    },
+    {
+      "reason": "capability",
+      "from": "org.smml.api",
+      "to": "com.example.pallet64",
+      "declaredBy": "com.example.pallet64"
+    }
+  ]
+}

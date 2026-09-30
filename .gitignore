@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Build / generated output
+build/
+dist/
+out/
+tmp/
+.temp/
+
+# Local heavyweight or historical artifacts.
+# Keep artifacts/README.md tracked as documentation.
+artifacts/**
+!artifacts/README.md
+
+# Logs and runtime state
+*.log
+*.pid
+*.lock
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example

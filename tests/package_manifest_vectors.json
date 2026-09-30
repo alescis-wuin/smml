@@ -1,0 +1,61 @@
+{
+  "semverRanges": [
+    {"version": "1.0.0", "range": "*", "matches": true},
+    {"version": "1.2.3", "range": "1.2.3", "matches": true},
+    {"version": "1.2.3+local.2", "range": "1.2.3+repo.1", "matches": true},
+    {"version": "1.2.4", "range": "1.2.3", "matches": false},
+    {"version": "1.5.0", "range": ">=1.2.3 <2.0.0", "matches": true},
+    {"version": "2.0.0", "range": ">=1.2.3 <2.0.0", "matches": false},
+    {"version": "1.2.3-alpha.2", "range": ">=1.2.3-alpha.1 <1.2.3", "matches": true},
+    {"version": "1.2.3", "range": ">=1.2.3-alpha.1 <1.2.3", "matches": false},
+    {"version": "0.9.9", "range": ">1.0.0", "matches": false},
+    {"version": "1.0.1", "range": ">1.0.0", "matches": true}
+  ],
+  "invalidRanges": [
+    "^1.2.3",
+    "~1.2.3",
+    "1.2",
+    ">=1.0.0 || <2.0.0",
+    ">=1.0.0, <2.0.0",
+    " >=1.0.0",
+    ">=1.0.0 ",
+    ">=1.0.0\t<2.0.0"
+  ],
+  "targetSelectors": [
+    {
+      "name": "appid-only",
+      "selector": {"steamAppId": 387990},
+      "matchesReference": true
+    },
+    {
+      "name": "exact-reference-build",
+      "selector": {
+        "steamAppId": 387990,
+        "gameVersions": ["1.0.6"],
+        "engineBuilds": [889],
+        "steamBuildIds": ["25442087"],
+        "steamBranches": ["public"],
+        "canonicalGameFingerprints": ["6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"],
+        "hostOs": ["linux"],
+        "gameOs": ["windows"],
+        "compatibilityLayers": ["proton"]
+      },
+      "matchesReference": true
+    },
+    {
+      "name": "wrong-engine-build",
+      "selector": {"steamAppId": 387990, "engineBuilds": [888]},
+      "matchesReference": false
+    },
+    {
+      "name": "wrong-game-version-exact",
+      "selector": {"steamAppId": 387990, "gameVersions": ["1.0.60"]},
+      "matchesReference": false
+    },
+    {
+      "name": "wrong-appid",
+      "selector": {"steamAppId": 1},
+      "matchesReference": false
+    }
+  ]
+}

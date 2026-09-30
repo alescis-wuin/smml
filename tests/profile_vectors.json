@@ -1,0 +1,30 @@
+{
+  "targetMatches": [
+    {
+      "name": "reference-exact",
+      "selector": {
+        "steamAppId": 387990,
+        "gameVersions": ["1.0.6"],
+        "engineBuilds": [889],
+        "steamBuildIds": ["25442087"],
+        "steamBranches": ["public"]
+      },
+      "expected": true
+    },
+    {
+      "name": "wrong-engine-build",
+      "selector": {
+        "steamAppId": 387990,
+        "engineBuilds": [888]
+      },
+      "expected": false
+    },
+    {
+      "name": "broad-app-id-only",
+      "selector": {
+        "steamAppId": 387990
+      },
+      "expected": true
+    }
+  ]
+}

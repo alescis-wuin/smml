@@ -1,0 +1,30 @@
+{
+  "schema": "smml.package-manifest/1",
+  "id": "com.example.meta",
+  "name": "Meta package",
+  "version": "1.0.0+catalog.1",
+  "authors": [
+    "Example Author"
+  ],
+  "compatibility": {
+    "targets": [
+      {
+        "steamAppId": 387990
+      }
+    ]
+  },
+  "dependencies": [],
+  "capabilities": {
+    "provides": [],
+    "requires": []
+  },
+  "conflicts": {
+    "packages": [],
+    "capabilities": []
+  },
+  "loadBefore": [],
+  "loadAfter": [],
+  "persistenceImpact": "none",
+  "artifacts": [],
+  "files": []
+}

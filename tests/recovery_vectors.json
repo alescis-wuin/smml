@@ -1,0 +1,162 @@
+[
+  {
+    "name": "crash_after_committing_phase_before_op0",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "op-0002": {
+        "kind": "missing"
+      },
+      "op-0003": {
+        "kind": "file",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "expectedClassifications": [
+      "BEFORE",
+      "BEFORE",
+      "BEFORE"
+    ],
+    "expectedDecision": "RESUME_COMMIT",
+    "expectedNextSequence": 0
+  },
+  {
+    "name": "crash_after_op0_mutation_before_status_update",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "op-0002": {
+        "kind": "missing"
+      },
+      "op-0003": {
+        "kind": "file",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "expectedClassifications": [
+      "AFTER",
+      "BEFORE",
+      "BEFORE"
+    ],
+    "expectedDecision": "RESUME_COMMIT",
+    "expectedNextSequence": 1
+  },
+  {
+    "name": "crash_after_op1_mutation_before_status_update",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "op-0002": {
+        "kind": "file",
+        "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      "op-0003": {
+        "kind": "file",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "expectedClassifications": [
+      "AFTER",
+      "AFTER",
+      "BEFORE"
+    ],
+    "expectedDecision": "RESUME_COMMIT",
+    "expectedNextSequence": 2
+  },
+  {
+    "name": "all_mutations_present_after_crash",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "op-0002": {
+        "kind": "file",
+        "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      "op-0003": {
+        "kind": "missing"
+      }
+    },
+    "expectedClassifications": [
+      "AFTER",
+      "AFTER",
+      "AFTER"
+    ],
+    "expectedDecision": "READY_TO_VERIFY"
+  },
+  {
+    "name": "foreign_hash_blocks_progress",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "op-0002": {
+        "kind": "file",
+        "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "op-0003": {
+        "kind": "file",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "expectedClassifications": [
+      "AFTER",
+      "FOREIGN",
+      "BEFORE"
+    ],
+    "expectedDecision": "FOREIGN_MODIFICATION"
+  },
+  {
+    "name": "non_prefix_after_before_pattern_is_inconsistent",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "op-0002": {
+        "kind": "file",
+        "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      "op-0003": {
+        "kind": "file",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "expectedClassifications": [
+      "BEFORE",
+      "AFTER",
+      "BEFORE"
+    ],
+    "expectedDecision": "RECOVERY_REQUIRED"
+  },
+  {
+    "name": "symlink_at_managed_path_is_foreign",
+    "observations": {
+      "op-0001": {
+        "kind": "file",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "op-0002": {
+        "kind": "symlink"
+      },
+      "op-0003": {
+        "kind": "file",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "expectedClassifications": [
+      "AFTER",
+      "FOREIGN",
+      "BEFORE"
+    ],
+    "expectedDecision": "FOREIGN_MODIFICATION"
+  }
+]

@@ -1,0 +1,555 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:lockfile:1",
+  "title": "SMML Lockfile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "profile",
+    "platformVersion",
+    "target",
+    "packages",
+    "artifacts",
+    "components",
+    "roots",
+    "loadOrder",
+    "capabilityProviders",
+    "edges"
+  ],
+  "properties": {
+    "schema": {
+      "const": "smml.lockfile/1"
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/profileId"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "platformVersion": {
+      "$ref": "#/$defs/semver"
+    },
+    "target": {
+      "$ref": "#/$defs/stableTarget"
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/packageRecord"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16384,
+      "items": {
+        "$ref": "#/$defs/artifactRecord"
+      }
+    },
+    "components": {
+      "$ref": "#/$defs/components"
+    },
+    "roots": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/rootRecord"
+      }
+    },
+    "loadOrder": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/packageId"
+      }
+    },
+    "capabilityProviders": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/capabilityProvider"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "maxItems": 32768,
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    },
+    "finalContentFingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "sha256"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "smml.content-tree-sha256/1"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "profileId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"
+    },
+    "capabilityId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"
+    },
+    "artifactId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "artifactType": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?(?:/[1-9][0-9]*)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "semver": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 128,
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "semverRange": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000\\r\\n]+$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?![A-Za-z]:/)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)[^\\u0000]+$"
+    },
+    "os": {
+      "type": "string",
+      "enum": [
+        "linux",
+        "windows",
+        "macos"
+      ]
+    },
+    "compatibilityLayer": {
+      "type": "string",
+      "enum": [
+        "none",
+        "proton",
+        "wine",
+        "other"
+      ]
+    },
+    "stableTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steamAppId",
+        "gameVersion",
+        "engineBuild",
+        "steamBuildId",
+        "steamBranch",
+        "platform",
+        "canonicalGameFingerprint"
+      ],
+      "properties": {
+        "steamAppId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gameVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "engineBuild": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "steamBuildId": {
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "maxLength": 32
+        },
+        "steamBranch": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "platform": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "hostOs",
+            "gameOs",
+            "compatibilityLayer"
+          ],
+          "properties": {
+            "hostOs": {
+              "type": "string",
+              "enum": [
+                "linux",
+                "windows",
+                "macos"
+              ]
+            },
+            "gameOs": {
+              "type": "string",
+              "enum": [
+                "linux",
+                "windows",
+                "macos"
+              ]
+            },
+            "compatibilityLayer": {
+              "type": "string",
+              "enum": [
+                "none",
+                "proton",
+                "wine",
+                "other"
+              ]
+            }
+          }
+        },
+        "canonicalGameFingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "packageRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "packageDigest",
+        "manifestDigest",
+        "persistenceImpact"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/packageId"
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "packageDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "manifestDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "persistenceImpact": {
+          "type": "string",
+          "enum": [
+            "none",
+            "runtimeState",
+            "playerState",
+            "worldContent"
+          ]
+        }
+      }
+    },
+    "artifactRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageId",
+        "artifactId",
+        "type",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "packageId": {
+          "$ref": "#/$defs/packageId"
+        },
+        "artifactId": {
+          "$ref": "#/$defs/artifactId"
+        },
+        "type": {
+          "$ref": "#/$defs/artifactType"
+        },
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "rootRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "requestedRange",
+        "resolvedVersion"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/packageId"
+        },
+        "requestedRange": {
+          "$ref": "#/$defs/semverRange"
+        },
+        "resolvedVersion": {
+          "$ref": "#/$defs/semver"
+        }
+      }
+    },
+    "capabilityProvider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "providers"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/capabilityId"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/packageId"
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to",
+        "reason",
+        "declaredBy",
+        "detail"
+      ],
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/packageId"
+        },
+        "to": {
+          "$ref": "#/$defs/packageId"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "hardDependency",
+            "softDependency",
+            "capability",
+            "loadBefore",
+            "loadAfter"
+          ]
+        },
+        "declaredBy": {
+          "$ref": "#/$defs/packageId"
+        },
+        "detail": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "range": {
+              "$ref": "#/$defs/semverRange"
+            },
+            "capabilityId": {
+              "$ref": "#/$defs/capabilityId"
+            },
+            "capabilityVersion": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reason": {
+                "enum": [
+                  "hardDependency",
+                  "softDependency"
+                ]
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "range"
+                ],
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "capabilityId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "capabilityVersion"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reason": {
+                "const": "capability"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "required": [
+                  "capabilityId",
+                  "capabilityVersion"
+                ],
+                "not": {
+                  "required": [
+                    "range"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reason": {
+                "enum": [
+                  "loadBefore",
+                  "loadAfter"
+                ]
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          },
+          "then": {
+            "properties": {
+              "detail": {
+                "maxProperties": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "packageComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageId"
+      ],
+      "properties": {
+        "packageId": {
+          "$ref": "#/$defs/packageId"
+        }
+      }
+    },
+    "hookPackComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageId",
+        "artifactId"
+      ],
+      "properties": {
+        "packageId": {
+          "$ref": "#/$defs/packageId"
+        },
+        "artifactId": {
+          "$ref": "#/$defs/artifactId"
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hookPack",
+        "api",
+        "sdk"
+      ],
+      "properties": {
+        "hookPack": {
+          "$ref": "#/$defs/hookPackComponent"
+        },
+        "api": {
+          "$ref": "#/$defs/packageComponent"
+        },
+        "sdk": {
+          "$ref": "#/$defs/packageComponent"
+        }
+      }
+    }
+  }
+}

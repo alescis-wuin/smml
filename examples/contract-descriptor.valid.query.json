@@ -1,0 +1,21 @@
+{
+  "schema": "smml.contract-descriptor/1",
+  "contractId": "runtime.querySession",
+  "version": 1,
+  "side": "shared",
+  "category": "query",
+  "payloadSchema": {
+    "kind": "none"
+  },
+  "resultSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.runtime-session.result"
+  },
+  "combinationPolicy": "single-handler",
+  "errorPolicy": {
+    "invalidPayload": "reject-invocation",
+    "handlerException": "fail-invocation",
+    "invalidResult": "fail-invocation",
+    "noHandlers": "fail-invocation"
+  }
+}

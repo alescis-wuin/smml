@@ -1,0 +1,43 @@
+{
+  "schema": "smml.profile/1",
+  "id": "survival-industrial",
+  "name": "Survival Industrial",
+  "description": "Reference GP1 profile fixture.",
+  "target": {
+    "steamAppId": 387990,
+    "gameVersions": [
+      "1.0.6"
+    ],
+    "engineBuilds": [
+      889
+    ],
+    "steamBuildIds": [
+      "25442087"
+    ],
+    "steamBranches": [
+      "public"
+    ],
+    "canonicalGameFingerprints": [
+      "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+    ]
+  },
+  "packages": [
+    {
+      "id": "com.example.pallet64",
+      "range": ">=1.0.0 <2.0.0"
+    }
+  ],
+  "policies": {
+    "softDependencies": "selected-only",
+    "providerAmbiguity": "pick-first",
+    "capabilityProviders": [
+      {
+        "id": "smml.api",
+        "version": 1,
+        "providers": [
+          "org.smml.api"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "smml.canonical-game-policy/1",
+  "contentTreeAlgorithm": "smml.content-tree-sha256/1",
+  "excludedFilePrefixes": [
+    "Logs/"
+  ],
+  "excludedExactFiles": [],
+  "includeEverythingElse": true
+}

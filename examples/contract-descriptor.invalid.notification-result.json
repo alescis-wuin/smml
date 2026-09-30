@@ -1,0 +1,22 @@
+{
+  "schema": "smml.contract-descriptor/1",
+  "contractId": "game.serverCreated",
+  "version": 1,
+  "side": "server",
+  "category": "notification",
+  "payloadSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.game-server-created.payload"
+  },
+  "resultSchema": {
+    "kind": "artifact",
+    "artifactId": "schema.notification.result"
+  },
+  "combinationPolicy": "all",
+  "errorPolicy": {
+    "invalidPayload": "reject-invocation",
+    "handlerException": "continue",
+    "invalidResult": "not-applicable",
+    "noHandlers": "succeed"
+  }
+}

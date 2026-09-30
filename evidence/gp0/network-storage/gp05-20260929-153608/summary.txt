@@ -1,0 +1,21 @@
+GP0.5 combined run: GP05-20260929-153608
+overall_pass=true
+
+PASS remote_client_to_server
+PASS server_to_remote_client
+PASS server_broadcast_to_remote_client
+PASS unknown_contract_rejected
+PASS bad_version_rejected
+PASS invalid_payload_rejected
+PASS handler_error_isolated
+PASS nil_envelope_fail_open
+PASS setClientData_usable_channel
+PASS setClientData_new_client_initial_state
+PASS remote_disconnect_reconnect
+PASS world_or_process_reload
+PASS storage_absent_to_schema1
+PASS storage_schema1_reload_and_migration
+PASS storage_schema2_survives_restart
+PASS logical_namespace_isolation
+
+usable setClientData channels: 3, 4

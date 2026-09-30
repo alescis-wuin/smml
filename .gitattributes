@@ -1,0 +1,31 @@
+* text=auto eol=lf
+
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.py text eol=lf
+*.lua text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.zip binary
+*.7z binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.dll binary
+*.exe binary
+*.pdb binary
+*.cbo binary
+*.dco binary
+*.mco binary
+*.tco binary

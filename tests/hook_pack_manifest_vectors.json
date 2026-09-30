@@ -1,0 +1,80 @@
+{
+  "targetMatches": [
+    {
+      "name": "reference-build",
+      "selector": {
+        "steamAppId": 387990,
+        "gameVersion": "1.0.6",
+        "engineBuild": 889,
+        "steamBuildId": "25442087",
+        "steamBranch": "public",
+        "canonicalGameFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+      },
+      "expected": true
+    },
+    {
+      "name": "wrong-steam-build",
+      "selector": {
+        "steamAppId": 387990,
+        "gameVersion": "1.0.6",
+        "engineBuild": 889,
+        "steamBuildId": "25442088",
+        "steamBranch": "public",
+        "canonicalGameFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964"
+      },
+      "expected": false
+    },
+    {
+      "name": "linux-proton-exact",
+      "selector": {
+        "steamAppId": 387990,
+        "gameVersion": "1.0.6",
+        "engineBuild": 889,
+        "steamBuildId": "25442087",
+        "steamBranch": "public",
+        "canonicalGameFingerprint": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
+        "hostOs": "linux",
+        "gameOs": "windows",
+        "compatibilityLayer": "proton"
+      },
+      "expected": true
+    }
+  ],
+  "baselinePreconditions": [
+    {
+      "name": "known-survival-game",
+      "kind": "regular-file",
+      "sha256": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
+      "expected": true
+    },
+    {
+      "name": "foreign-survival-game",
+      "kind": "regular-file",
+      "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expected": false
+    },
+    {
+      "name": "symlink-survival-game",
+      "kind": "symlink",
+      "sha256": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
+      "expected": false
+    }
+  ],
+  "anchorCardinality": [
+    {
+      "name": "one-match",
+      "text": "prefix\nfunction SurvivalGame.server_onCreate( self )\nbody\nend\n",
+      "expected": true
+    },
+    {
+      "name": "zero-match",
+      "text": "function Other.server_onCreate( self )\nend\n",
+      "expected": false
+    },
+    {
+      "name": "two-matches",
+      "text": "function SurvivalGame.server_onCreate( self )\nend\nfunction SurvivalGame.server_onCreate( self )\nend\n",
+      "expected": false
+    }
+  ]
+}

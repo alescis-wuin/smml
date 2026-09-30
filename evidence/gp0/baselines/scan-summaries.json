@@ -1,0 +1,169 @@
+{
+  "before_new_install": {
+    "counts": {
+      "case_collision_groups": 0,
+      "copied_text_samples": 69,
+      "deep_references": 462226,
+      "directories": 3025,
+      "duplicate_groups": 1164,
+      "empty_files": 0,
+      "errors": 0,
+      "extensions": 91,
+      "files": 61645,
+      "likely_binary_files": 45214,
+      "likely_text_files": 16431,
+      "long_paths": 0,
+      "records": 64670,
+      "symlinks": 0,
+      "unreadable_files": 0,
+      "uuid_occurrences": 333287
+    },
+    "generated_utc": "2026-09-28T22:36:44.790818+00:00",
+    "notes": [
+      "ctime semantics are platform-dependent.",
+      "birth time is recorded only when exposed by the OS.",
+      "atime is intentionally not recorded because reading files can update access time.",
+      "package_hint is advisory only.",
+      "directory symlinks are never followed."
+    ],
+    "platform": "linux",
+    "python": "3.14.7 (main, Aug 14 2026, 06:38:32) [GCC 16.2.1 20260810]",
+    "root_name": "Scrap Mechanic",
+    "root_path_local_only": "/home/seynax/.local/share/Steam/steamapps/common/Scrap Mechanic",
+    "schema": "smml-gp0-scan/1",
+    "total_file_bytes": 20999962591,
+    "total_file_bytes_human": "19.56 GiB"
+  },
+  "new_install": {
+    "counts": {
+      "case_collision_groups": 0,
+      "copied_text_samples": 67,
+      "deep_references": 66715,
+      "directories": 2991,
+      "duplicate_groups": 1157,
+      "empty_files": 0,
+      "errors": 0,
+      "extensions": 89,
+      "files": 61370,
+      "likely_binary_files": 45112,
+      "likely_text_files": 16258,
+      "long_paths": 0,
+      "records": 64361,
+      "symlinks": 0,
+      "unreadable_files": 0,
+      "uuid_occurrences": 331454
+    },
+    "generated_utc": "2026-09-28T23:07:04.886419+00:00",
+    "notes": [
+      "ctime semantics are platform-dependent.",
+      "birth time is recorded only when exposed by the OS.",
+      "atime is intentionally not recorded because reading files can update access time.",
+      "package_hint is advisory only.",
+      "directory symlinks are never followed."
+    ],
+    "platform": "linux",
+    "python": "3.14.7 (main, Aug 14 2026, 06:38:32) [GCC 16.2.1 20260810]",
+    "root_name": "Scrap Mechanic",
+    "root_path_local_only": "/home/seynax/.local/share/Steam/steamapps/common/Scrap Mechanic",
+    "schema": "smml-gp0-scan/1",
+    "total_file_bytes": 20596856244,
+    "total_file_bytes_human": "19.18 GiB"
+  },
+  "vanilla_B0": {
+    "counts": {
+      "case_collision_groups": 0,
+      "copied_text_samples": 67,
+      "deep_references": 66715,
+      "directories": 2991,
+      "duplicate_groups": 1157,
+      "empty_files": 0,
+      "errors": 0,
+      "extensions": 89,
+      "files": 61370,
+      "likely_binary_files": 45112,
+      "likely_text_files": 16258,
+      "long_paths": 0,
+      "records": 64361,
+      "symlinks": 0,
+      "unreadable_files": 0,
+      "uuid_occurrences": 331454
+    },
+    "fingerprints": {
+      "installation_content_sha256": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
+      "top_level_content_sha256": {
+        "Cache": "affd1530a458ac21782eabca281426fadf38b5de9a43f76ad1620462ca1d8cf1",
+        "ChallengeData": "6861f414ba0c90195ea7d96a45efb0bfa24d6c104144e19fa438db5257bfa3a6",
+        "Challenges": "6070ae45d790918c9e818b2ebb93b8c4a30de3db5e04f03771eb2c6477c4838a",
+        "Data": "f4710feee3052900e3daff832238795e861f5f7f8d067f1270cc3a64c695fa25",
+        "ParticleEditorData": "aef6e0f5dd1faba5d0ae204e5d597d6637470d7dc227dbd029da59cd1b1b46e9",
+        "Release": "293a38308f0ea89887bdc9c9344c5e047a58560c7fe76d9f18de4cf3250a6092",
+        "Survival": "1dfddaed983a8b243742fa0d36f06e9a45c47116bb716ff4b3ddf23ecf2c8463",
+        "installscript.vdf": "980e6d7bb7c93daa12a050773575cde108cdd524e2ef0d9015a9778948589b03"
+      }
+    },
+    "generated_utc": "2026-09-28T23:10:45.630079+00:00",
+    "notes": [
+      "ctime semantics are platform-dependent.",
+      "birth time is recorded only when exposed by the OS.",
+      "atime is intentionally not recorded because reading files can update access time.",
+      "package_hint is advisory only.",
+      "directory symlinks are never followed."
+    ],
+    "platform": "linux",
+    "python": "3.14.7 (main, Aug 14 2026, 06:38:32) [GCC 16.2.1 20260810]",
+    "root_name": "Scrap Mechanic",
+    "root_path_local_only": "/home/seynax/.local/share/Steam/steamapps/common/Scrap Mechanic",
+    "schema": "smml-gp0-scan/1.1",
+    "total_file_bytes": 20596856244,
+    "total_file_bytes_human": "19.18 GiB"
+  },
+  "vanilla_B1_after_start": {
+    "counts": {
+      "case_collision_groups": 0,
+      "copied_text_samples": 68,
+      "deep_references": 66814,
+      "directories": 3001,
+      "duplicate_groups": 1157,
+      "empty_files": 0,
+      "errors": 0,
+      "extensions": 90,
+      "files": 61371,
+      "likely_binary_files": 45112,
+      "likely_text_files": 16259,
+      "long_paths": 0,
+      "records": 64372,
+      "symlinks": 0,
+      "unreadable_files": 0,
+      "uuid_occurrences": 331466
+    },
+    "fingerprints": {
+      "installation_content_sha256": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
+      "top_level_content_sha256": {
+        "Cache": "affd1530a458ac21782eabca281426fadf38b5de9a43f76ad1620462ca1d8cf1",
+        "ChallengeData": "6861f414ba0c90195ea7d96a45efb0bfa24d6c104144e19fa438db5257bfa3a6",
+        "Challenges": "6070ae45d790918c9e818b2ebb93b8c4a30de3db5e04f03771eb2c6477c4838a",
+        "Data": "f4710feee3052900e3daff832238795e861f5f7f8d067f1270cc3a64c695fa25",
+        "Logs": "dcfbca56bc425fbf710e7fe4cde7e60c49bfb4dfe513e1e918e08785a6290b21",
+        "ParticleEditorData": "aef6e0f5dd1faba5d0ae204e5d597d6637470d7dc227dbd029da59cd1b1b46e9",
+        "Release": "293a38308f0ea89887bdc9c9344c5e047a58560c7fe76d9f18de4cf3250a6092",
+        "Survival": "1dfddaed983a8b243742fa0d36f06e9a45c47116bb716ff4b3ddf23ecf2c8463",
+        "installscript.vdf": "980e6d7bb7c93daa12a050773575cde108cdd524e2ef0d9015a9778948589b03"
+      }
+    },
+    "generated_utc": "2026-09-28T23:27:47.033587+00:00",
+    "notes": [
+      "ctime semantics are platform-dependent.",
+      "birth time is recorded only when exposed by the OS.",
+      "atime is intentionally not recorded because reading files can update access time.",
+      "package_hint is advisory only.",
+      "directory symlinks are never followed."
+    ],
+    "platform": "linux",
+    "python": "3.14.7 (main, Aug 14 2026, 06:38:32) [GCC 16.2.1 20260810]",
+    "root_name": "Scrap Mechanic",
+    "root_path_local_only": "/home/seynax/.local/share/Steam/steamapps/common/Scrap Mechanic",
+    "schema": "smml-gp0-scan/1.1",
+    "total_file_bytes": 20596893988,
+    "total_file_bytes_human": "19.18 GiB"
+  }
+}

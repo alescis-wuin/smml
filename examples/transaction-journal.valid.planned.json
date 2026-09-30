@@ -1,0 +1,149 @@
+{
+  "schema": "smml.transaction-journal/1",
+  "transactionId": "tx-example-0001",
+  "journalRevision": 0,
+  "phase": "PLANNED",
+  "createdAt": "2026-09-29T16:00:00Z",
+  "updatedAt": "2026-09-29T16:00:00Z",
+  "gameTarget": {
+    "schema": "smml.game-target/1",
+    "steamAppId": 387990,
+    "gameVersion": "1.0.6",
+    "engineBuild": 889,
+    "steamBuildId": "25442087",
+    "steamBranch": "public",
+    "platform": {
+      "hostOs": "linux",
+      "gameOs": "windows",
+      "hostArch": "x86_64",
+      "gameArch": "x86_64",
+      "compatibilityLayer": {
+        "kind": "proton"
+      }
+    },
+    "fingerprints": {
+      "algorithm": "smml.content-tree-sha256/1",
+      "canonicalPolicy": "smml.canonical-game-policy/1",
+      "installationExactFingerprint": {
+        "sha256": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
+        "fileCount": 61371,
+        "totalFileBytes": 20596893988
+      },
+      "canonicalGameFingerprint": {
+        "sha256": "6538e09bfcc535534cced2d9c4174d235605399f3ce3dbcf4fd752868c223964",
+        "fileCount": 61370,
+        "totalFileBytes": 20596856244
+      },
+      "rootFingerprints": [
+        {
+          "path": "Cache",
+          "sha256": "affd1530a458ac21782eabca281426fadf38b5de9a43f76ad1620462ca1d8cf1",
+          "algorithm": "smml.content-tree-sha256/1"
+        },
+        {
+          "path": "ChallengeData",
+          "sha256": "6861f414ba0c90195ea7d96a45efb0bfa24d6c104144e19fa438db5257bfa3a6",
+          "algorithm": "smml.content-tree-sha256/1"
+        },
+        {
+          "path": "Data",
+          "sha256": "f4710feee3052900e3daff832238795e861f5f7f8d067f1270cc3a64c695fa25",
+          "algorithm": "smml.content-tree-sha256/1"
+        },
+        {
+          "path": "Release",
+          "sha256": "293a38308f0ea89887bdc9c9344c5e047a58560c7fe76d9f18de4cf3250a6092",
+          "algorithm": "smml.content-tree-sha256/1"
+        },
+        {
+          "path": "Survival",
+          "sha256": "1dfddaed983a8b243742fa0d36f06e9a45c47116bb716ff4b3ddf23ecf2c8463",
+          "algorithm": "smml.content-tree-sha256/1"
+        }
+      ],
+      "targetFingerprints": [
+        {
+          "path": "Survival/Scripts/game/SurvivalGame.lua",
+          "sha256": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
+          "algorithm": "sha256"
+        },
+        {
+          "path": "Survival/Scripts/game/SurvivalPlayer.lua",
+          "sha256": "960d15b4a5f66e1fd9ea4af6bd81a6088893b9f71bd8c1ad9c6bafaa592ecf76",
+          "algorithm": "sha256"
+        },
+        {
+          "path": "Survival/Scripts/game/tools/CarryTool.lua",
+          "sha256": "ddbb727a8fb687f290f35ff359d626bdcf4983930c51ad24daadd26ee8702dbf",
+          "algorithm": "sha256"
+        },
+        {
+          "path": "Survival/Scripts/game/interactables/ResourceContainer.lua",
+          "sha256": "ccd77da5aaa6b6a8e640dc115e123a7236f0df40e31b56277d01314371cdc042",
+          "algorithm": "sha256"
+        },
+        {
+          "path": "Cache/Bundle/core_data.cbo",
+          "sha256": "682efa4378e69f1a711e1d2147c302fbdd0dc8035f841c948d50c50964181351",
+          "algorithm": "sha256"
+        }
+      ]
+    }
+  },
+  "operations": [
+    {
+      "operationId": "op-0001",
+      "sequence": 0,
+      "path": "Survival/Scripts/game/SurvivalGame.lua",
+      "kind": "replace",
+      "owner": "smml.hookpatcher",
+      "before": {
+        "exists": true,
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "after": {
+        "exists": true,
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "status": "PENDING"
+    },
+    {
+      "operationId": "op-0002",
+      "sequence": 1,
+      "path": "Survival/Scripts/smml/Runtime.lua",
+      "kind": "create",
+      "owner": "smml.runtime",
+      "before": {
+        "exists": false
+      },
+      "after": {
+        "exists": true,
+        "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      "status": "PENDING"
+    },
+    {
+      "operationId": "op-0003",
+      "sequence": 2,
+      "path": "Survival/Scripts/legacy/Obsolete.lua",
+      "kind": "delete",
+      "owner": "smml.manager",
+      "before": {
+        "exists": true,
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "after": {
+        "exists": false
+      },
+      "status": "PENDING"
+    }
+  ],
+  "phaseHistory": [
+    {
+      "revision": 0,
+      "at": "2026-09-29T16:00:00Z",
+      "phase": "PLANNED"
+    }
+  ],
+  "incidents": []
+}

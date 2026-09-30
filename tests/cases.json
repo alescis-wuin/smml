@@ -1,0 +1,546 @@
+[
+  {
+    "file": "game-target.valid.scrap-mechanic-1.0.6.889-b1.json",
+    "valid": true,
+    "schema": "game-target"
+  },
+  {
+    "file": "game-target.invalid.missing-canonical.json",
+    "valid": false,
+    "failureLayer": "schema",
+    "schema": "game-target"
+  },
+  {
+    "file": "game-target.invalid.bad-sha256.json",
+    "valid": false,
+    "failureLayer": "schema",
+    "schema": "game-target"
+  },
+  {
+    "file": "game-target.invalid.absolute-path.json",
+    "valid": false,
+    "failureLayer": "schema",
+    "schema": "game-target"
+  },
+  {
+    "file": "game-target.invalid.case-collision.json",
+    "valid": false,
+    "failureLayer": "semantic",
+    "schema": "game-target"
+  },
+  {
+    "file": "game-target.invalid.cross-os-none.json",
+    "valid": false,
+    "failureLayer": "semantic",
+    "schema": "game-target"
+  },
+  {
+    "file": "game-target.invalid.canonical-larger-than-exact.json",
+    "valid": false,
+    "failureLayer": "semantic",
+    "schema": "game-target"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.planned.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.committing.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.recovery-required-stale-status.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.committed.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.prepared.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.verifying.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.valid.foreign-modification.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.missing-before-hash.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.kind-state-mismatch.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.replace-noop.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.case-collision.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.noncontiguous-sequence.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.committed-not-verified.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.incident-phase-without-incident.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.traversal-path.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.applied-not-prefix.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "transaction-journal",
+    "file": "transaction-journal.invalid.phase-history-tail-mismatch.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.valid.full-example.json",
+    "valid": true
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.valid.minimal.json",
+    "valid": true
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.uppercase-id.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.bad-semver.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.unsupported-range.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.self-dependency.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.duplicate-dependency.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.duplicate-provided-capability.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.capability-self-conflict.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.self-load-before.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.order-overlap.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.file-case-collision.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.manifest-in-files.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.entrypoint-missing-file.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.artifact-missing-file.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.duplicate-artifact-path.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.traversal-file.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "package-manifest",
+    "file": "package-manifest.invalid.bad-file-digest.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.valid.notification.json",
+    "valid": true
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.valid.cancellable.json",
+    "valid": true
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.valid.transform.json",
+    "valid": true
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.valid.query.json",
+    "valid": true
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.valid.service-no-result.json",
+    "valid": true
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.bad-id.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.version-zero.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.notification-result.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.cancellable-client.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.cancellable-result.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.transform-schema-mismatch.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.query-no-result.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.notification-combination.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.transform-error-policy.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.service-no-result-policy.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.service-result-policy.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "contract-descriptor",
+    "file": "contract-descriptor.invalid.invalid-payload-policy.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.valid.scrap-mechanic-1.0.6.889.json",
+    "valid": true
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.missing-canonical.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.unknown-target-file.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.noncontiguous-sequence.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.function-transform-text-anchor.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.duplicate-marker.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.cache-target-overlap.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.duplicate-target.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.same-region-anchor.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "hook-pack-manifest",
+    "file": "hook-pack-manifest.invalid.traversal-cache.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.valid.full-example.json",
+    "valid": true
+  },
+  {
+    "schema": "profile",
+    "file": "profile.valid.minimal.json",
+    "valid": true
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.bad-id.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.duplicate-package.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.unsupported-range.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.duplicate-capability-selection.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.duplicate-provider.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.provider-ambiguity-policy.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "profile",
+    "file": "profile.invalid.duplicate-target-value.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.valid.full-example.json",
+    "valid": true
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.valid.resolved-only.json",
+    "valid": true
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.duplicate-package.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.unsorted-packages.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.root-unknown.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.root-version-mismatch.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.load-order-missing.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.edge-order-violation.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.edge-declared-by.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.capability-provider-unknown.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.capability-edge-unlocked.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.hookpack-artifact-type.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.api-component-unknown.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.unsorted-edges.json",
+    "valid": false,
+    "failureLayer": "semantic"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.timestamp.json",
+    "valid": false,
+    "failureLayer": "schema"
+  },
+  {
+    "schema": "lockfile",
+    "file": "lockfile.invalid.bad-final-fingerprint.json",
+    "valid": false,
+    "failureLayer": "schema"
+  }
+]

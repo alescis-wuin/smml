@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smml:schema:profile:1",
+  "title": "SMML Profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "target",
+    "packages",
+    "policies"
+  ],
+  "properties": {
+    "schema": {
+      "const": "smml.profile/1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "target": {
+      "$ref": "#/$defs/targetSelector"
+    },
+    "packages": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/packageRequest"
+      }
+    },
+    "policies": {
+      "$ref": "#/$defs/policies"
+    }
+  },
+  "$defs": {
+    "packageId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"
+    },
+    "capabilityId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "semverRange": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000\\r\\n]+$"
+    },
+    "os": {
+      "type": "string",
+      "enum": [
+        "linux",
+        "windows",
+        "macos"
+      ]
+    },
+    "compatibilityLayer": {
+      "type": "string",
+      "enum": [
+        "none",
+        "proton",
+        "wine",
+        "other"
+      ]
+    },
+    "targetSelector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steamAppId"
+      ],
+      "properties": {
+        "steamAppId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gameVersions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "engineBuilds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "steamBuildIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "maxLength": 32
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "steamBranches": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "canonicalGameFingerprints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "hostOs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "windows",
+              "macos"
+            ]
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "gameOs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "windows",
+              "macos"
+            ]
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "compatibilityLayers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "none",
+              "proton",
+              "wine",
+              "other"
+            ]
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "packageRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "range"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/packageId"
+        },
+        "range": {
+          "$ref": "#/$defs/semverRange"
+        }
+      }
+    },
+    "capabilityProvider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "providers"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/capabilityId"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/packageId"
+          },
+          "maxItems": 1024,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "softDependencies",
+        "providerAmbiguity",
+        "capabilityProviders"
+      ],
+      "properties": {
+        "softDependencies": {
+          "type": "string",
+          "enum": [
+            "selected-only",
+            "include-if-available"
+          ]
+        },
+        "providerAmbiguity": {
+          "const": "error"
+        },
+        "capabilityProviders": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/capabilityProvider"
+          }
+        }
+      }
+    }
+  }
+}
