@@ -50,7 +50,7 @@ Le DLL/VFS natif reste différé. Le MVP reste Lua/data hybride.
 
 ## PathPolicy v1
 
-`PathPolicy v1` est au stade **candidate freeze**. Il fixe une représentation portable des chemins logiques, Unicode NFC, une clé de collision Unicode 15.1.0, les restrictions Windows portables, les limites UTF-8 et les invariants no-follow pour symlink/reparse/hardlink.
+`PathPolicy v1` est au stade **candidate freeze**. Il fixe une représentation portable des chemins logiques, Unicode NFC, une clé de collision normative Unicode 15.1.0, les restrictions Windows portables, les limites UTF-8 et les invariants no-follow pour symlink/reparse/hardlink. L'implémentation Python de référence accepte UCD 15.0.0 et 15.1.0 après vérification explicite de compatibilité, ce qui couvre CPython 3.12 et 3.13 sans modifier la sémantique normative.
 
 Les validateurs sémantiques existants (`GameTargetIdentity`, `TransactionJournal`, `PackageManifest`, `HookPackManifest`) utilisent désormais le même validateur de chemin de référence.
 

@@ -7,7 +7,15 @@ import os
 import sys
 from pathlib import Path
 
-from jsonschema import Draft202012Validator
+try:
+    from jsonschema import Draft202012Validator
+except ModuleNotFoundError as exc:
+    if exc.name == "jsonschema":
+        raise SystemExit(
+            "Missing runtime dependency 'jsonschema'. "
+            "Run 'python3 -m pip install -r requirements.txt' or 'make setup'."
+        ) from None
+    raise
 
 ROOT = Path(__file__).resolve().parents[3]
 REFERENCE = ROOT / "reference" / "python"

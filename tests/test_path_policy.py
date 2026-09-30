@@ -10,8 +10,11 @@ from jsonschema import Draft202012Validator
 from path_policy_validation import (
     MAX_PATH_UTF8_BYTES,
     MAX_SEGMENT_UTF8_BYTES,
+    NORMATIVE_UNICODE_VERSION,
+    SUPPORTED_RUNTIME_UNICODE_VERSIONS,
     PathPolicyError,
     portable_collision_key,
+    require_unicode_compatibility,
     validate_filesystem_observation,
     validate_logical_path,
     validate_unique_paths,
@@ -29,8 +32,39 @@ class PathPolicyTests(unittest.TestCase):
         Draft202012Validator.check_schema(schema)
         Draft202012Validator(schema).validate(policy)
 
-    def test_runtime_unicode_table_is_normative_version(self):
-        self.assertEqual(unicodedata.unidata_version, "15.1.0")
+    def test_runtime_unicode_table_is_compatible_with_normative_version(self):
+        self.assertEqual(NORMATIVE_UNICODE_VERSION, "15.1.0")
+        self.assertIn(unicodedata.unidata_version, SUPPORTED_RUNTIME_UNICODE_VERSIONS)
+        require_unicode_compatibility()
+
+    def test_python_312_unicode_15_0_runtime_is_accepted(self):
+        original = unicodedata.unidata_version
+        try:
+            unicodedata.unidata_version = "15.0.0"
+            require_unicode_compatibility()
+            self.assertEqual(portable_collision_key("Straße.txt"), "strasse.txt")
+            self.assertEqual("\u1FD3".casefold(), "\u03B9\u0308\u0301")
+            self.assertEqual("\u1FE3".casefold(), "\u03C5\u0308\u0301")
+            self.assertEqual("\uFB05".casefold(), "st")
+        finally:
+            unicodedata.unidata_version = original
+
+    def test_unsupported_unicode_runtime_is_rejected(self):
+        original = unicodedata.unidata_version
+        try:
+            unicodedata.unidata_version = "16.0.0"
+            with self.assertRaises(RuntimeError):
+                require_unicode_compatibility()
+        finally:
+            unicodedata.unidata_version = original
+
+    def test_unicode_15_1_new_characters_are_identity_for_v1_operations(self):
+        additions = [*range(0x2EBF0, 0x2EE5E), 0x2FFC, 0x2FFD, 0x2FFE, 0x2FFF, 0x31EF]
+        for cp in additions:
+            ch = chr(cp)
+            with self.subTest(codepoint=f"U+{cp:04X}"):
+                self.assertEqual(ch.casefold(), ch)
+                self.assertEqual(unicodedata.normalize("NFC", ch), ch)
 
     def test_valid_vectors(self):
         for path in VECTORS["validPaths"]:

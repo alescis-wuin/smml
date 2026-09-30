@@ -45,19 +45,24 @@ Voir [`docs/project/repository-layout.md`](docs/project/repository-layout.md) po
 
 ## Validation GP1
 
-Dépendances de test :
+L'implémentation Python de référence supporte actuellement **CPython 3.12 et 3.13**. `PathPolicy v1` conserve Unicode 15.1.0 comme sémantique normative, avec une compatibilité vérifiée pour les runtimes UCD 15.0.0 (Python 3.12) et 15.1.0 (Python 3.13). Les runtimes Unicode plus récents sont refusés en v1 tant que les tables normatives ne sont pas embarquées indépendamment du runtime.
+
+Installation recommandée :
 
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
-python3 -m pip install -r requirements-dev.txt
+make setup
+make check
 ```
 
-Puis :
+Équivalent sans `make` :
 
 ```bash
-make test
-make check
+python3 -m pip install -r requirements-dev.txt
+python3 tests/validate_examples.py
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+python3 tools/repo/check_repository.py
 ```
 
 Les commandes équivalentes sans `make` sont documentées dans `docs/foundation/foundation-v0.6.0.md`.

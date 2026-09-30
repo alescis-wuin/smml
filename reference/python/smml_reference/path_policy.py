@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from functools import lru_cache
 from dataclasses import dataclass
 from typing import Iterable
 
-UNICODE_VERSION = "15.1.0"
+NORMATIVE_UNICODE_VERSION = "15.1.0"
+SUPPORTED_RUNTIME_UNICODE_VERSIONS = frozenset({"15.0.0", "15.1.0"})
 MAX_PATH_UTF8_BYTES = 4096
 MAX_SEGMENT_UTF8_BYTES = 255
 MAX_SEGMENTS = 256
@@ -34,15 +36,57 @@ def _raise(code: str, detail: str) -> None:
     raise PathPolicyError(code, detail)
 
 
-def require_unicode_version() -> None:
-    if unicodedata.unidata_version != UNICODE_VERSION:
+@lru_cache(maxsize=None)
+def _verify_unicode_15_1_compatibility(runtime_version: str) -> None:
+    # Unicode 15.1 added 622 CJK unified ideographs plus five
+    # Ideographic Description Characters. They are uncased and have no
+    # canonical normalization effect, so a Unicode 15.0 runtime must treat
+    # them identically for the PathPolicy operations used here.
+    additions = [*range(0x2EBF0, 0x2EE5E), 0x2FFC, 0x2FFD, 0x2FFE, 0x2FFF, 0x31EF]
+    for cp in additions:
+        ch = chr(cp)
+        if ch.casefold() != ch or unicodedata.normalize("NFC", ch) != ch:
+            raise RuntimeError(
+                "PathPolicy runtime Unicode tables are not compatible with "
+                f"Unicode {NORMATIVE_UNICODE_VERSION}: U+{cp:04X}"
+            )
+
+    # Unicode 15.1 changed Simple_Case_Folding for these existing code points,
+    # but PathPolicy uses full/default case folding. Their full folds are
+    # stable and are asserted explicitly so the 15.0 compatibility exception
+    # cannot silently broaden.
+    full_fold_sentinels = {
+        "\u1FD3": "\u03B9\u0308\u0301",
+        "\u1FE3": "\u03C5\u0308\u0301",
+        "\uFB05": "st",
+    }
+    for source, expected in full_fold_sentinels.items():
+        if source.casefold() != expected:
+            raise RuntimeError(
+                "PathPolicy runtime full case folding is not compatible with "
+                f"Unicode {NORMATIVE_UNICODE_VERSION}: U+{ord(source):04X}"
+            )
+
+
+def require_unicode_compatibility() -> None:
+    version = unicodedata.unidata_version
+    if version not in SUPPORTED_RUNTIME_UNICODE_VERSIONS:
+        supported = ", ".join(sorted(SUPPORTED_RUNTIME_UNICODE_VERSIONS))
         raise RuntimeError(
-            "PathPolicy reference implementation requires Unicode "
-            f"{UNICODE_VERSION}, got {unicodedata.unidata_version}"
+            "PathPolicy reference implementation requires a Unicode runtime "
+            f"compatible with {NORMATIVE_UNICODE_VERSION}; supported runtime "
+            f"UCD versions: {supported}; got {version}"
         )
+    _verify_unicode_15_1_compatibility(version)
+
+
+def require_unicode_version() -> None:
+    # Backward-compatible alias retained for callers from the first v1 draft.
+    require_unicode_compatibility()
 
 
 def validate_logical_path(value: str) -> str:
+    require_unicode_compatibility()
     if not isinstance(value, str):
         _raise("TYPE_MISMATCH", "logical path must be a string")
     if not value:
@@ -98,7 +142,7 @@ def validate_logical_path(value: str) -> str:
 
 
 def portable_collision_key(value: str) -> str:
-    require_unicode_version()
+    require_unicode_compatibility()
     validate_logical_path(value)
     folded = value.casefold()
     return unicodedata.normalize("NFC", folded)

@@ -153,6 +153,20 @@ PortableCollisionKey(path) = NFC(DefaultCaseFold_Unicode_15.1.0(NFC(path)))
 
 La table de case folding normative est Unicode `15.1.0`, cohérente avec `GameTargetIdentity v1`.
 
+#### Compatibilité de l'implémentation Python de référence
+
+La **sémantique normative reste Unicode 15.1.0**. L'implémentation Python de référence PEUT toutefois s'exécuter avec une bibliothèque standard exposant UCD `15.0.0` ou `15.1.0`, à condition de vérifier au démarrage les invariants de compatibilité utilisés par PathPolicy.
+
+Cette exception est bornée à ces deux versions. Elle repose sur les faits suivants :
+
+- `PortableCollisionKey` utilise le **full/default case folding**, pas `Simple_Case_Folding` ;
+- le full case folding est stable pour les caractères déjà assignés ;
+- Unicode 15.1 ajoute 622 idéogrammes CJK et cinq Ideographic Description Characters, qui sont sans casse et sans effet de normalisation NFC ;
+- les ajouts `Simple_Case_Folding` de Unicode 15.1 ne changent donc pas le full/default case folding requis ici ;
+- la normalisation des caractères déjà assignés est couverte par la stabilité Unicode de NFC.
+
+L'implémentation de référence DOIT vérifier explicitement ces propriétés avant d'accepter une runtime UCD `15.0.0`. Toute autre version UCD est rejetée en v1 afin d'éviter qu'un caractère assigné après Unicode 15.1 acquière silencieusement une sémantique de casse différente de la politique figée.
+
 Une collection de chemins gérés NE DOIT PAS contenir deux chemins distincts possédant la même `PortableCollisionKey`.
 
 Exemples de collisions :
@@ -357,7 +371,7 @@ Une implémentation conforme DOIT au minimum démontrer :
 5. rejet d'un segment terminé par espace ou point ;
 6. rejet des noms device Windows avec extension ;
 7. respect des limites UTF-8 v1 ;
-8. `PortableCollisionKey` basé sur Unicode 15.1.0 ;
+8. `PortableCollisionKey` normatif basé sur Unicode 15.1.0, avec compatibilité de référence vérifiée UCD 15.0.0/15.1.0 ;
 9. détection de collisions casefold/NFC indépendamment du host ;
 10. absence de normalisation silencieuse ;
 11. symlinks/reparse points rejetés sur les chemins gérés ;
@@ -377,3 +391,9 @@ Une implémentation conforme DOIT au minimum démontrer :
 - gestion des short names 8.3 existants ;
 - volumes réseau et filesystems exotiques ;
 - opérations sur répertoires dans `TransactionJournal v1`.
+
+## 13. Références informatives Unicode
+
+- Unicode Character Encoding Stability Policies — normalization et case folding stability : `https://www.unicode.org/standard/stability_policy.html`
+- Unicode 15.1 announcement — 622 CJK Unified Ideographs Extension I + 5 Ideographic Description Characters : `https://blog.unicode.org/2023/09/announcing-unicode-standard-version-151.html`
+- UTC #175 — ajouts `Simple_Case_Folding` 15.1 pour U+1FD3, U+1FE3 et U+FB05 : `https://www.unicode.org/L2/L2023/23076.htm`

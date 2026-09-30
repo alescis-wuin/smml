@@ -1,4 +1,7 @@
-.PHONY: test check
+.PHONY: setup test check
+
+setup:
+	python3 -m pip install -r requirements-dev.txt
 
 test:
 	PYTHONDONTWRITEBYTECODE=1 python3 tests/validate_examples.py

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### PathPolicy / GameTargetInspector compatibility fix — 2026-09-30
+
+- correction de l'incompatibilité de la référence Python avec CPython 3.12 / UCD 15.0.0 ;
+- conservation de Unicode 15.1.0 comme sémantique normative de `PortableCollisionKey` ;
+- compatibilité bornée UCD 15.0.0/15.1.0 avec auto-vérification des 627 caractères ajoutés en Unicode 15.1 et des sentinelles de full case folding ;
+- rejet explicite des runtimes UCD plus récents tant que les tables normatives ne sont pas embarquées ;
+- séparation `requirements.txt` (runtime) / `requirements-dev.txt` et ajout de `make setup` ;
+- diagnostic CLI explicite quand `jsonschema` n'est pas installé.
+
 ### GameTargetInspector v1 — 2026-09-30
 
 - ajout de `specs/game-target-inspector.md` et du plan `smml.game-target-inspection-plan/1` ;
