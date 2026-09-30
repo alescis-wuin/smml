@@ -40,6 +40,10 @@
 - Les fichiers exclus du canonique peuvent rester des preuves fortes : `Cache/Bundle/core_data.cbo` conserve un target fingerprint SHA-256 strict.
 - Le `GameTargetInspector` peut produire `smml.file-inventory/1`; la comparaison de baseline utilise l'inventaire B0 sanitizé et ne dépend pas de chemins locaux.
 - L'inspection exige un inventaire stable en deux passes et ne constitue jamais une autorisation de mutation ; le TransactionEngine revalide les préconditions.
+- `TransactionJournal runtime integration v1` observe le filesystem sans mutation et considère les octets observés comme autorité pour `BEFORE | AFTER | FOREIGN`; le `status` du journal reste une connaissance durable potentiellement en retard.
+- Le recovery runtime lie la cible sur build + fingerprint canonique + target fingerprints stricts ; l'exact fingerprint et les root fingerprints ne bloquent pas à eux seuls le recovery à cause du drift `Cache/` prouvé.
+- Un diagnostic `RESUME_COMMIT` ou `ROLLBACK_REQUIRED` n'autorise aucune écriture ; seul le futur TransactionEngine pourra matérialiser l'action après revalidation et write-ahead durable.
+- Le recovery inspector refuse toute sortie sous le game root et bloque fail-closed sur symlink, reparse point, hardlink mutable, case mismatch ou ancêtre invalide.
 - `smml explain <path>` doit exposer provenance/ownership/conflits.
 
 ## Décisions réseau/persistance gelées après GP0.5

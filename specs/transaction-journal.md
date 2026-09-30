@@ -375,3 +375,6 @@ A locally edited journal therefore does not become an authority merely because i
 - symlink substitution at a managed path.
 
 These vectors exercise the recovery rule independently from persisted operation `status`.
+## 10. Runtime integration
+
+The first executable integration of this contract is specified in [`transaction-journal-runtime.md`](transaction-journal-runtime.md). It is deliberately read-only: it observes operation paths, binds the embedded target snapshot to a fresh `GameTargetIdentity`, classifies `BEFORE | AFTER | FOREIGN`, and emits `smml.transaction-recovery-report/1` without changing the journal or game root.

@@ -542,5 +542,16 @@
     "file": "lockfile.invalid.bad-final-fingerprint.json",
     "valid": false,
     "failureLayer": "schema"
+  },
+  {
+    "schema": "transaction-recovery-report",
+    "file": "transaction-recovery-report.valid.ready-to-verify.json",
+    "valid": true
+  },
+  {
+    "schema": "transaction-recovery-report",
+    "file": "transaction-recovery-report.invalid.bad-summary.json",
+    "valid": false,
+    "failureLayer": "semantic"
   }
 ]

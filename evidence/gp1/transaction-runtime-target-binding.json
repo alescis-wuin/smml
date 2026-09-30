@@ -1,0 +1,28 @@
+{
+  "evidence": "smml.transaction-runtime-target-binding/1",
+  "target": {
+    "steamAppId": 387990,
+    "gameVersion": "1.0.6",
+    "engineBuild": 889,
+    "steamBuildId": "25442087",
+    "steamBranch": "public",
+    "canonicalPolicy": "smml.canonical-game-policy/2",
+    "canonicalGameFingerprint": "f8356e5f0b660320bdcd196bc553114d688aeff43f20872438cbac1e1bc9668c"
+  },
+  "journalSnapshot": {
+    "installationExactFingerprint": "9d5e06e5da64485218f8f9154097c1638719166c3e9d004adac77d01c2863ab4",
+    "cacheRootFingerprint": "affd1530a458ac21782eabca281426fadf38b5de9a43f76ad1620462ca1d8cf1"
+  },
+  "currentObservation": {
+    "installationExactFingerprint": "908123cc7e586adf21f1a5636242ebf2545183a9f3319fcf781748677559be71",
+    "cacheRootFingerprint": "32c35f46162adb2d6da969d33eb71fda542136033b6bac58a9eaa022cce6d6aa"
+  },
+  "bindingResult": "MATCH",
+  "bindingRules": {
+    "requiresCanonicalFingerprint": true,
+    "requiresJournalStrictTargets": true,
+    "requiresInstallationExactFingerprint": false,
+    "requiresRootFingerprints": false
+  },
+  "privacy": "No absolute local path is stored."
+}

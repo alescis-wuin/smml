@@ -77,15 +77,22 @@ Le fingerprint canonique B0/B1 v2 est `f8356e5f0b660320bdcd196bc553114d688aeff43
 
 Le plan courant connaît explicitement la cible Steam build `25442087` / branche `public`, le fingerprint canonique v2 connu et ne tente aucune reconnaissance heuristique d'une build inconnue.
 
+## TransactionJournal runtime integration v1
+
+L'intégration runtime read-only est au stade **candidate freeze**. Elle observe chaque chemin d'opération sans suivre les liens, calcule le SHA-256 exact des fichiers réguliers, classe l'état réel en `BEFORE | AFTER | FOREIGN` et produit `smml.transaction-recovery-report/1`.
+
+Le rapport lie le journal à un `GameTargetIdentity` frais par build + fingerprint canonique v2 + target fingerprints stricts. Il ignore volontairement l'`installationExactFingerprint` et les `rootFingerprints`, qui peuvent dériver à cause du cache déjà classifié.
+
+Le CLI de recovery n'écrit ni dans le game root ni dans le journal ; `RESUME_COMMIT` / `ROLLBACK_REQUIRED` sont uniquement des diagnostics. Symlink, reparse point, hardlink mutable, case mismatch et topologie de chemin invalide bloquent fail-closed.
+
 ## Prochaine priorité
 
 Le prochain chantier P0 du cœur de sûreté est :
 
 ```text
-TransactionJournal integration
 TransactionEngine
 ```
 
-Le `TransactionEngine` doit être développé avec fault injection et recovery fail-closed avant toute GUI.
+Il doit introduire staging/CAS ou équivalent, journal durable write-ahead, commit/verify/rollback et fault injection avant toute GUI.
 
 Ensuite : `PackageValidator`, `Resolver`, puis Content Composer MVP et vertical slice Pallet64.

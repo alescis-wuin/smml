@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### TransactionJournal runtime integration v1 — 2026-09-30
+
+- ajout de `smml.transaction-recovery-report/1` et de `specs/transaction-journal-runtime.md` ;
+- observation filesystem read-only des chemins de transaction avec hashing stable sans suivi de liens sur la référence POSIX ;
+- classification physique `BEFORE | AFTER | FOREIGN` indépendante du `status` durable du journal ;
+- liaison du journal à un `GameTargetIdentity` frais via build, fingerprint canonique v2 et target fingerprints stricts, sans exiger l'exact/root Cache ;
+- décisions phase-aware : resume commit, ready-to-verify, recovery required, rollback diagnostics et états terminaux ;
+- blocage fail-closed sur symlink, reparse point, hardlink mutable, case mismatch et ancêtre invalide ;
+- CLI `transaction-recovery-inspector` qui refuse toute sortie dans le game root et n'écrit jamais le journal ;
+- déplacement des validateurs `GameTargetIdentity` et `TransactionJournal` vers `reference/python/smml_reference/` avec shims de compatibilité pour les tests.
+
 ### GameTargetInspector v1.1 / canonical cache classification — 2026-09-30
 
 - ajout de `smml.file-inventory/1` et `smml.file-inventory-diff/1` ;

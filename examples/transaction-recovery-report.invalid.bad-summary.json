@@ -1,0 +1,44 @@
+{
+  "schema": "smml.transaction-recovery-report/1",
+  "mode": "read-only",
+  "transactionId": "tx-example-report-0001",
+  "journalRevision": 2,
+  "journalPhase": "COMMITTING",
+  "inspectedAt": "2026-09-30T07:30:00Z",
+  "gameTargetBinding": {
+    "status": "MATCH",
+    "mismatches": []
+  },
+  "summary": {
+    "operationCount": 1,
+    "beforeCount": 1,
+    "afterCount": 0,
+    "foreignCount": 0,
+    "unsafePathCount": 0
+  },
+  "operations": [
+    {
+      "operationId": "op-0001",
+      "sequence": 0,
+      "path": "Survival/Scripts/game/SurvivalGame.lua",
+      "kind": "replace",
+      "journalStatus": "PENDING",
+      "observation": {
+        "kind": "file",
+        "stable": true,
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "size": 123,
+        "linkCount": 1,
+        "pathSafety": {
+          "status": "SAFE",
+          "issues": []
+        }
+      },
+      "classification": "AFTER",
+      "journalStatusAssessment": "STALE_STATUS"
+    }
+  ],
+  "recovery": {
+    "decision": "READY_TO_VERIFY"
+  }
+}

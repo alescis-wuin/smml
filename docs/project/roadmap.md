@@ -6,7 +6,7 @@
 2. ✅ hashing déterministe — candidate freeze
 3. ✅ `GameTargetInspector v1.1` + FileInventory — candidate freeze
 4. ✅ classification canonique `Cache/` + `smml.canonical-game-policy/2`
-5. intégration de `TransactionJournal v1`
+5. ✅ intégration runtime read-only de `TransactionJournal v1` — candidate freeze
 6. `TransactionEngine`
 7. verrou inter-processus
 8. durabilité adaptée à l'OS (`fsync`, atomic replace, etc.)

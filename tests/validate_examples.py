@@ -34,6 +34,14 @@ from validation import SemanticValidationError, validate_policy_semantics, valid
 from profile_validation import ProfileSemanticError, validate_profile_semantics  # noqa: E402
 from lockfile_validation import LockfileSemanticError, validate_lockfile_semantics  # noqa: E402
 
+REFERENCE = ROOT / "reference" / "python"
+if str(REFERENCE) not in sys.path:
+    sys.path.insert(0, str(REFERENCE))
+from smml_reference.transaction_runtime import (  # noqa: E402
+    TransactionRecoveryReportSemanticError,
+    validate_transaction_recovery_report_semantics,
+)
+
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -61,6 +69,9 @@ def main() -> int:
 
     lockfile_schema = load_json(ROOT / "schemas" / "smml.lockfile-1.schema.json")
     lockfile_validator = Draft202012Validator(lockfile_schema)
+
+    recovery_report_schema = load_json(ROOT / "schemas" / "smml.transaction-recovery-report-1.schema.json")
+    recovery_report_validator = Draft202012Validator(recovery_report_schema)
 
     for version in (1, 2):
         policy_schema = load_json(ROOT / "schemas" / f"smml.canonical-game-policy-{version}.schema.json")
@@ -118,6 +129,10 @@ def main() -> int:
             validator = lockfile_validator
             semantic_fn = validate_lockfile_semantics
             semantic_error_type = LockfileSemanticError
+        elif schema_kind == "transaction-recovery-report":
+            validator = recovery_report_validator
+            semantic_fn = validate_transaction_recovery_report_semantics
+            semantic_error_type = TransactionRecoveryReportSemanticError
         else:
             print(f"FAIL {case['file']}: unknown schema kind {schema_kind!r}")
             failures += 1
