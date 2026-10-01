@@ -1,7 +1,7 @@
 -- SMML Runtime Spine laboratory runtime.
 -- Internal prototype: bootstrap, lifecycle diagnostics, contracts, transport, storage and Carry hook adapter.
 
-local RUNTIME_VERSION = "0.5.1"
+local RUNTIME_VERSION = "0.5.2"
 local EVENT_SCHEMA = "1"
 local MARKER = "[SMML-RUNTIME] EVT"
 
@@ -234,7 +234,7 @@ local function loadCarryAdapter()
     if not createOk then
         return false, service
     end
-    if type( service ) ~= "table" or type( service.resolveInsertTarget ) ~= "function" or type( service.onResolverClientSend ) ~= "function" or type( service.onVanillaServerRelay ) ~= "function" then
+    if type( service ) ~= "table" or type( service.resolveInsertTarget ) ~= "function" or type( service.onResolverClientSend ) ~= "function" or type( service.onVanillaServerRelay ) ~= "function" or type( service.onCustomReceiverServer ) ~= "function" then
         return false, "carry-adapter-invalid"
     end
 

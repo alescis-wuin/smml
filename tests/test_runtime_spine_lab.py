@@ -268,17 +268,20 @@ end
         self.assertIn("__SMML_CARRY_ADAPTER_FACTORY = nil", runtime_source)
         self.assertIn("local factory = __SMML_CARRY_ADAPTER_FACTORY", runtime_source)
         self.assertNotIn("sendToServer", carry_source)
-        self.assertIn("probe.resourceCollectorProxy@1", carry_source)
+        self.assertIn("probe.scrapChestReceiver@1", carry_source)
         self.assertIn("968de65c-75f3-471b-954e-6165a4b6d3d6", carry_source)
-        self.assertIn("a930a42f-63ed-4fb0-933e-56ce8a889cc5", carry_source)
-        self.assertIn("body:getShapes()", carry_source)
+        self.assertIn("7527cf2e-1705-4214-9d07-3dc374957e25", carry_source)
+        self.assertNotIn("body:getShapes()", carry_source)
+        self.assertIn("onCustomReceiverServer", runtime_source)
 
-    def test_carry_adapter_registers_single_proxy_resolver(self) -> None:
+    def test_carry_adapter_registers_single_scrap_chest_resolver(self) -> None:
         carry_source = (ROOT / "runtime" / "Survival" / "Scripts" / "SMML" / "CarryAdapter.lua").read_text("utf-8")
         self.assertEqual(carry_source.count("service.registerResolver( TEST_RESOLVER_ID"), 1)
-        self.assertIn('return matches[1], "ok"', carry_source)
-        self.assertIn("ambiguous_resource_collector", carry_source)
-        self.assertIn("vanilla_target", carry_source)
+        self.assertIn('return hitShape, "ok"', carry_source)
+        self.assertIn("not_test_receiver", carry_source)
+        self.assertIn("unsupported_carry", carry_source)
+        self.assertIn("sm.container.spend", carry_source)
+        self.assertIn("player:getCarry()", carry_source)
 
     def test_carry_tool_patch_injects_resolver_hook_and_vanilla_relay_observer(self) -> None:
         original = b"""function CarryTool.cl_tryInsert( self, character, primaryState, playerCarry, carryUuid, playerCarryColor )
@@ -306,14 +309,28 @@ end
         final_false_pos = patched.index("\n\treturn false\nend\n\nfunction CarryTool.cl_tryDrop")
         self.assertLess(hook_pos, final_false_pos)
 
-    def test_carry_summary_requires_resolver_match_and_round_trip(self) -> None:
+    def test_chest_patch_injects_custom_receiver_and_bootstrap(self) -> None:
+        original = b"Chest = class( nil )\nfunction Chest.server_onCreate( self )\nend\n"
+        patched = lab.patch_chest(original).decode("utf-8")
+        self.assertIn("SMML_RUNTIME_SPINE_BEGIN:bootstrap:Chest.lua", patched)
+        self.assertIn("SMML_RUNTIME_SPINE_BEGIN:carry.customReceiver@1", patched)
+        self.assertIn("function Chest.sv_e_receiveItem( self, params )", patched)
+        self.assertIn("__SMML_RUNTIME.carry.onCustomReceiverServer", patched)
+        self.assertTrue(patched.index("Chest = class") < patched.index("function Chest.sv_e_receiveItem"))
+
+    def test_chest_patch_refuses_existing_receiver(self) -> None:
+        original = b"Chest = class( nil )\nfunction Chest.sv_e_receiveItem( self, params )\nend\n"
+        with self.assertRaises(RuntimeError):
+            lab.patch_chest(original)
+
+    def test_carry_summary_requires_custom_receiver_accept(self) -> None:
         client_events = [
             {"event": "runtime.bootstrap", "runtimeId": "c1", "firstInitialization": "true", "source": "CarryTool.lua.file"},
-            {"event": "carry.resolver.register", "runtimeId": "c1", "resolverId": "probe.resourceCollectorProxy@1"},
-            {"event": "carry.resolve.match", "runtimeId": "c1", "resolverId": "probe.resourceCollectorProxy@1"},
-            {"event": "carry.resolver.rpc.client", "runtimeId": "c1", "resolverId": "probe.resourceCollectorProxy@1"},
+            {"event": "carry.resolver.register", "runtimeId": "c1", "resolverId": "probe.scrapChestReceiver@1"},
+            {"event": "carry.resolve.match", "runtimeId": "c1", "resolverId": "probe.scrapChestReceiver@1"},
+            {"event": "carry.resolver.rpc.client", "runtimeId": "c1", "resolverId": "probe.scrapChestReceiver@1"},
         ]
-        client_summary = lab.summarize(client_events, {"run_id": "R51", "role": "client"})
+        client_summary = lab.summarize(client_events, {"run_id": "R52", "role": "client"})
         self.assertTrue(client_summary["carry_client_passed"])
         self.assertTrue(client_summary["carry_passed"])
         self.assertEqual(client_summary["carry_resolver_match_count"], 1)
@@ -321,13 +338,20 @@ end
 
         host_events = [
             {"event": "runtime.bootstrap", "runtimeId": "s1", "firstInitialization": "true", "source": "CarryTool.lua.file"},
-            {"event": "carry.vanilla.rpc.server", "runtimeId": "s1", "resolverId": "probe.resourceCollectorProxy@1"},
-            {"event": "carry.resolver.rpc.server", "runtimeId": "s1", "resolverId": "probe.resourceCollectorProxy@1"},
+            {"event": "carry.vanilla.rpc.server", "runtimeId": "s1", "resolverId": "probe.scrapChestReceiver@1"},
+            {"event": "carry.resolver.rpc.server", "runtimeId": "s1", "resolverId": "probe.scrapChestReceiver@1"},
+            {"event": "carry.receiver.accept", "runtimeId": "s1", "resolverId": "probe.scrapChestReceiver@1", "receivedCount": "1"},
         ]
-        host_summary = lab.summarize(host_events, {"run_id": "R51", "role": "host"})
+        host_summary = lab.summarize(host_events, {"run_id": "R52", "role": "host"})
         self.assertTrue(host_summary["carry_server_passed"])
         self.assertTrue(host_summary["carry_passed"])
         self.assertEqual(host_summary["carry_resolver_server_rpc_count"], 1)
+        self.assertEqual(host_summary["carry_receiver_accept_count"], 1)
+        self.assertEqual(host_summary["carry_receiver_received_max"], 1)
+
+        host_missing_receiver = host_events[:-1]
+        missing_summary = lab.summarize(host_missing_receiver, {"run_id": "R52", "role": "host"})
+        self.assertFalse(missing_summary["carry_server_passed"])
 
     def test_normal_smml_event_is_not_reported_as_lua_diagnostic(self) -> None:
         line = "[Lua] ERROR: [SMML-RUNTIME] EVT|schema=1|event=contract.dispatch|runId=R2"

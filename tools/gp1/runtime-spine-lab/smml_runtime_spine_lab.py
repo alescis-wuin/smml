@@ -13,8 +13,8 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "0.5.1"
-RUNTIME_VERSION = "0.5.1"
+VERSION = "0.5.2"
+RUNTIME_VERSION = "0.5.2"
 MARKER = "[SMML-RUNTIME] EVT"
 
 TRANSPORT_EXPECTED = {
@@ -28,6 +28,7 @@ TARGETS = {
     "Survival/Scripts/game/SurvivalGame.lua": "934beb15dff2f34638128a56aa1be8586e363bc1a5d564698e9b8f09bf9d35c4",
     "Survival/Scripts/game/SurvivalPlayer.lua": "960d15b4a5f66e1fd9ea4af6bd81a6088893b9f71bd8c1ad9c6bafaa592ecf76",
     "Survival/Scripts/game/tools/CarryTool.lua": "ddbb727a8fb687f290f35ff359d626bdcf4983930c51ad24daadd26ee8702dbf",
+    "Survival/Scripts/game/interactables/Chest.lua": "02f13e72b6542725eb8fe8a1b07bcf3984ac472781f6b46751ca8fef691bc8e7",
 }
 CACHE_PATH = "Cache/Bundle/core_data.cbo"
 CACHE_SHA256 = "682efa4378e69f1a711e1d2147c302fbdd0dc8035f841c948d50c50964181351"
@@ -307,6 +308,41 @@ def patch_carry_tool(original: bytes) -> bytes:
     return text.encode("utf-8")
 
 
+def patch_chest(original: bytes) -> bytes:
+    use_crlf = b"\r\n" in original and original.count(b"\r\n") == original.count(b"\n")
+    text = original.decode("utf-8")
+    if use_crlf:
+        text = text.replace("\r\n", "\n")
+
+    if "function Chest.sv_e_receiveItem" in text:
+        raise RuntimeError("Chest.lua: refusing to overwrite an existing Chest.sv_e_receiveItem")
+
+    class_matches = list(re.finditer(r"^Chest\s*=\s*class[^\n]*\n", text, re.MULTILINE))
+    if len(class_matches) != 1:
+        raise RuntimeError(f"Chest.lua: expected exactly one Chest class declaration, found {len(class_matches)}")
+
+    receiver = (
+        "-- SMML_RUNTIME_SPINE_BEGIN:carry.customReceiver@1\n"
+        "function Chest.sv_e_receiveItem( self, params )\n"
+        "\tif type( __SMML_RUNTIME ) ~= \"table\" or type( __SMML_RUNTIME.carry ) ~= \"table\" or type( __SMML_RUNTIME.carry.onCustomReceiverServer ) ~= \"function\" then\n"
+        "\t\treturn\n"
+        "\tend\n"
+        "\tlocal __smml_ok, __smml_result = pcall( __SMML_RUNTIME.carry.onCustomReceiverServer, self, params )\n"
+        "\tif not __smml_ok and type( __SMML_RUNTIME.emit ) == \"function\" then\n"
+        "\t\tpcall( __SMML_RUNTIME.emit, \"hook.error\", { hook = \"carry.customReceiver\", detail = __smml_result } )\n"
+        "\tend\n"
+        "end\n"
+        "-- SMML_RUNTIME_SPINE_END:carry.customReceiver@1\n"
+    )
+    class_end = class_matches[0].end()
+    text = text[:class_end] + receiver + text[class_end:]
+    text = bootstrap_prefix("Chest.lua", False) + text
+
+    if use_crlf:
+        text = text.replace("\n", "\r\n")
+    return text.encode("utf-8")
+
+
 def patched_bytes(rel: str, original: bytes) -> bytes:
     if rel.endswith("SurvivalPlayer.lua"):
         return patch_survival_player(original)
@@ -314,6 +350,8 @@ def patched_bytes(rel: str, original: bytes) -> bytes:
         return patch_survival_game(original)
     if rel.endswith("CarryTool.lua"):
         return patch_carry_tool(original)
+    if rel.endswith("Chest.lua"):
+        return patch_chest(original)
     raise ValueError(rel)
 
 
@@ -720,6 +758,14 @@ def summarize(events: list[dict], state: dict) -> dict:
     carry_resolver_client_rpc_count = counts.get("carry.resolver.rpc.client", 0)
     carry_vanilla_server_count = counts.get("carry.vanilla.rpc.server", 0)
     carry_resolver_server_rpc_count = counts.get("carry.resolver.rpc.server", 0)
+    carry_receiver_accept_count = counts.get("carry.receiver.accept", 0)
+    carry_receiver_reject_count = counts.get("carry.receiver.reject", 0)
+    receiver_counts = [
+        int(e.get("receivedCount", "0"))
+        for e in events
+        if e.get("event") == "carry.receiver.accept" and str(e.get("receivedCount", "0")).isdigit()
+    ]
+    carry_receiver_received_max = max(receiver_counts, default=0)
     carry_client_passed = (
         carry_resolver_register_count >= 1 and
         carry_resolver_match_count >= 1 and
@@ -729,6 +775,8 @@ def summarize(events: list[dict], state: dict) -> dict:
     carry_server_passed = (
         carry_vanilla_server_count >= 1 and
         carry_resolver_server_rpc_count >= 1 and
+        carry_receiver_accept_count >= 1 and
+        carry_resolver_server_rpc_count == carry_receiver_accept_count and
         len(carry_errors) == 0
     ) if role == "host" else False
     carry_passed = carry_server_passed if role == "host" else carry_client_passed
@@ -771,6 +819,9 @@ def summarize(events: list[dict], state: dict) -> dict:
         "carry_resolver_client_rpc_count": carry_resolver_client_rpc_count,
         "carry_vanilla_server_relay_count": carry_vanilla_server_count,
         "carry_resolver_server_rpc_count": carry_resolver_server_rpc_count,
+        "carry_receiver_accept_count": carry_receiver_accept_count,
+        "carry_receiver_reject_count": carry_receiver_reject_count,
+        "carry_receiver_received_max": carry_receiver_received_max,
         "carry_error_event_count": len(carry_errors),
         "carry_client_passed": carry_client_passed,
         "carry_server_passed": carry_server_passed,
