@@ -13,8 +13,8 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "0.5.0"
-RUNTIME_VERSION = "0.5.0"
+VERSION = "0.5.1"
+RUNTIME_VERSION = "0.5.1"
 MARKER = "[SMML-RUNTIME] EVT"
 
 TRANSPORT_EXPECTED = {
@@ -258,7 +258,7 @@ def patch_carry_tool(original: bytes) -> bytes:
     hook = (
         "\n\t-- SMML_RUNTIME_SPINE_BEGIN:carry.resolveInsertTarget@1\n"
         "\tif type( __SMML_RUNTIME ) == \"table\" and type( __SMML_RUNTIME.carry ) == \"table\" and type( __SMML_RUNTIME.carry.resolveInsertTarget ) == \"function\" then\n"
-        "\t\tlocal __smml_ok, __smml_matched = pcall( __SMML_RUNTIME.carry.resolveInsertTarget, {\n"
+        "\t\tlocal __smml_ok, __smml_matched, __smml_targetShape, __smml_resolverId = pcall( __SMML_RUNTIME.carry.resolveInsertTarget, {\n"
         "\t\t\ttool = self, character = character, playerCarry = playerCarry, carryUuid = carryUuid, carryColor = playerCarryColor,\n"
         "\t\t\tprimaryState = primaryState, isStart = primaryState == sm.tool.interactState.start,\n"
         "\t\t\traycastSuccess = success == true, resultType = result and result.type or \"nil\", raycastResult = result\n"
@@ -267,7 +267,20 @@ def patch_carry_tool(original: bytes) -> bytes:
         "\t\t\tif type( __SMML_RUNTIME.emit ) == \"function\" then\n"
         "\t\t\t\tpcall( __SMML_RUNTIME.emit, \"hook.error\", { hook = \"carry.resolveInsertTarget@1\", detail = __smml_matched } )\n"
         "\t\t\tend\n"
-        "\t\telseif __smml_matched == true then\n"
+        "\t\telseif __smml_matched == true and __smml_targetShape ~= nil then\n"
+        "\t\t\tshowInsertInteraction()\n"
+        "\t\t\tif primaryState == sm.tool.interactState.start then\n"
+        "\t\t\t\tlocal fromPosition = character:getTpBonePos( CarryConfig[self.cl.carryType].transform.primaryBone )\n"
+        "\t\t\t\tlocal fromRotation = character:getTpBoneRot( CarryConfig[self.cl.carryType].transform.primaryBone )\n"
+        "\t\t\t\tlocal params = { containerA = playerCarry, itemA = carryUuid, quantityA = 1, targetShape = __smml_targetShape, fromPosition = fromPosition, fromRotation = fromRotation, color = playerCarryColor, __smmlResolverId = __smml_resolverId }\n"
+        "\t\t\t\tif type( __SMML_RUNTIME.carry.onResolverClientSend ) == \"function\" then\n"
+        "\t\t\t\t\tlocal __smml_send_ok, __smml_send_err = pcall( __SMML_RUNTIME.carry.onResolverClientSend, params )\n"
+        "\t\t\t\t\tif not __smml_send_ok and type( __SMML_RUNTIME.emit ) == \"function\" then\n"
+        "\t\t\t\t\t\tpcall( __SMML_RUNTIME.emit, \"hook.error\", { hook = \"carry.resolverClientSend\", detail = __smml_send_err } )\n"
+        "\t\t\t\t\tend\n"
+        "\t\t\t\tend\n"
+        "\t\t\t\tself.network:sendToServer( \"sv_n_sendItem\", params )\n"
+        "\t\t\tend\n"
         "\t\t\treturn true\n"
         "\t\tend\n"
         "\tend\n"
@@ -698,12 +711,26 @@ def summarize(events: list[dict], state: dict) -> dict:
 
     carry_errors = [
         e for e in events
-        if e.get("event") == "hook.error" and str(e.get("hook", "")).startswith("carry.")
+        if (e.get("event") == "hook.error" and str(e.get("hook", "")).startswith("carry."))
+        or e.get("event") == "carry.resolve.error"
     ]
     carry_empty_count = counts.get("carry.resolve.empty", 0)
+    carry_resolver_register_count = counts.get("carry.resolver.register", 0)
+    carry_resolver_match_count = counts.get("carry.resolve.match", 0)
+    carry_resolver_client_rpc_count = counts.get("carry.resolver.rpc.client", 0)
     carry_vanilla_server_count = counts.get("carry.vanilla.rpc.server", 0)
-    carry_client_passed = (carry_empty_count >= 1 and len(carry_errors) == 0) if role == "client" else False
-    carry_server_passed = (carry_vanilla_server_count >= 1 and len(carry_errors) == 0) if role == "host" else False
+    carry_resolver_server_rpc_count = counts.get("carry.resolver.rpc.server", 0)
+    carry_client_passed = (
+        carry_resolver_register_count >= 1 and
+        carry_resolver_match_count >= 1 and
+        carry_resolver_client_rpc_count >= 1 and
+        len(carry_errors) == 0
+    ) if role == "client" else False
+    carry_server_passed = (
+        carry_vanilla_server_count >= 1 and
+        carry_resolver_server_rpc_count >= 1 and
+        len(carry_errors) == 0
+    ) if role == "host" else False
     carry_passed = carry_server_passed if role == "host" else carry_client_passed
 
     return {
@@ -739,7 +766,11 @@ def summarize(events: list[dict], state: dict) -> dict:
         "storage_probe_phases": phase_names,
         "storage_error_event_count": len(storage_error_events),
         "carry_empty_resolve_count": carry_empty_count,
+        "carry_resolver_register_count": carry_resolver_register_count,
+        "carry_resolver_match_count": carry_resolver_match_count,
+        "carry_resolver_client_rpc_count": carry_resolver_client_rpc_count,
         "carry_vanilla_server_relay_count": carry_vanilla_server_count,
+        "carry_resolver_server_rpc_count": carry_resolver_server_rpc_count,
         "carry_error_event_count": len(carry_errors),
         "carry_client_passed": carry_client_passed,
         "carry_server_passed": carry_server_passed,
@@ -889,7 +920,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--state-dir", type=Path, default=default_state_dir())
     sub = parser.add_subparsers(dest="command", required=True)
 
-    install_p = sub.add_parser("install", help="Install the two-hook Runtime Spine laboratory")
+    install_p = sub.add_parser("install", help="Install the Runtime Spine laboratory")
     install_p.add_argument("game_root", type=Path)
     install_p.add_argument("--role", choices=("host", "client"), required=True)
     install_p.add_argument("--run-id", required=True)
